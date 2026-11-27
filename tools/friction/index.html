@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Friction Ramp</title>
+  <meta name="description" content="Roll a toy car down a ramp onto different surfaces and see how friction changes the distance it travels.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css">
+  <script src="../../js/theme.js" defer></script>
+  <script src="../../js/friction.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> P6 Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Friction Ramp</h1>
+      <p class="lead">Let a toy car roll down a ramp onto a surface. Measure how far it travels before it stops.</p>
+
+      <div class="tool-layout friction-layout">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Experiment</h2>
+          <div class="sim-canvas-wrap">
+            <canvas id="friction-canvas" role="img" aria-label="A toy car on a ramp, with a measuring tape along the floor."></canvas>
+          </div>
+          <p class="result-line" id="result" aria-live="polite">Choose a surface and a ramp height, then press <strong style="font-size:inherit">Release!</strong></p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">Set up your experiment</h2>
+
+          <fieldset class="choice-group">
+            <legend>1. Surface on the floor</legend>
+            <div class="choices two" id="surface-choices">
+              <button type="button" class="choice" data-surface="glass" aria-pressed="false"><span class="swatch swatch-glass" aria-hidden="true"></span>Glass</button>
+              <button type="button" class="choice" data-surface="wood" aria-pressed="true"><span class="swatch swatch-wood" aria-hidden="true"></span>Wood</button>
+              <button type="button" class="choice" data-surface="carpet" aria-pressed="false"><span class="swatch swatch-carpet" aria-hidden="true"></span>Carpet</button>
+              <button type="button" class="choice" data-surface="sandpaper" aria-pressed="false"><span class="swatch swatch-sandpaper" aria-hidden="true"></span>Sandpaper</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="choice-group">
+            <legend>2. Height of the ramp</legend>
+            <div class="choices three" id="height-choices">
+              <button type="button" class="choice" data-height="10" aria-pressed="false">Low<br><span class="tag">10 cm</span></button>
+              <button type="button" class="choice" data-height="20" aria-pressed="true">Medium<br><span class="tag">20 cm</span></button>
+              <button type="button" class="choice" data-height="30" aria-pressed="false">High<br><span class="tag">30 cm</span></button>
+            </div>
+          </fieldset>
+
+          <div class="actions">
+            <button type="button" class="btn btn-big" id="release-btn">Release!</button>
+          </div>
+          <div class="hint" id="fair-test-hint" hidden style="margin-top:14px">
+            <strong>Fair test tip:</strong> you changed <em>both</em> the surface and the ramp height. Change only <em>one</em> thing at a time, so you know which change made the difference.
+          </div>
+        </section>
+
+        <section class="card span-all" aria-labelledby="results-heading">
+          <div class="actions" style="justify-content:space-between">
+            <h2 id="results-heading" style="margin:0">Results table</h2>
+            <button type="button" class="btn btn-secondary" id="clear-btn">Clear table</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Run</th><th scope="col">Surface</th><th scope="col">Ramp height</th><th scope="col">Distance travelled</th></tr>
+              </thead>
+              <tbody id="results-body">
+                <tr class="empty-row"><td colspan="4">No runs yet. Your results will appear here.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="fair-heading">
+          <h2 id="fair-heading">Think like a scientist</h2>
+          <p>You want to find out <strong>how the type of surface affects the distance the car travels</strong>.</p>
+          <details>
+            <summary>Which things must you keep the same?</summary>
+            <p>Keep the <strong>ramp height</strong> the same and use the <strong>same car</strong>. Change only the <strong>surface</strong>. This makes it a <strong>fair test</strong>.</p>
+          </details>
+          <details>
+            <summary>Which surface gives the most friction?</summary>
+            <p><strong>Sandpaper.</strong> It is the roughest surface, so it has the most friction and the car stops soonest. Glass is the smoothest, so the car travels the furthest.</p>
+          </details>
+        </section>
+
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key idea</h2>
+          <p><strong>Friction</strong> is a force that opposes motion between two surfaces in contact.</p>
+          <p style="margin:0">The rougher the surface, the greater the friction, and the shorter the distance the car moves. A higher ramp gives the car more energy, so it travels further.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 6 pupils preparing for PSLE Science.</div>
+  </footer>
+</body>
+</html>

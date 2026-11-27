@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>P6 Science Lab</title>
+  <meta name="description" content="Try Primary 6 Science experiments in your browser, based on the Singapore PSLE Science syllabus.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">🔬</span> P6 Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Try Primary 6 Science experiments right in your browser</h1>
+      <p class="lead">Pick a tool, change one thing at a time, and see what happens. Every tool follows the Singapore PSLE Primary 6 Science syllabus.</p>
+
+      <section class="topic-section" aria-labelledby="forces-heading">
+        <h2 id="forces-heading">Interactions: Forces</h2>
+        <div class="tool-grid">
+          <a class="card tool-card" href="tools/friction/index.html">
+            <span class="tool-icon" aria-hidden="true">🚗</span>
+            <h3>Friction Ramp</h3>
+            <p>Roll a toy car onto glass, wood, carpet or sandpaper. Which surface stops it soonest?</p>
+            <div class="tags"><span class="tag">Frictional force</span><span class="tag">Standard &amp; Foundation</span></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="topic-section" aria-labelledby="energy-heading">
+        <h2 id="energy-heading">Energy</h2>
+        <div class="tool-grid">
+          <a class="card tool-card" href="tools/energy/index.html">
+            <span class="tool-icon" aria-hidden="true">⚡</span>
+            <h3>Energy Conversion</h3>
+            <p>See how energy changes from one form to another in a torch, a falling ball, a wind turbine and more.</p>
+            <div class="tags"><span class="tag">Energy conversion</span><span class="tag">Standard</span></div>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 6 pupils preparing for PSLE Science.</div>
+  </footer>
+</body>
+</html>
