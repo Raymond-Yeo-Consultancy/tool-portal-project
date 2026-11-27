@@ -1,33 +1,37 @@
 /*
  * Spring Stretch
- * Masses (50 g each) hang on a spring. The extension grows by the same
- * amount for every 50 g added (Spring A: 2 cm, Spring B: 1 cm).
+ * Two springs hang side by side from one stand, with a shared ruler between
+ * them. Masses (50 g each) are hung on each spring separately. The extension
+ * grows by the same amount for every 50 g added (Spring A: 2 cm, Spring B: 1 cm).
  * The scene and graph are SVG drawings so they follow the light/dark theme.
  */
 (function () {
   var ORIGINAL_CM = 10;
   var MASS_STEP = 50;
   var MAX_MASSES = 6;
+  // x: where the spring hangs; side: which way its labels and ruler pointer go
   var SPRINGS = {
-    A: { name: 'Spring A', cmPer50g: 2, color: '--e-kinetic' },
-    B: { name: 'Spring B', cmPer50g: 1, color: '--e-heat' }
+    A: { name: 'Spring A', cmPer50g: 2, color: '--e-kinetic', x: 160, side: -1, width: 3 },
+    B: { name: 'Spring B', cmPer50g: 1, color: '--e-heat', x: 378, side: 1, width: 4.5 }
   };
+  var KEYS = ['A', 'B'];
 
   // scene geometry (SVG units)
   var PX_PER_CM = 12;
-  var TOP_Y = 40; // where the spring hangs from (0 cm on the ruler)
-  var SPRING_X = 170;
-  var RULER_X = 236;
+  var TOP_Y = 40; // where the springs hang from (0 cm on the ruler)
+  var RULER_L = 246;
+  var RULER_R = 292;
   var RULER_MAX_CM = 26;
+  var VIEW_W = 512;
 
   var state = {
-    spring: 'A',
-    count: 0, // number of 50 g masses
-    shownCm: ORIGINAL_CM, // length currently drawn (animates)
+    count: { A: 0, B: 0 }, // number of 50 g masses on each spring
+    shownCm: { A: ORIGINAL_CM, B: ORIGINAL_CM }, // length currently drawn (animates)
     showForces: true,
     results: { A: {}, B: {} }, // results[spring][mass] = length in cm
-    anim: null
+    anim: { A: null, B: null }
   };
+  // The stretch always plays. If the device asks for less motion, the bounce is left out.
   var calmMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (id) { return document.getElementById(id); };
 
@@ -36,18 +40,18 @@
   }
 
   /* ---------- scene ---------- */
-  function springPath(topY, bottomY) {
+  function springPath(x, topY, bottomY) {
     var coils = 12;
     var lead = 8;
     var amp = 13;
-    var d = 'M' + SPRING_X + ' ' + topY + ' V' + (topY + lead);
+    var d = 'M' + x + ' ' + topY + ' V' + (topY + lead);
     var span = bottomY - topY - lead * 2;
     for (var i = 0; i < coils * 2; i++) {
       var y = topY + lead + span * (i + 0.5) / (coils * 2);
-      var x = SPRING_X + (i % 2 === 0 ? amp : -amp);
-      d += ' L' + x.toFixed(1) + ' ' + y.toFixed(1);
+      var px = x + (i % 2 === 0 ? amp : -amp);
+      d += ' L' + px.toFixed(1) + ' ' + y.toFixed(1);
     }
-    d += ' L' + SPRING_X + ' ' + (bottomY - lead) + ' V' + bottomY;
+    d += ' L' + x + ' ' + (bottomY - lead) + ' V' + bottomY;
     return d;
   }
 
@@ -58,74 +62,101 @@
       '<polygon points="' + (x - 8) + ',' + (y2 - dir * 12) + ' ' + (x + 8) + ',' + (y2 - dir * 12) + ' ' + x + ',' + y2 + '" style="fill:' + color + '"/>';
   }
 
-  function drawScene() {
-    var cm = state.shownCm;
-    var bottomY = TOP_Y + cm * PX_PER_CM;
-    var spring = SPRINGS[state.spring];
+  function label(x, y, text, anchor) {
+    return '<text class="svg-text" x="' + x + '" y="' + y + '" text-anchor="' + anchor + '" style="font-size:17px">' + text + '</text>';
+  }
+
+  function drawSpring(key) {
+    var sp = SPRINGS[key];
+    var x = sp.x;
+    var side = sp.side; // -1: labels on the left, +1: labels on the right
+    var anchor = side < 0 ? 'end' : 'start';
+    var count = state.count[key];
+    var bottomY = TOP_Y + state.shownCm[key] * PX_PER_CM;
+    var rulerEdge = side < 0 ? RULER_L : RULER_R; // the ruler side facing this spring
     var s = '';
 
-    // stand
-    s += '<rect class="svg-fill" x="20" y="500" width="230" height="12" rx="3"/>';
-    s += '<rect class="svg-fill" x="34" y="18" width="12" height="482"/>';
-    s += '<rect class="svg-fill" x="34" y="18" width="160" height="12"/>';
-    s += '<path class="svg-ink" d="M' + SPRING_X + ' 30 V' + TOP_Y + '"/>';
-
-    // ruler
-    s += '<rect x="' + (RULER_X - 4) + '" y="' + (TOP_Y - 10) + '" width="46" height="' + (RULER_MAX_CM * PX_PER_CM + 20) + '" rx="4" style="fill:var(--surface);stroke:var(--ink-soft);stroke-width:1.5"/>';
-    for (var c = 0; c <= RULER_MAX_CM; c++) {
-      var ty = TOP_Y + c * PX_PER_CM;
-      var len = c % 5 === 0 ? 14 : 7;
-      s += '<line x1="' + RULER_X + '" y1="' + ty + '" x2="' + (RULER_X + len) + '" y2="' + ty + '" style="stroke:var(--ink);stroke-width:' + (c % 5 === 0 ? 1.6 : 1) + '"/>';
-      if (c % 5 === 0) s += '<text class="svg-text" x="' + (RULER_X + 18) + '" y="' + (ty + 5) + '" style="font-size:12px">' + c + '</text>';
-    }
-    s += '<text class="svg-text" x="' + (RULER_X + 18) + '" y="' + (TOP_Y - 14) + '" style="font-size:12px">cm</text>';
+    s += label(x, 8, sp.name, 'middle');
+    s += '<path class="svg-ink" d="M' + x + ' 30 V' + TOP_Y + '"/>';
 
     // original length mark
     var origY = TOP_Y + ORIGINAL_CM * PX_PER_CM;
-    s += '<line x1="' + (SPRING_X + 20) + '" y1="' + origY + '" x2="' + RULER_X + '" y2="' + origY + '" style="stroke:var(--ink-soft);stroke-width:1.5;stroke-dasharray:3 4"/>';
+    s += '<line x1="' + (x - side * 20) + '" y1="' + origY + '" x2="' + rulerEdge + '" y2="' + origY + '" style="stroke:var(--ink-soft);stroke-width:1.5;stroke-dasharray:3 4"/>';
 
     // spring
-    s += '<path d="' + springPath(TOP_Y, bottomY) + '" style="fill:none;stroke:var(' + spring.color + ');stroke-width:' + (state.spring === 'B' ? 4.5 : 3) + ';stroke-linejoin:round"/>';
+    s += '<path d="' + springPath(x, TOP_Y, bottomY) + '" style="fill:none;stroke:var(' + sp.color + ');stroke-width:' + sp.width + ';stroke-linejoin:round"/>';
 
-    // pointer to the ruler at the spring's bottom
-    s += '<line x1="' + (SPRING_X + 6) + '" y1="' + bottomY + '" x2="' + RULER_X + '" y2="' + bottomY + '" style="stroke:var(--primary);stroke-width:2"/>';
-    s += '<polygon points="' + (RULER_X - 8) + ',' + (bottomY - 5) + ' ' + RULER_X + ',' + bottomY + ' ' + (RULER_X - 8) + ',' + (bottomY + 5) + '" style="fill:var(--primary)"/>';
+    // pointer from the bottom of the spring to the ruler
+    s += '<line x1="' + (x - side * 6) + '" y1="' + bottomY + '" x2="' + rulerEdge + '" y2="' + bottomY + '" style="stroke:var(--primary);stroke-width:2"/>';
+    s += '<polygon points="' + (rulerEdge + side * 8) + ',' + (bottomY - 5) + ' ' + rulerEdge + ',' + bottomY + ' ' + (rulerEdge + side * 8) + ',' + (bottomY + 5) + '" style="fill:var(--primary)"/>';
 
-    // hook + hanger + masses
-    s += '<path class="svg-ink" d="M' + SPRING_X + ' ' + bottomY + ' v8 a6 6 0 1 1 -6 6"/>';
+    // hook + masses
+    s += '<path class="svg-ink" d="M' + x + ' ' + bottomY + ' v8 a6 6 0 1 1 -6 6"/>';
     var y = bottomY + 20;
-    if (state.count > 0) {
-      s += '<line x1="' + SPRING_X + '" y1="' + y + '" x2="' + SPRING_X + '" y2="' + (y + 8) + '" style="stroke:var(--ink);stroke-width:3"/>';
+    if (count > 0) {
+      s += '<line x1="' + x + '" y1="' + y + '" x2="' + x + '" y2="' + (y + 8) + '" style="stroke:var(--ink);stroke-width:3"/>';
       y += 8;
-      for (var i = 0; i < state.count; i++) {
-        s += '<rect x="' + (SPRING_X - 22) + '" y="' + y + '" width="44" height="14" rx="3" style="fill:var(--ink-soft);stroke:var(--ink);stroke-width:2"/>';
+      for (var i = 0; i < count; i++) {
+        s += '<rect x="' + (x - 22) + '" y="' + y + '" width="44" height="14" rx="3" style="fill:var(--ink-soft);stroke:var(--ink);stroke-width:2"/>';
         y += 14;
       }
-      s += '<text class="svg-text" x="' + (SPRING_X - 28) + '" y="' + (y - 3) + '" text-anchor="end" style="font-size:13px">' + (state.count * MASS_STEP) + ' g</text>';
+      s += label(x + side * 28, y - 2, (count * MASS_STEP) + ' g', anchor);
     }
 
-    // forces
-    if (state.showForces && state.count > 0) {
-      var fLen = 18 + state.count * 9;
+    // forces: equal and opposite when the mass hangs still
+    if (state.showForces && count > 0) {
+      var fLen = 18 + count * 9;
       var upFrom = bottomY - 4;
-      s += arrow(SPRING_X - 46, upFrom, upFrom - fLen, 'var(--e-kinetic)');
-      s += '<text class="svg-text" x="' + (SPRING_X - 56) + '" y="' + (upFrom - fLen / 2 + 4) + '" text-anchor="end" style="font-size:12px">spring</text>';
-      s += '<text class="svg-text" x="' + (SPRING_X - 56) + '" y="' + (upFrom - fLen / 2 + 18) + '" text-anchor="end" style="font-size:12px">force</text>';
+      var ax = x + side * 46;
+      s += arrow(ax, upFrom, upFrom - fLen, 'var(--e-kinetic)');
+      s += label(ax + side * 12, upFrom - fLen / 2 - 2, 'spring', anchor);
+      s += label(ax + side * 12, upFrom - fLen / 2 + 16, 'force', anchor);
       var downFrom = y + 2;
-      s += arrow(SPRING_X, downFrom, downFrom + fLen, 'var(--e-heat)');
-      s += '<text class="svg-text" x="' + (SPRING_X - 14) + '" y="' + (downFrom + fLen / 2 + 4) + '" text-anchor="end" style="font-size:12px">gravitational</text>';
-      s += '<text class="svg-text" x="' + (SPRING_X - 14) + '" y="' + (downFrom + fLen / 2 + 18) + '" text-anchor="end" style="font-size:12px">force</text>';
+      s += arrow(x, downFrom, downFrom + fLen, 'var(--e-heat)');
+      s += label(x + side * 14, downFrom + fLen / 2 + 2, 'gravitational', anchor);
+      s += label(x + side * 14, downFrom + fLen / 2 + 20, 'force', anchor);
     }
+    return s;
+  }
 
-    $('scene').innerHTML =
-      '<svg viewBox="0 0 300 515" role="img" aria-label="' + spring.name + ' hanging from a stand with ' +
-      (state.count * MASS_STEP) + ' g of masses. Its length is ' + lengthCm(state.spring, state.count) + ' cm.">' + s + '</svg>';
+  function drawScene() {
+    var s = '';
+
+    // stand
+    s += '<rect class="svg-fill" x="6" y="500" width="440" height="12" rx="3"/>';
+    s += '<rect class="svg-fill" x="14" y="18" width="12" height="482"/>';
+    s += '<rect class="svg-fill" x="14" y="18" width="400" height="12"/>';
+
+    // shared ruler, with ticks on both edges
+    var mid = (RULER_L + RULER_R) / 2;
+    s += '<rect x="' + RULER_L + '" y="' + (TOP_Y - 10) + '" width="' + (RULER_R - RULER_L) + '" height="' + (RULER_MAX_CM * PX_PER_CM + 20) + '" rx="4" style="fill:var(--surface);stroke:var(--ink-soft);stroke-width:1.5"/>';
+    for (var c = 0; c <= RULER_MAX_CM; c++) {
+      var ty = TOP_Y + c * PX_PER_CM;
+      var big = c % 5 === 0;
+      var len = big ? 10 : 6;
+      var st = 'stroke:var(--ink);stroke-width:' + (big ? 1.6 : 1);
+      s += '<line x1="' + RULER_L + '" y1="' + ty + '" x2="' + (RULER_L + len) + '" y2="' + ty + '" style="' + st + '"/>';
+      s += '<line x1="' + RULER_R + '" y1="' + ty + '" x2="' + (RULER_R - len) + '" y2="' + ty + '" style="' + st + '"/>';
+      if (big) s += '<text class="svg-text" x="' + mid + '" y="' + (ty + 5) + '" text-anchor="middle" style="font-size:15px">' + c + '</text>';
+    }
+    s += '<text class="svg-text" x="' + mid + '" y="' + (TOP_Y + RULER_MAX_CM * PX_PER_CM + 26) + '" text-anchor="middle" style="font-size:13px">cm</text>';
+
+    KEYS.forEach(function (k) { s += drawSpring(k); });
+
+    var desc = KEYS.map(function (k) {
+      return SPRINGS[k].name + ' with ' + (state.count[k] * MASS_STEP) + ' g is ' + lengthCm(k, state.count[k]) + ' cm long';
+    }).join('; ');
+    $('scene').innerHTML = '<svg viewBox="0 -10 ' + VIEW_W + ' 530" role="img" aria-label="Two springs hanging from a stand with a ruler between them. ' + desc + '.">' + s + '</svg>';
   }
 
   /* ---------- animation: stretch with a small bounce ---------- */
-  function animateTo(targetCm) {
-    if (state.anim) cancelAnimationFrame(state.anim);
-    var from = state.shownCm;
+  function animateTo(key, targetCm) {
+    if (state.anim[key]) cancelAnimationFrame(state.anim[key]);
+    var from = state.shownCm[key];
+    if (from === targetCm) {
+      drawScene();
+      return;
+    }
     var start = null;
     var dur = 900;
     function step(ts) {
@@ -134,21 +165,14 @@
       // damped oscillation settling on the target; if the device asks for
       // less motion, stretch smoothly without the bounce
       var settle = calmMotion ? 1 - Math.pow(1 - t, 3) : 1 - Math.exp(-5 * t) * Math.cos(10 * t);
-      state.shownCm = from + (targetCm - from) * (t === 1 ? 1 : settle);
+      state.shownCm[key] = from + (targetCm - from) * (t === 1 ? 1 : settle);
       drawScene();
-      if (t < 1) state.anim = requestAnimationFrame(step);
+      state.anim[key] = t < 1 ? requestAnimationFrame(step) : null;
     }
-    state.anim = requestAnimationFrame(step);
+    state.anim[key] = requestAnimationFrame(step);
   }
 
   /* ---------- results ---------- */
-  function record() {
-    var mass = state.count * MASS_STEP;
-    state.results[state.spring][mass] = lengthCm(state.spring, state.count);
-    renderTable();
-    drawGraph();
-  }
-
   function renderTable() {
     var body = $('results-body');
     body.innerHTML = '';
@@ -156,7 +180,7 @@
       var mass = n * MASS_STEP;
       var tr = document.createElement('tr');
       var cells = [String(mass)];
-      ['A', 'B'].forEach(function (k) {
+      KEYS.forEach(function (k) {
         var len = state.results[k][mass];
         cells.push(len === undefined ? '–' : String(len));
         cells.push(len === undefined ? '–' : String(len - ORIGINAL_CM));
@@ -167,7 +191,6 @@
         td.textContent = v;
         tr.appendChild(td);
       });
-      if (mass === state.count * MASS_STEP) tr.className = 'current-row';
       body.appendChild(tr);
     }
   }
@@ -194,7 +217,7 @@
     s += '<text class="svg-text" transform="rotate(-90)" x="' + (-(top + H - bottom) / 2) + '" y="14" text-anchor="middle" style="font-size:13px">Extension (cm)</text>';
 
     // data
-    ['A', 'B'].forEach(function (k) {
+    KEYS.forEach(function (k) {
       var color = 'var(' + SPRINGS[k].color + ')';
       var pts = Object.keys(state.results[k]).map(Number).sort(function (a, b) { return a - b; });
       if (pts.length > 1) {
@@ -209,7 +232,7 @@
       });
     });
 
-    var summary = ['A', 'B'].map(function (k) {
+    var summary = KEYS.map(function (k) {
       var n = Object.keys(state.results[k]).length;
       return SPRINGS[k].name + ': ' + n + ' point' + (n === 1 ? '' : 's');
     }).join('; ');
@@ -218,34 +241,31 @@
 
   /* ---------- controls ---------- */
   function update() {
-    var len = lengthCm(state.spring, state.count);
-    var mass = state.count * MASS_STEP;
-    $('mass-readout').textContent = mass + ' g';
-    $('add-btn').disabled = state.count >= MAX_MASSES;
-    $('remove-btn').disabled = state.count <= 0;
-    $('result').innerHTML = SPRINGS[state.spring].name + ' with <strong>' + mass + ' g</strong>: length <strong>' + len +
-      ' cm</strong>, extension <strong>' + (len - ORIGINAL_CM) + ' cm</strong>.';
-    record();
-    animateTo(len);
+    var lines = KEYS.map(function (k) {
+      var count = state.count[k];
+      var len = lengthCm(k, count);
+      var mass = count * MASS_STEP;
+      state.results[k][mass] = len;
+      $('mass-' + k).textContent = mass + ' g';
+      $('add-' + k).disabled = count >= MAX_MASSES;
+      $('remove-' + k).disabled = count <= 0;
+      return '<span>' + SPRINGS[k].name + ' with <strong>' + mass + ' g</strong>: length <strong>' + len +
+        ' cm</strong>, extension <strong>' + (len - ORIGINAL_CM) + ' cm</strong>.</span>';
+    });
+    $('result').innerHTML = lines.join('');
+    renderTable();
+    drawGraph();
+    KEYS.forEach(function (k) { animateTo(k, lengthCm(k, state.count[k])); });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    var springButtons = document.querySelectorAll('#spring-choices .choice');
-    springButtons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        springButtons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
-        state.spring = btn.getAttribute('data-spring');
-        // swapping springs: take the masses off first, like in a real experiment
-        state.count = 0;
-        state.shownCm = ORIGINAL_CM;
-        update();
+    KEYS.forEach(function (k) {
+      $('add-' + k).addEventListener('click', function () {
+        if (state.count[k] < MAX_MASSES) { state.count[k] += 1; update(); }
       });
-    });
-    $('add-btn').addEventListener('click', function () {
-      if (state.count < MAX_MASSES) { state.count += 1; update(); }
-    });
-    $('remove-btn').addEventListener('click', function () {
-      if (state.count > 0) { state.count -= 1; update(); }
+      $('remove-' + k).addEventListener('click', function () {
+        if (state.count[k] > 0) { state.count[k] -= 1; update(); }
+      });
     });
     $('forces-toggle').addEventListener('change', function (e) {
       state.showForces = e.target.checked;
@@ -253,7 +273,7 @@
     });
     $('clear-btn').addEventListener('click', function () {
       state.results = { A: {}, B: {} };
-      state.count = 0;
+      state.count = { A: 0, B: 0 };
       update();
     });
     update();

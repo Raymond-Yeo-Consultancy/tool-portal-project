@@ -780,3 +780,13 @@ tbody th { font-size: 1rem; color: var(--text); }
 .anim-off { animation: none !important; }
 .anim-off.hide-off { opacity: 0 !important; }
 .at-end { animation: none !important; transform: var(--end); }
+
+/* spring tool: two springs side by side */
+.result-line span { display: block; }
+
+.spring-control {
+  border-left: 6px solid var(--spring-color);
+  padding-left: 12px;
+}
+
+.spring-control legend { display: flex; align-items: center; gap: 8px; }

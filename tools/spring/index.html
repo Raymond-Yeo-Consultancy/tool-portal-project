@@ -24,7 +24,7 @@
     <div class="container">
       <a class="back-link" href="../../index.html">← All tools</a>
       <h1>Spring Stretch</h1>
-      <p class="lead">Hang masses on a spring and measure how much it stretches. Compare a soft spring with a stiff spring.</p>
+      <p class="lead">Hang masses on two springs and measure how much each one stretches. Compare the soft spring with the stiff spring.</p>
       <p><span class="tag">Standard Science</span></p>
 
       <div class="tool-layout friction-layout">
@@ -35,22 +35,23 @@
         </section>
 
         <section class="card" aria-labelledby="controls-heading">
-          <h2 id="controls-heading">Set up your experiment</h2>
+          <h2 id="controls-heading">Hang masses (50 g each)</h2>
 
-          <fieldset class="choice-group">
-            <legend>1. Choose a spring</legend>
-            <div class="choices" id="spring-choices">
-              <button type="button" class="choice" data-spring="A" aria-pressed="true">Spring A<br><span class="tag">soft</span></button>
-              <button type="button" class="choice" data-spring="B" aria-pressed="false">Spring B<br><span class="tag">stiff</span></button>
+          <fieldset class="choice-group spring-control" style="--spring-color:var(--e-kinetic)">
+            <legend>Spring A <span class="tag">soft</span></legend>
+            <p class="mass-readout">Mass hung: <strong id="mass-A">0 g</strong></p>
+            <div class="actions">
+              <button type="button" class="btn" id="add-A" aria-label="Add 50 g to Spring A">+ Add 50 g</button>
+              <button type="button" class="btn btn-secondary" id="remove-A" aria-label="Remove 50 g from Spring A">− Remove 50 g</button>
             </div>
           </fieldset>
 
-          <fieldset class="choice-group">
-            <legend>2. Hang masses (50 g each)</legend>
-            <p class="mass-readout">Mass hung: <strong id="mass-readout">0 g</strong></p>
+          <fieldset class="choice-group spring-control" style="--spring-color:var(--e-heat)">
+            <legend>Spring B <span class="tag">stiff</span></legend>
+            <p class="mass-readout">Mass hung: <strong id="mass-B">0 g</strong></p>
             <div class="actions">
-              <button type="button" class="btn" id="add-btn">+ Add 50 g</button>
-              <button type="button" class="btn btn-secondary" id="remove-btn">− Remove 50 g</button>
+              <button type="button" class="btn" id="add-B" aria-label="Add 50 g to Spring B">+ Add 50 g</button>
+              <button type="button" class="btn btn-secondary" id="remove-B" aria-label="Remove 50 g from Spring B">− Remove 50 g</button>
             </div>
           </fieldset>
 
@@ -107,7 +108,7 @@
           </details>
           <details>
             <summary>To make it a fair test, what must stay the same?</summary>
-            <p>Hang the <strong>same masses</strong> on both springs, and measure the length in the same way. Change only the <strong>spring</strong>.</p>
+            <p>Hang the <strong>same mass</strong> on both springs, and measure the length in the same way. Change only the <strong>spring</strong>. Try it: put 150 g on each spring and compare them on the ruler.</p>
           </details>
         </section>
 
