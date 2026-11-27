@@ -14,22 +14,22 @@
 
   var OBJECTS = [
     {
-      id: 'feather', name: 'Feather', topSpeed: 0.8, flutter: 1,
+      id: 'feather', name: 'Feather', topSpeed: 0.8, gLen: 14, flutter: 1,
       svg: '<g transform="rotate(35)"><path d="M0 18 V-18" style="stroke:var(--ink);stroke-width:2"/>' +
         '<path d="M0 -18 C13 -9 13 9 0 14 C-13 9 -13 -9 0 -18 Z" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/>' +
         '<path d="M0 -8 L7 -12 M0 0 L8 -4 M0 -8 L-7 -12 M0 0 L-8 -4" style="stroke:var(--ink-soft);stroke-width:1.5"/></g>'
     },
     {
-      id: 'sheet', name: 'Flat sheet of paper', short: 'Flat paper', topSpeed: 1.2, flutter: 0.7,
+      id: 'sheet', name: 'Flat sheet of paper', short: 'Flat paper', topSpeed: 1.2, gLen: 24, flutter: 0.7,
       svg: '<rect x="-26" y="-3" width="52" height="6" rx="1" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/>'
     },
     {
-      id: 'paperball', name: 'Crumpled paper ball', short: 'Paper ball', topSpeed: 7, flutter: 0,
+      id: 'paperball', name: 'Crumpled paper ball', short: 'Paper ball', topSpeed: 7, gLen: 24, flutter: 0,
       svg: '<polygon points="0,-12 7,-9 12,-2 10,7 3,12 -6,11 -12,4 -11,-5 -6,-11" style="fill:var(--surface);stroke:var(--ink);stroke-width:2;stroke-linejoin:round"/>' +
         '<path d="M-6 -4 L2 0 L-2 6 M4 -6 L6 2" style="stroke:var(--ink-soft);stroke-width:1.5;fill:none"/>'
     },
     {
-      id: 'ball', name: 'Metal ball', short: 'Metal ball', topSpeed: 40, flutter: 0,
+      id: 'ball', name: 'Metal ball', short: 'Metal ball', topSpeed: 40, gLen: 38, flutter: 0,
       svg: '<circle r="12" style="fill:var(--ink-soft);stroke:var(--ink);stroke-width:2"/>' +
         '<circle cx="-4" cy="-4" r="3.5" style="fill:var(--surface);opacity:0.8"/>'
     }
@@ -118,11 +118,22 @@
         x += Math.sin(t * 5 + i) * 10 * obj.flutter;
         rot = Math.sin(t * 5 + i + 1) * 18 * obj.flutter;
       }
+      // position dots: where the object was every 0.1 s
+      if (t !== null) {
+        var tMax = Math.min(t, fall(obj, state.air).time);
+        for (var k = 1; k * 0.1 < tMax; k++) {
+          var dotY = TOP_Y + (at(obj, state.air, k * 0.1).d / HEIGHT_M) * FALL_PX;
+          s += '<circle cx="' + cx + '" cy="' + dotY.toFixed(1) + '" r="2.5" style="fill:var(--ink-soft)"/>';
+        }
+      }
       s += '<g transform="translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') rotate(' + rot.toFixed(1) + ')">' + obj.svg + '</g>';
 
-      // forces: arrows are drawn to the same scale for each object's own weight
+      // forces: a heavier object gets a longer gravitational force arrow
+      // (the sheet and the paper ball have the same mass, so the same arrow).
+      // Air resistance grows with speed until it equals the gravitational force.
+      // Arrow lengths compare sizes only; they are not to exact scale.
       if (state.showForces && !p.landed) {
-        var len = 26;
+        var len = obj.gLen;
         var ax = x + (obj.id === 'sheet' ? 38 : 26);
         s += arrow(ax, y + 4, y + 4 + len, 'var(--e-heat)');
         if (state.air) {

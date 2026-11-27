@@ -770,3 +770,15 @@ tbody th { font-size: 1rem; color: var(--text); }
 }
 
 .force-key span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* ---------- step-aware animation (energy tool) ---------- */
+@keyframes flow { to { stroke-dashoffset: -18; } }
+@keyframes windkey { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.15); } }
+
+/* moving dashes show electrical energy flowing along a wire */
+.anim-flow { stroke-dasharray: 10 8; animation: flow 0.7s linear infinite; }
+.anim-wind { animation: windkey 0.9s linear infinite; transform-box: fill-box; transform-origin: center; }
+
+.anim-off { animation: none !important; }
+.anim-off.hide-off { opacity: 0 !important; }
+.at-end { animation: none !important; transform: var(--end); }

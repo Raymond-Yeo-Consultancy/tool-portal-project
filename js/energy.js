@@ -12,6 +12,8 @@
  *       e       energy forms produced at this step (keys of ENERGY)
  *       wasted  less useful forms also produced (shown dashed)
  *       parts   data-part names to light up in the drawing
+ *                 (in the SVG, data-on="1 2" makes a piece animate only in those
+ *                 steps, counted from 0; class hide-off also hides it otherwise)
  *       text    caption explaining the step
  *       hint    clue shown in "Test yourself" if this step is wrong
  */
@@ -42,13 +44,14 @@
         '<g data-part="battery">' +
           '<rect x="80" y="134" width="68" height="32" rx="4" style="fill:var(--e-chem)" class="svg-ink"/>' +
           '<rect x="154" y="134" width="68" height="32" rx="4" style="fill:var(--e-chem)" class="svg-ink"/>' +
-          '<text class="svg-text" x="114" y="156" text-anchor="middle">+  −</text>' +
-          '<text class="svg-text" x="188" y="156" text-anchor="middle">+  −</text>' +
+          '<text class="svg-text" x="114" y="156" text-anchor="middle">−  +</text>' +
+          '<text class="svg-text" x="188" y="156" text-anchor="middle">−  +</text>' +
         '</g>' +
-        '<g data-part="wire"><path d="M222 150 H280 M80 150 Q66 150 66 168 Q66 176 80 176 H270 L284 160" style="stroke:var(--e-elec);stroke-width:4;fill:none;stroke-linecap:round"/></g>' +
+        '<g data-part="wire"><path class="anim-flow" data-on="1 2" d="M222 150 H280 M284 160 L270 176 H80 Q66 176 66 168 Q66 150 80 150" style="stroke:var(--e-elec);stroke-width:4;fill:none;stroke-linecap:round"/></g>' +
         '<g data-part="bulb">' +
-          '<polygon class="anim-glow" points="304,112 392,62 392,238 304,188" style="fill:var(--e-light);opacity:.45"/>' +
-          '<circle cx="290" cy="150" r="14" style="fill:var(--e-light)" class="svg-ink"/>' +
+          '<polygon class="anim-glow hide-off" data-on="2" points="304,112 392,62 392,238 304,188" style="fill:var(--e-light);opacity:.45"/>' +
+          '<circle class="svg-fill" cx="290" cy="150" r="14"/>' +
+          '<circle class="svg-ink hide-off" data-on="2" cx="290" cy="150" r="14" style="fill:var(--e-light)"/>' +
         '</g>' +
         '<text class="svg-text" x="160" y="230" text-anchor="middle">Switch on</text>',
       steps: [
@@ -63,11 +66,11 @@
         GROUND(260) +
         '<path class="svg-ink" d="M60 260 V80 M50 92 L60 78 L70 92"/>' +
         '<text class="svg-text" x="72" y="180">height</text>' +
-        '<g data-part="ball"><circle class="anim-fall" cx="200" cy="90" r="20" style="fill:var(--car);stroke:var(--ink);stroke-width:3"/></g>' +
-        '<g data-part="impact">' +
+        '<g data-part="ball"><circle class="anim-fall" data-on="1" data-done="2" cx="200" cy="90" r="20" style="fill:var(--car);stroke:var(--ink);stroke-width:3;--end:translateY(150px)"/></g>' +
+        '<g data-part="impact"><g class="hide-off" data-on="2">' +
           '<path class="svg-ink" d="M168 248 l-16 -10 M164 258 l-20 0 M232 248 l16 -10 M236 258 l20 0"/>' +
           '<text class="svg-text" x="300" y="240" text-anchor="middle">thud!</text>' +
-        '</g>',
+        '</g></g>',
       steps: [
         { e: ['gpe'], parts: ['ball'], text: 'The ball held high above the ground has gravitational potential energy.', hint: 'What kind of energy does an object have because of its height?' },
         { e: ['kinetic'], parts: ['ball'], text: 'As the ball falls, its gravitational potential energy is converted into kinetic energy. It moves faster and faster.', hint: 'What kind of energy does a moving object have?' },
@@ -78,7 +81,7 @@
       id: 'toycar', name: 'Wind-up toy car', emoji: '🚙',
       svg:
         GROUND(252) +
-        '<g class="anim-drive">' +
+        '<g class="anim-drive" data-on="1">' +
           '<g data-part="car">' +
             '<path d="M80 180 L100 152 H160 L178 180 Z" style="fill:var(--car);stroke:var(--ink);stroke-width:3;stroke-linejoin:round"/>' +
             '<rect x="60" y="180" width="140" height="50" rx="10" style="fill:var(--car);stroke:var(--ink);stroke-width:3"/>' +
@@ -89,7 +92,7 @@
             '<rect class="svg-fill" x="80" y="190" width="80" height="30" rx="4"/>' +
             '<polyline points="86,205 93,195 100,215 107,195 114,215 121,195 128,215 135,195 142,215 149,195 155,205" style="fill:none;stroke:var(--e-epe);stroke-width:3;stroke-linejoin:round"/>' +
             '<rect class="svg-fill" x="200" y="198" width="22" height="6"/>' +
-            '<ellipse class="svg-fill" cx="230" cy="201" rx="9" ry="16"/>' +
+            '<ellipse class="svg-fill anim-wind" data-on="0" cx="230" cy="201" rx="9" ry="16"/>' +
           '</g>' +
         '</g>',
       steps: [
@@ -110,11 +113,11 @@
           '<path class="svg-ink" d="M77 232 L97 182 M113 232 L133 182 M50 207 H160" style="stroke-width:2"/>' +
           '<path class="svg-ink" d="M95 232 V250"/>' +
         '</g>' +
-        '<g data-part="wire"><path d="M160 212 H240 Q260 212 260 232 V244 H290" style="stroke:var(--e-elec);stroke-width:4;fill:none;stroke-linecap:round"/></g>' +
+        '<g data-part="wire"><path class="anim-flow" data-on="1 2" d="M160 212 H240 Q260 212 260 232 V244 H290" style="stroke:var(--e-elec);stroke-width:4;fill:none;stroke-linecap:round"/></g>' +
         '<rect class="svg-fill" x="290" y="170" width="12" height="80"/>' +
         '<rect class="svg-fill" x="268" y="242" width="56" height="8" rx="3"/>' +
         '<g data-part="fan">' +
-          '<g class="anim-spin-fast">' +
+          '<g class="anim-spin-fast" data-on="2">' +
             '<ellipse cx="296" cy="150" rx="52" ry="11" style="fill:var(--e-kinetic);stroke:var(--ink);stroke-width:2"/>' +
             '<ellipse cx="296" cy="150" rx="11" ry="52" style="fill:var(--e-kinetic);stroke:var(--ink);stroke-width:2"/>' +
           '</g>' +
@@ -144,7 +147,7 @@
           '<rect x="236" y="88" width="36" height="24" rx="7" style="fill:var(--e-elec);stroke:var(--ink);stroke-width:3"/>' +
           '<circle class="svg-fill" cx="250" cy="100" r="7"/>' +
         '</g>' +
-        '<g data-part="wire"><path d="M266 250 H330" style="stroke:var(--e-elec);stroke-width:4;stroke-linecap:round"/></g>' +
+        '<g data-part="wire"><path class="anim-flow" data-on="2" d="M266 250 H330" style="stroke:var(--e-elec);stroke-width:4;stroke-linecap:round"/></g>' +
         '<g data-part="house">' +
           '<polygon class="svg-fill" points="320,215 352,186 384,215"/>' +
           '<rect class="svg-fill" x="326" y="215" width="52" height="40"/>' +
@@ -166,11 +169,11 @@
           '<ellipse cx="96" cy="150" rx="10" ry="5" style="fill:var(--e-chem)"/>' +
         '</g>' +
         '<path class="svg-ink" d="M120 190 H170 M160 180 L172 190 L160 200" style="stroke-dasharray:6 6"/>' +
-        '<g data-part="person"><g class="anim-run">' +
+        '<g data-part="person"><g class="anim-run" data-on="1">' +
           '<circle class="svg-fill" cx="230" cy="110" r="16"/>' +
           '<path class="svg-ink" d="M230 126 L226 180 M228 144 L206 166 M228 144 L254 132 M226 180 L206 220 L192 222 M226 180 L252 212 L262 238"/>' +
         '</g></g>' +
-        '<g data-part="heat"><g class="anim-rise">' +
+        '<g data-part="heat"><g class="anim-rise hide-off" data-on="1">' +
           '<path d="M310 140 q8 -10 0 -20 q-8 -10 0 -20 M330 150 q8 -10 0 -20 q-8 -10 0 -20" style="fill:none;stroke:var(--e-heat);stroke-width:4;stroke-linecap:round"/>' +
         '</g></g>',
       steps: [
@@ -186,9 +189,9 @@
           '<text class="svg-text" x="200" y="210" text-anchor="middle">wax</text></g>' +
         '<path class="svg-ink" d="M200 150 V136"/>' +
         '<g data-part="flame">' +
-          '<circle class="anim-glow" cx="200" cy="112" r="54" style="fill:var(--e-light);opacity:.3"/>' +
-          '<path class="anim-flicker" d="M200 76 C184 104 186 132 200 138 C214 132 216 104 200 76 Z" style="fill:var(--e-light);stroke:var(--e-heat);stroke-width:3"/>' +
-          '<g class="anim-rise"><path d="M178 58 q6 -8 0 -16 q-6 -8 0 -16 M222 58 q6 -8 0 -16 q-6 -8 0 -16" style="fill:none;stroke:var(--e-heat);stroke-width:3;stroke-linecap:round"/></g>' +
+          '<circle class="anim-glow hide-off" data-on="1" cx="200" cy="112" r="54" style="fill:var(--e-light);opacity:.3"/>' +
+          '<path class="anim-flicker hide-off" data-on="1" d="M200 76 C184 104 186 132 200 138 C214 132 216 104 200 76 Z" style="fill:var(--e-light);stroke:var(--e-heat);stroke-width:3"/>' +
+          '<g class="anim-rise hide-off" data-on="1"><path d="M178 58 q6 -8 0 -16 q-6 -8 0 -16 M222 58 q6 -8 0 -16 q-6 -8 0 -16" style="fill:none;stroke:var(--e-heat);stroke-width:3;stroke-linecap:round"/></g>' +
         '</g>',
       steps: [
         { e: ['chem'], parts: ['wax'], text: 'The candle wax is a fuel. It stores chemical potential energy.', hint: 'Fuels such as wax store which kind of energy?' },
@@ -201,13 +204,13 @@
         '<rect x="135" y="250" width="140" height="10" rx="3" class="svg-fill"/>' +
         '<rect class="svg-fill" x="18" y="150" width="44" height="56" rx="6"/>' +
         '<path class="svg-ink" d="M33 168 V180 M47 168 V180"/>' +
-        '<g data-part="wire"><path d="M62 186 C100 186 96 238 136 238" style="stroke:var(--e-elec);stroke-width:4;fill:none;stroke-linecap:round"/></g>' +
+        '<g data-part="wire"><path class="anim-flow" data-on="0 1" d="M62 186 C100 186 96 238 136 238" style="stroke:var(--e-elec);stroke-width:4;fill:none;stroke-linecap:round"/></g>' +
         '<path class="svg-fill" d="M266 172 L306 130 L312 140 L270 196 Z"/>' +
         '<path class="svg-ink" d="M150 160 C110 160 110 230 146 230"/>' +
         '<path class="svg-fill" d="M140 250 L152 140 H258 L270 250 Z"/>' +
         '<path class="svg-ink" d="M168 140 V128 H242 V140"/>' +
-        '<g data-part="element"><polyline points="160,236 174,220 188,236 202,220 216,236 230,220 244,236 256,226" style="fill:none;stroke:var(--e-heat);stroke-width:4;stroke-linejoin:round"/></g>' +
-        '<g data-part="steam"><g class="anim-rise"><path d="M314 118 q10 -10 0 -20 q-10 -10 0 -20 M334 124 q10 -10 0 -20 q-10 -10 0 -20" style="fill:none;stroke:var(--ink-soft);stroke-width:4;stroke-linecap:round"/></g></g>',
+        '<g data-part="element"><polyline class="anim-glow" data-on="1" points="160,236 174,220 188,236 202,220 216,236 230,220 244,236 256,226" style="fill:none;stroke:var(--e-heat);stroke-width:4;stroke-linejoin:round"/></g>' +
+        '<g data-part="steam"><g class="anim-rise hide-off" data-on="1"><path d="M314 118 q10 -10 0 -20 q-10 -10 0 -20 M334 124 q10 -10 0 -20 q-10 -10 0 -20" style="fill:none;stroke:var(--ink-soft);stroke-width:4;stroke-linecap:round"/></g></g>',
       steps: [
         { e: ['elec'], parts: ['wire'], text: 'Electrical energy flows from the power socket through the wire into the kettle.', hint: 'What kind of energy comes from a power socket?' },
         { e: ['heat'], wasted: ['sound'], parts: ['element', 'steam'], text: 'The heating element converts electrical energy into heat energy, which boils the water. Some sound energy is also produced. Here, heat energy is the useful form!', hint: 'The kettle’s job is to make water hot. Which energy form does that?' }
@@ -341,13 +344,28 @@
     svg.querySelectorAll('[data-part]').forEach(function (p) {
       p.classList.toggle('lit', step.parts.indexOf(p.getAttribute('data-part')) !== -1);
     });
+    applyStepAnimation(svg, i);
     setCaption();
+  }
+
+  // Each animated piece lists the steps it is active in (data-on="1 2").
+  // Outside those steps it stops (and hides, if it has class hide-off).
+  // With no step selected (i = -1) everything animates.
+  function applyStepAnimation(svg, i) {
+    svg.querySelectorAll('[data-on]').forEach(function (el) {
+      var on = i < 0 || el.getAttribute('data-on').split(' ').indexOf(String(i)) !== -1;
+      el.classList.toggle('anim-off', !on);
+    });
+    svg.querySelectorAll('[data-done]').forEach(function (el) {
+      el.classList.toggle('at-end', i >= Number(el.getAttribute('data-done')));
+    });
   }
 
   function clearHighlight() {
     activeStep = -1;
     var svg = $('illustration').querySelector('svg');
     if (svg) {
+      applyStepAnimation(svg, -1);
       svg.classList.remove('highlighting');
       svg.querySelectorAll('.lit').forEach(function (p) { p.classList.remove('lit'); });
     }

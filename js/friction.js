@@ -163,7 +163,33 @@
 
     // car
     var pos = carPosition();
-    drawCar(pos.x, pos.y, pos.angle);
+    drawCar(pos.x, pos.y, pos.angle, pos.dist);
+
+    // friction arrow: acts on the moving car, opposite to its motion.
+    // Longer arrow = more friction (not to exact scale).
+    if (state.phase === 'floor') {
+      var fLen = 16 + s.friction * 80;
+      var fx = pos.x - L.carW / 2 - 5;
+      var fy = L.groundY - L.carW * 0.3;
+      var fCol = cssVar('--e-heat');
+      ctx.strokeStyle = fCol;
+      ctx.fillStyle = fCol;
+      ctx.lineWidth = 3.5;
+      ctx.beginPath();
+      ctx.moveTo(fx, fy);
+      ctx.lineTo(fx - fLen + 7, fy);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(fx - fLen, fy);
+      ctx.lineTo(fx - fLen + 10, fy - 6);
+      ctx.lineTo(fx - fLen + 10, fy + 6);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = text;
+      ctx.font = '600 12px ' + font;
+      ctx.textAlign = 'center';
+      ctx.fillText('friction', fx - fLen / 2, fy - 9);
+    }
 
     // latest result flag
     if (state.phase === 'done') {
@@ -194,18 +220,20 @@
     var topY = rampTopY();
     var startX = L.rampLeft + L.carW * 0.55;
     var startY = topY + ((startX - L.rampLeft) / L.rampW) * (L.groundY - topY);
+    var rampLen = Math.sqrt(Math.pow(L.footX - startX, 2) + Math.pow(L.groundY - startY, 2));
     if (state.phase === 'idle' || state.phase === 'ramp') {
       var s = state.phase === 'idle' ? 0 : state.carS;
       return {
         x: startX + (L.footX - startX) * s,
         y: startY + (L.groundY - startY) * s,
-        angle: Math.atan2(L.groundY - topY, L.rampW)
+        angle: Math.atan2(L.groundY - topY, L.rampW),
+        dist: rampLen * s
       };
     }
-    return { x: cmToX(state.carCm), y: L.groundY, angle: 0 };
+    return { x: cmToX(state.carCm), y: L.groundY, angle: 0, dist: rampLen + cmToX(state.carCm) - L.footX };
   }
 
-  function drawCar(x, y, angle) {
+  function drawCar(x, y, angle, dist) {
     var w = L.carW;
     var bodyH = w * 0.34;
     var r = w * 0.13;
@@ -225,10 +253,17 @@
     ctx.stroke();
     // wheels
     ctx.fillStyle = cssVar('--wheel');
+    var spin = (dist || 0) / r; // wheels turn as far as the car has rolled
     [-w * 0.3, w * 0.3].forEach(function (wx) {
       ctx.beginPath();
       ctx.arc(wx, -r, r, 0, Math.PI * 2);
       ctx.fill();
+      ctx.strokeStyle = cssVar('--ink-soft');
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(wx - Math.cos(spin) * r * 0.8, -r - Math.sin(spin) * r * 0.8);
+      ctx.lineTo(wx + Math.cos(spin) * r * 0.8, -r + Math.sin(spin) * r * 0.8);
+      ctx.stroke();
     });
     ctx.restore();
   }
