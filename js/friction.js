@@ -31,7 +31,6 @@
     runs: [],
     animId: null
   };
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function distanceCm(surfaceKey, heightCm) {
     return heightCm / SURFACES[surfaceKey].friction;
@@ -297,12 +296,6 @@
 
     setBusy(true);
     resultEl.textContent = 'The car is rolling…';
-
-    if (reduceMotion) {
-      state.carCm = finalCm;
-      finish(finalCm);
-      return;
-    }
 
     var rampTime = 0.6 + state.height * 0.01;
     var start = null;

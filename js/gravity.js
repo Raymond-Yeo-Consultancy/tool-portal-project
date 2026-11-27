@@ -49,7 +49,9 @@
     anim: null,
     view: null // what is drawn: per object {d, v, t}
   };
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // The fall always plays: it is the experiment. If the device asks for less
+  // motion, only the side-to-side flutter is left out.
+  var calmMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (id) { return document.getElementById(id); };
 
   /* ---------- physics: step the fall forward in small time steps ---------- */
@@ -114,7 +116,7 @@
       var p = t === null ? { d: 0, v: 0, landed: false } : at(obj, state.air, t);
       var y = TOP_Y + (p.d / HEIGHT_M) * FALL_PX;
       var x = cx, rot = 0;
-      if (state.air && obj.flutter && !p.landed && p.d > 0) {
+      if (state.air && obj.flutter && !p.landed && p.d > 0 && !calmMotion) {
         x += Math.sin(t * 5 + i) * 10 * obj.flutter;
         rot = Math.sin(t * 5 + i + 1) * 18 * obj.flutter;
       }
@@ -172,11 +174,6 @@
     $('result').textContent = 'Falling…';
     var longest = Math.max.apply(null, OBJECTS.map(function (o) { return fall(o, state.air).time; }));
 
-    if (reduceMotion) {
-      draw(longest + 1);
-      finish();
-      return;
-    }
     var start = null;
     function step(ts) {
       if (start === null) start = ts;

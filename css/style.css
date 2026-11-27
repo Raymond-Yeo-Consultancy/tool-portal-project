@@ -668,13 +668,11 @@ details summary {
 .anim-run { animation: run 1.6s ease-in-out infinite; }
 .anim-rise { animation: rise 1.8s ease-out infinite; }
 
+/* The tool animations are the lesson, so they always play.
+   If the device asks for less motion, only decorative movement is removed. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-  }
+  .tool-card { transition: none; }
+  .tool-card:hover { transform: none; }
 }
 
 /* ---------- small phones ---------- */

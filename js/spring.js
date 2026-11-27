@@ -28,7 +28,7 @@
     results: { A: {}, B: {} }, // results[spring][mass] = length in cm
     anim: null
   };
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var calmMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (id) { return document.getElementById(id); };
 
   function lengthCm(spring, count) {
@@ -125,19 +125,15 @@
   /* ---------- animation: stretch with a small bounce ---------- */
   function animateTo(targetCm) {
     if (state.anim) cancelAnimationFrame(state.anim);
-    if (reduceMotion) {
-      state.shownCm = targetCm;
-      drawScene();
-      return;
-    }
     var from = state.shownCm;
     var start = null;
     var dur = 900;
     function step(ts) {
       if (start === null) start = ts;
       var t = Math.min(1, (ts - start) / dur);
-      // damped oscillation settling on the target
-      var settle = 1 - Math.exp(-5 * t) * Math.cos(10 * t);
+      // damped oscillation settling on the target; if the device asks for
+      // less motion, stretch smoothly without the bounce
+      var settle = calmMotion ? 1 - Math.pow(1 - t, 3) : 1 - Math.exp(-5 * t) * Math.cos(10 * t);
       state.shownCm = from + (targetCm - from) * (t === 1 ? 1 : settle);
       drawScene();
       if (t < 1) state.anim = requestAnimationFrame(step);
