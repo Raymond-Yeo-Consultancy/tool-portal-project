@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spring Stretch</title>
+  <meta name="description" content="Hang masses on a spring, measure how much it stretches, and plot the results on a graph.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css">
+  <script src="../../js/theme.js" defer></script>
+  <script src="../../js/spring.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> P6 Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Spring Stretch</h1>
+      <p class="lead">Hang masses on a spring and measure how much it stretches. Compare a soft spring with a stiff spring.</p>
+      <p><span class="tag">Standard Science</span></p>
+
+      <div class="tool-layout friction-layout">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Experiment</h2>
+          <div class="spring-scene" id="scene"></div>
+          <p class="result-line" id="result" aria-live="polite"></p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">Set up your experiment</h2>
+
+          <fieldset class="choice-group">
+            <legend>1. Choose a spring</legend>
+            <div class="choices" id="spring-choices">
+              <button type="button" class="choice" data-spring="A" aria-pressed="true">Spring A<br><span class="tag">soft</span></button>
+              <button type="button" class="choice" data-spring="B" aria-pressed="false">Spring B<br><span class="tag">stiff</span></button>
+            </div>
+          </fieldset>
+
+          <fieldset class="choice-group">
+            <legend>2. Hang masses (50 g each)</legend>
+            <p class="mass-readout">Mass hung: <strong id="mass-readout">0 g</strong></p>
+            <div class="actions">
+              <button type="button" class="btn" id="add-btn">+ Add 50 g</button>
+              <button type="button" class="btn btn-secondary" id="remove-btn">− Remove 50 g</button>
+            </div>
+          </fieldset>
+
+          <label class="check-row">
+            <input type="checkbox" id="forces-toggle" checked>
+            Show the forces
+          </label>
+        </section>
+
+        <section class="card" aria-labelledby="table-heading">
+          <div class="actions" style="justify-content:space-between">
+            <h2 id="table-heading" style="margin:0">Results table</h2>
+            <button type="button" class="btn btn-secondary" id="clear-btn">Clear results</button>
+          </div>
+          <p style="color:var(--text-muted);margin:6px 0 0">Original length of both springs: <strong>10 cm</strong>. Extension = stretched length − original length.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Mass (g)</th>
+                  <th scope="col">Spring A length (cm)</th>
+                  <th scope="col">Spring A extension (cm)</th>
+                  <th scope="col">Spring B length (cm)</th>
+                  <th scope="col">Spring B extension (cm)</th>
+                </tr>
+              </thead>
+              <tbody id="results-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="graph-heading">
+          <h2 id="graph-heading">Graph</h2>
+          <div class="graph-legend" aria-hidden="true">
+            <span><svg width="22" height="14"><line x1="0" y1="7" x2="22" y2="7" style="stroke:var(--e-kinetic);stroke-width:3"/><circle cx="11" cy="7" r="4.5" style="fill:var(--e-kinetic)"/></svg> Spring A</span>
+            <span><svg width="22" height="14"><line x1="0" y1="7" x2="22" y2="7" style="stroke:var(--e-heat);stroke-width:3;stroke-dasharray:5 3"/><rect x="7" y="3" width="8" height="8" style="fill:var(--e-heat)"/></svg> Spring B</span>
+          </div>
+          <div id="graph"></div>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>What pattern do you see?</summary>
+            <p>Every time you add <strong>50 g</strong>, Spring A stretches by another <strong>2 cm</strong> and Spring B by another <strong>1 cm</strong>. The greater the mass, the greater the extension. On the graph, the points form a straight line.</p>
+          </details>
+          <details>
+            <summary>Predict: what would the extension of Spring A be with 350 g?</summary>
+            <p>350 g is 7 lots of 50 g. Spring A stretches 2 cm for each 50 g, so the extension would be 7 × 2 = <strong>14 cm</strong>. Its length would be 10 + 14 = <strong>24 cm</strong>.</p>
+          </details>
+          <details>
+            <summary>Which spring is stiffer? How can you tell?</summary>
+            <p><strong>Spring B.</strong> With the same mass, it has a smaller extension. Its line on the graph is less steep.</p>
+          </details>
+          <details>
+            <summary>To make it a fair test, what must stay the same?</summary>
+            <p>Hang the <strong>same masses</strong> on both springs, and measure the length in the same way. Change only the <strong>spring</strong>.</p>
+          </details>
+        </section>
+
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>When a spring is stretched, it exerts a <strong>spring force</strong> that pulls back towards its original length.</li>
+            <li>The mass is pulled down by <strong>gravitational force</strong> (its weight). When the mass hangs still, the spring force pulling up balances the gravitational force pulling down.</li>
+            <li>The greater the mass hung on the spring, the greater the extension.</li>
+            <li>When the masses are removed, the spring goes back to its original length (as long as it has not been overstretched).</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 6 pupils preparing for PSLE Science.</div>
+  </footer>
+</body>
+</html>

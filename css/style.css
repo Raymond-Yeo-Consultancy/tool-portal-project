@@ -698,3 +698,50 @@ details summary {
   .chain { flex-direction: column; align-items: flex-start; }
   .chain .arrow { transform: rotate(90deg); margin-left: 18px; }
 }
+
+/* ---------- spring tool ---------- */
+.spring-scene {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+}
+
+.spring-scene svg {
+  width: 100%;
+  max-height: 520px;
+  margin: 0 auto;
+}
+
+.mass-readout { margin: 0 0 10px; font-size: 1.1rem; }
+.mass-readout strong { color: var(--primary); font-size: 1.3rem; }
+
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.check-row input { width: 22px; height: 22px; accent-color: var(--primary); }
+
+.graph-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.graph-legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+#graph svg { width: 100%; max-width: 520px; height: auto; margin: 0 auto; }
+
+tbody th { font-size: 1rem; color: var(--text); }
+.current-row { background: var(--surface-2); }
+.current-row th, .current-row td { font-weight: 700; }
+
+/* let wide tables scroll inside their card instead of widening the page */
+.tool-layout > * { min-width: 0; }

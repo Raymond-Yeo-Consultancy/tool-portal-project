@@ -24,8 +24,10 @@
 ├── js/theme.js                # Light/dark toggle, shared by every page
 ├── js/friction.js             # Friction Ramp tool logic
 ├── js/energy.js               # Energy Conversion tool logic and example data
+├── js/spring.js               # Spring Stretch tool logic
 └── tools/
     ├── friction/index.html    # Friction Ramp tool page
+    ├── spring/index.html      # Spring Stretch tool page
     └── energy/index.html      # Energy Conversion tool page
 ```
 
