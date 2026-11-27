@@ -10,7 +10,7 @@
 (function () {
   var G = 9.8;
   var HEIGHT_M = 2;
-  var SLOW = 2; // slow-motion factor for the drawing
+  var SLOW = 3; // slow-motion factor for the drawing
 
   var OBJECTS = [
     {
