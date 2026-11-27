@@ -745,3 +745,28 @@ tbody th { font-size: 1rem; color: var(--text); }
 
 /* let wide tables scroll inside their card instead of widening the page */
 .tool-layout > * { min-width: 0; }
+
+/* ---------- drop race (gravity) tool ---------- */
+.drop-scene {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+}
+
+.drop-scene svg { width: 100%; height: auto; max-height: 560px; }
+
+.slowmo-note { margin: 8px 0 0; color: var(--text-muted); font-size: 0.95rem; }
+
+.choice .emoji { font-size: 1.6rem; line-height: 1; }
+
+.force-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.force-key span { display: inline-flex; align-items: center; gap: 6px; }

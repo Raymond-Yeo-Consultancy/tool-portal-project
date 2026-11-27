@@ -25,9 +25,11 @@
 ├── js/friction.js             # Friction Ramp tool logic
 ├── js/energy.js               # Energy Conversion tool logic and example data
 ├── js/spring.js               # Spring Stretch tool logic
+├── js/gravity.js              # Drop Race (gravity and air resistance) tool logic
 └── tools/
     ├── friction/index.html    # Friction Ramp tool page
     ├── spring/index.html      # Spring Stretch tool page
+    ├── gravity/index.html     # Drop Race tool page
     └── energy/index.html      # Energy Conversion tool page
 ```
 

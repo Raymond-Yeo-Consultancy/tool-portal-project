@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drop Race</title>
+  <meta name="description" content="Drop a feather, paper and a ball with and without air to see how gravitational force and air resistance affect falling objects.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css">
+  <script src="../../js/theme.js" defer></script>
+  <script src="../../js/gravity.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> P6 Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Drop Race</h1>
+      <p class="lead">Drop four objects from a height of 2 m at the same moment. Which lands first? Then take the air away and race them again.</p>
+
+      <div class="tool-layout friction-layout">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Experiment</h2>
+          <div class="drop-scene" id="scene"></div>
+          <p class="slowmo-note">Shown in slow motion. Times are real times.</p>
+          <p class="result-line" id="result" aria-live="polite">Choose <strong style="font-size:inherit">With air</strong> or <strong style="font-size:inherit">No air</strong>, then press Drop!</p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">Set up your experiment</h2>
+          <fieldset class="choice-group">
+            <legend>Where are the objects dropped?</legend>
+            <div class="choices" id="air-choices">
+              <button type="button" class="choice" data-air="yes" aria-pressed="true"><span class="emoji" aria-hidden="true">🌬️</span>With air</button>
+              <button type="button" class="choice" data-air="no" aria-pressed="false"><span class="emoji" aria-hidden="true">🫙</span>No air (vacuum)</button>
+            </div>
+          </fieldset>
+          <div class="actions">
+            <button type="button" class="btn btn-big" id="drop-btn">Drop!</button>
+            <button type="button" class="btn btn-secondary" id="reset-btn">Reset</button>
+          </div>
+          <label class="check-row" style="margin-top:10px">
+            <input type="checkbox" id="forces-toggle" checked>
+            Show the forces
+          </label>
+          <div class="force-key" aria-hidden="true">
+            <span><svg width="16" height="26"><line x1="8" y1="2" x2="8" y2="18" style="stroke:var(--e-heat);stroke-width:4"/><polygon points="2,16 14,16 8,25" style="fill:var(--e-heat)"/></svg> Gravitational force</span>
+            <span><svg width="16" height="26"><line x1="8" y1="24" x2="8" y2="8" style="stroke:var(--e-kinetic);stroke-width:4"/><polygon points="2,10 14,10 8,1" style="fill:var(--e-kinetic)"/></svg> Air resistance</span>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="table-heading">
+          <div class="actions" style="justify-content:space-between">
+            <h2 id="table-heading" style="margin:0">Results table</h2>
+            <button type="button" class="btn btn-secondary" id="clear-btn">Clear results</button>
+          </div>
+          <p style="color:var(--text-muted);margin:6px 0 0">Time taken to fall 2 m, in seconds.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Object</th><th scope="col">With air (s)</th><th scope="col">No air (s)</th></tr>
+              </thead>
+              <tbody id="results-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li><strong>Gravitational force</strong> is the pull of the Earth on objects. It pulls every object towards the Earth, so things fall when we let go.</li>
+            <li><strong>Air resistance</strong> is a frictional force. It opposes the motion of objects moving through air.</li>
+            <li>The larger the surface area facing the air, the greater the air resistance, and the more slowly the object falls.</li>
+            <li>With no air, there is no air resistance. All the objects fall together and land at the same time!</li>
+          </ul>
+        </section>
+
+        <section class="card span-all" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>The flat sheet and the crumpled ball are made from the same paper. Why did they land at different times?</summary>
+            <p>They have the <strong>same mass</strong>, so the gravitational force on them is the same. The flat sheet has a <strong>larger surface area</strong>, so it has more air resistance and falls more slowly.</p>
+          </details>
+          <details>
+            <summary>Why is comparing the flat sheet and the crumpled ball a fair test?</summary>
+            <p>Only one thing is different: the <strong>shape</strong> (surface area). The mass, the material and the drop height are all the same.</p>
+          </details>
+          <details>
+            <summary>What happened with no air? Why?</summary>
+            <p>All four objects landed at the <strong>same time</strong>. Without air there is no air resistance, so gravitational force is the only force acting on them. An astronaut tried this on the Moon (which has no air) with a hammer and a feather. They landed together!</p>
+          </details>
+          <details>
+            <summary>How does a parachute use this idea?</summary>
+            <p>A parachute has a very large surface area. This gives a lot of air resistance, which slows the fall so the person lands safely.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 6 pupils preparing for PSLE Science.</div>
+  </footer>
+</body>
+</html>
