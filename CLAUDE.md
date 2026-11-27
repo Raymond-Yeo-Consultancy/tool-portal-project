@@ -6,18 +6,30 @@
 - No frameworks or libraries (no React, Vue, Tailwind, jQuery, etc.).
 - No build step: files are served exactly as written, so opening the HTML in a browser is enough.
 
-## Project Structure
+## About the Project
 
-The project is nearly empty for now. Planned layout:
+"P6 Science Lab": a web portal of small interactive tools for Singapore Primary 6 pupils, based on the PSLE Science syllabus (2023 MOE Primary Science syllabus).
+
+- Content and wording must follow the MOE Primary Science syllabus. Use the terms pupils learn in class (e.g. "chemical potential energy", "frictional force").
+- Mark whether a topic is in the Standard track, the Foundation track or both.
+- Keep language simple and friendly for 11–12 year olds.
+
+## Project Structure
 
 ```
 /
-├── CLAUDE.md      # This file: guidance for Claude
-├── index.html     # Main page
-├── css/           # Stylesheets
-├── js/            # Scripts
-└── assets/        # Images, icons and other static files
+├── CLAUDE.md                  # This file: guidance for Claude
+├── index.html                 # Portal home page: tool cards grouped by syllabus theme
+├── css/style.css              # Shared styles; all colours are CSS variables for both themes
+├── js/theme.js                # Light/dark toggle, shared by every page
+├── js/friction.js             # Friction Ramp tool logic
+├── js/energy.js               # Energy Conversion tool logic and example data
+└── tools/
+    ├── friction/index.html    # Friction Ramp tool page
+    └── energy/index.html      # Energy Conversion tool page
 ```
+
+To add a tool: create `tools/<name>/index.html` and `js/<name>.js`, copy the header and the inline theme script from an existing tool page, and add a card to `index.html`.
 
 Update this section when files or folders are added.
 

@@ -676,3 +676,25 @@ details summary {
     transition: none !important;
   }
 }
+
+/* ---------- small phones ---------- */
+.brand { white-space: nowrap; }
+
+@media (max-width: 420px) {
+  /* keep the header on one line: show only the sun/moon icon */
+  .theme-toggle .label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .theme-toggle { min-width: 44px; padding: 6px 10px; }
+}
+
+@media (max-width: 559px) {
+  /* energy chain reads top-to-bottom on phones */
+  .chain { flex-direction: column; align-items: flex-start; }
+  .chain .arrow { transform: rotate(90deg); margin-left: 18px; }
+}

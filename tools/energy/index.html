@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Energy Conversion</title>
+  <meta name="description" content="See how energy is converted from one form to another in everyday things, then test yourself.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css">
+  <script src="../../js/theme.js" defer></script>
+  <script src="../../js/energy.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> P6 Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Energy Conversion</h1>
+      <p class="lead">Energy can be converted from one form to another. Pick an example to see how its energy changes, step by step.</p>
+      <p><span class="tag">Standard Science</span></p>
+
+      <section class="card" aria-labelledby="pick-heading" style="margin-top:18px">
+        <h2 id="pick-heading">1. Pick an example</h2>
+        <div class="scenario-grid" id="scenario-choices"></div>
+      </section>
+
+      <div class="tool-layout energy-layout">
+        <section class="card" aria-labelledby="scene-heading">
+          <h2 id="scene-heading">Torch</h2>
+          <div class="illustration" id="illustration"></div>
+          <p class="step-caption" id="caption" aria-live="polite"></p>
+        </section>
+
+        <section class="card" aria-labelledby="chain-heading">
+          <div class="actions" style="justify-content:space-between; margin-bottom:10px">
+            <h2 id="chain-heading" style="margin:0">2. Energy conversion</h2>
+            <div class="mode-switch" role="group" aria-label="Mode">
+              <button type="button" id="mode-learn" aria-pressed="true">Learn</button>
+              <button type="button" id="mode-test" aria-pressed="false">Test yourself</button>
+            </div>
+          </div>
+
+          <!-- Learn mode -->
+          <div id="learn-panel">
+            <p style="margin:0">Tap a step, or press <strong>Play</strong> to go through them in order.</p>
+            <div class="chain" id="chain"></div>
+            <div class="also-row" id="also-row"></div>
+            <div class="actions" style="margin-top:14px">
+              <button type="button" class="btn" id="play-btn">▶ Play</button>
+            </div>
+          </div>
+
+          <!-- Test mode -->
+          <div id="test-panel" hidden>
+            <p style="margin:0">Fill in each blank: tap a blank, then tap an energy form below.</p>
+            <div class="chain" id="test-chain"></div>
+            <p style="margin:0 0 8px; font-weight:700">Energy forms</p>
+            <div class="energy-palette" id="palette"></div>
+            <div class="actions" style="margin-top:14px">
+              <button type="button" class="btn" id="check-btn">Check</button>
+              <button type="button" class="btn btn-secondary" id="reset-btn">Clear</button>
+              <button type="button" class="btn btn-secondary" id="answer-btn">Show answer</button>
+            </div>
+            <p class="feedback" id="feedback" aria-live="polite"></p>
+            <p class="hint" id="test-hint" hidden></p>
+          </div>
+        </section>
+      </div>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>Energy cannot be created or destroyed. It can only be converted from one form to another.</li>
+            <li>When energy is converted, some of it is often converted into forms we do not want, such as <strong>heat</strong> and <strong>sound</strong>. These are shown in <em>dashed</em> boxes.</li>
+            <li>Whether a form is useful depends on the job. In a torch, heat is not wanted. In a kettle, heat is the useful form!</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="forms-heading">
+          <h2 id="forms-heading">Forms of energy</h2>
+          <ul class="legend-list" id="legend"></ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 6 pupils preparing for PSLE Science.</div>
+  </footer>
+</body>
+</html>
