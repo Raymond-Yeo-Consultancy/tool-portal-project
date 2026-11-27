@@ -25,6 +25,7 @@ Update this section when files or folders are added.
 
 1. **Responsive on every page.** Every page must work on desktop, tablet and phone.
 2. **Light and dark theme.** Users can switch between a light and a dark theme. The light theme is the default.
+3. **Readable text in both themes.** Text must stay easy to read, with good contrast against its background, in both the light and the dark theme. Aim for the WCAG AA standard, a common accessibility guideline: normal text should be at least 4.5 times "brighter or darker" than its background (a 4.5:1 contrast ratio), and large text at least 3:1.
 
 ## Rules for Claude
 
