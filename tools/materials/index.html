@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Materials Tester</title>
+  <meta name="description" content="Test wood, metal, plastic, glass, rubber, ceramic and fabric to find out their properties.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=16">
+  <script src="../../js/theme.js?v=16" defer></script>
+  <script src="../../js/materials.js?v=16" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Materials Tester</h1>
+      <p class="lead">Things are made of different materials. Test each material to find out what it is like, then choose the best one for a job.</p>
+      <p class="tags"><span class="tag tag-level">Primary 3</span><span class="tag">Diversity</span></p>
+
+      <div class="tool-layout friction-layout">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Test bench</h2>
+          <div class="drop-scene" id="scene"></div>
+          <p class="result-line" id="result" aria-live="polite">Choose a material, then choose a test.</p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">Set up your test</h2>
+          <fieldset class="choice-group">
+            <legend>1. Choose a material</legend>
+            <div class="choices" id="material-choices"></div>
+          </fieldset>
+          <fieldset class="choice-group">
+            <legend>2. Run a test</legend>
+            <div class="choices" id="test-choices">
+              <button type="button" class="choice" data-test="hammer"><span class="emoji" aria-hidden="true">🔨</span>Hammer test</button>
+              <button type="button" class="choice" data-test="bend"><span class="emoji" aria-hidden="true">↩️</span>Bend test</button>
+              <button type="button" class="choice" data-test="water"><span class="emoji" aria-hidden="true">💧</span>Water test</button>
+              <button type="button" class="choice" data-test="light"><span class="emoji" aria-hidden="true">🔦</span>Light test</button>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="card span-all" aria-labelledby="table-heading">
+          <div class="actions" style="justify-content:space-between">
+            <h2 id="table-heading" style="margin:0">Results table</h2>
+            <button type="button" class="btn btn-secondary" id="clear-btn">Clear results</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Material</th><th scope="col">Hit with a hammer</th><th scope="col">Bent</th><th scope="col">Water dripped on it</th><th scope="col">Torch shone on it</th></tr>
+              </thead>
+              <tbody id="results-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="job-heading">
+          <h2 id="job-heading">Best material for the job</h2>
+          <h3 id="job-title"></h3>
+          <p id="job-needs"></p>
+          <div class="choices" id="job-options"></div>
+          <p class="feedback" id="job-feedback" aria-live="polite" style="margin-top:10px"></p>
+          <button type="button" class="btn btn-secondary" id="job-next" hidden>Next job</button>
+        </section>
+
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>Different materials have different <strong>properties</strong>.</li>
+            <li>A <strong>strong</strong> material does not break easily.</li>
+            <li>A <strong>flexible</strong> material bends easily. A <strong>stiff</strong> material does not.</li>
+            <li>A <strong>waterproof</strong> material does not let water pass through or soak in.</li>
+            <li>Some materials let light pass through, so we can see through them.</li>
+            <li>We choose a material for an object because of its properties.</li>
+          </ul>
+        </section>
+
+        <section class="card span-all" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>Why is a window made of glass and not wood?</summary>
+            <p>Glass lets light pass through, so we can see through it and the room is bright. Wood does not let light through.</p>
+          </details>
+          <details>
+            <summary>Glass and metal are both stiff and waterproof. How are they different?</summary>
+            <p>Glass <strong>breaks easily</strong> and lets light through. Metal is <strong>strong</strong> and does not let light through.</p>
+          </details>
+          <details>
+            <summary>Why is a towel made of cotton fabric and not plastic?</summary>
+            <p>Cotton fabric <strong>soaks up water</strong>, so it dries you. Plastic is waterproof: the water would stay on your skin.</p>
+          </details>
+          <details>
+            <summary>To make these tests fair, what must be the same for every material?</summary>
+            <p>The strips should be the <strong>same size and thickness</strong>, and each test must be done in the <strong>same way</strong>: the same hammer, the same weight, the same amount of water and the same torch.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>

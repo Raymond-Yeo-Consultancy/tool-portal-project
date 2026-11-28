@@ -922,6 +922,11 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
   color: var(--on-primary);
 }
 
+/* quiz choices marked after answering (used with a text message, not colour alone) */
+.choice-right { border-color: var(--success); box-shadow: inset 0 0 0 2px var(--success); }
+.choice-wrong { border-color: var(--error); box-shadow: inset 0 0 0 2px var(--error); }
+.choice:disabled { cursor: default; }
+
 /* anything marked hidden stays hidden, whatever its display style */
 [hidden] { display: none !important; }
 
