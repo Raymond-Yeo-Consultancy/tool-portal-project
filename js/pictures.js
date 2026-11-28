@@ -218,7 +218,9 @@
       alt.push((c.name ? 'Circuit ' + c.name + ': ' : '') + c.batteries + (c.batteries === 1 ? ' battery, ' : ' batteries, ') + c.bulbs + (c.bulbs === 1 ? ' bulb' : ' bulbs in ' + (par ? 'parallel' : 'series')) +
         (c.sw ? ', switch ' + c.sw : '') + (c.gap ? ', with a gap bridged by: ' + c.gap : ''));
     });
-    return svg(rowsN * ch + 6, s, alt.join('. ') + '.');
+    // a single row with no parallel branches needs less height
+    var flat = rowsN === 1 && !p.items.some(function (c) { return c.type === 'parallel' && c.bulbs > 1; });
+    return svg(flat ? 118 : rowsN * ch + 6, s, alt.join('. ') + '.');
   }
 
   /* ---------- magnets: rows [{ name, bars: ['NS', 'SN'] or [['P', 'Q'], 'nail'] }] ----------

@@ -74,11 +74,20 @@
       });
     });
 
-    $('summary').textContent = topics.length + ' topics and ' + total + ' questions are in the quiz.';
+    // how often is the correct answer the single longest option? (by chance it would be about 25%)
+    var longest = 0;
+    topics.forEach(function (t) {
+      (window.QUESTIONS[t.id] || []).forEach(function (q) {
+        var lens = q.options.map(function (o) { return String(o).length; }), max = Math.max.apply(null, lens);
+        if (lens[q.answer] === max && lens.filter(function (n) { return n === max; }).length === 1) longest += 1;
+      });
+    });
+    $('summary').textContent = topics.length + ' topics and ' + total + ' questions are in the quiz. The correct answer is the longest option in ' +
+      Math.round(longest / (total || 1) * 100) + '% of questions (by chance it would be about 25%).';
     var box = $('checks');
     if (!problems.length) {
       box.className = 'hint check-ok';
-      box.textContent = '✔ All automatic checks passed: every topic has at least 30 questions (10 easy, 10 medium, 10 hard) and at least 10 picture questions, and every question has four different options, one marked answer and an explanation.';
+      box.textContent = '✔ All automatic checks passed: every topic has at least 30 questions (10 easy, 10 medium, 10 hard) and at least 10 picture questions, every question has four different options, one marked answer and an explanation, and the correct answer is not the longest option too often.';
     } else {
       box.className = 'hint check-bad';
       box.textContent = '✘ ' + problems.length + ' problem' + (problems.length === 1 ? '' : 's') + ' found:';

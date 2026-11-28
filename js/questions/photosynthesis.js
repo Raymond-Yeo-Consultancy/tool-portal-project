@@ -57,7 +57,7 @@ window.QUESTIONS.photosynthesis = [
   /* ---------- medium ---------- */
   { id: "photosynthesis-m01", level: "medium",
     q: "A water plant in bright light gives off bubbles. It is then moved into a dark cupboard and the bubbles stop. Why?",
-    options: ["Without light, the plant cannot carry out photosynthesis", "The water in the beaker has frozen", "The plant has used up all the water", "The plant gives off carbon dioxide only in the light"],
+    options: ["Without light, the plant cannot carry out photosynthesis", "The water in the beaker has frozen", "The plant has used up all the water", "The plant gives off carbon dioxide bubbles only in the light"],
     answer: 0,
     why: "Photosynthesis needs light. In the dark it stops, so no oxygen is given off." },
   { id: "photosynthesis-m02", level: "medium",
@@ -67,7 +67,7 @@ window.QUESTIONS.photosynthesis = [
     why: "Light alone is not enough. Without carbon dioxide the plant cannot make food, so it gives off no oxygen." },
   { id: "photosynthesis-m03", level: "medium",
     q: "A water plant gives off more bubbles in one minute under bright light than under dim light. What does this show?",
-    options: ["The plant makes food faster in bright light", "The plant makes food faster in dim light", "Light has no effect on photosynthesis", "The plant needs less water in bright light"],
+    options: ["The plant makes food faster in bright light", "The plant makes food faster when it is in dim light", "Light has no effect on photosynthesis", "The plant needs less water in bright light"],
     answer: 0,
     why: "More bubbles of oxygen in a minute means photosynthesis is happening faster. Brighter light gives faster photosynthesis." },
   { id: "photosynthesis-m04", level: "medium",

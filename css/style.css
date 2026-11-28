@@ -470,7 +470,7 @@ details summary {
 }
 
 .mode-switch button {
-  min-height: 40px;
+  min-height: 44px;
   padding: 4px 16px;
   border: 0;
   border-radius: 999px;
@@ -1182,6 +1182,42 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .sheet-correct { font-weight: 700; color: var(--success); padding-left: 0 !important; }
 .sheet-why { margin: 0; color: var(--text-muted); }
 .sheet-id { margin: 0; color: var(--text-muted); font-size: 0.8rem; }
+
+/* ---------- parent report (quiz/report.html) ---------- */
+.report-filters { display: flex; flex-wrap: wrap; gap: 14px 28px; }
+.filter-label { margin: 0 0 6px; font-weight: 700; }
+.report-player h3, .report-compare h3 { margin: 22px 0 8px; }
+.report-stats { margin-top: 6px; }
+.report-stat { flex: 1 1 130px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-2); }
+.report-stat-label { display: block; color: var(--text-muted); font-size: 0.9rem; }
+.report-stat strong { font-size: 1.2rem; }
+.report-headline { font-weight: 700; margin: 0 0 8px; }
+.report-empty { color: var(--text-muted); }
+.report-table { width: 100%; }
+.report-table th, .report-table td { text-align: left; vertical-align: middle; }
+.score-cell { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.score-cell.none { color: var(--text-muted); white-space: normal; }
+.score-cell strong { min-width: 3.2em; }
+.score-bar { display: inline-block; width: 90px; height: 12px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.score-bar span { display: block; height: 100%; }
+.score-bar .low { background: var(--error); }
+.score-bar .mid { background: var(--e-elec); }
+.score-bar .high { background: var(--success); }
+@media (max-width: 560px) {
+  .report-table { font-size: 0.9rem; }
+  .report-table th, .report-table td { padding: 6px 4px; }
+  .score-cell { gap: 4px; }
+  .score-cell strong { min-width: 2.7em; }
+  .score-bar { width: 40px; }
+  .report-player .score-bar { display: none; }
+}
+.report-pick { margin: 6px 0 12px; }
+.report-pick select { font: inherit; padding: 8px 10px; min-height: 44px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); max-width: 100%; }
+.report-wrong h4 { margin: 18px 0 8px; }
+.report-wrong .pic svg { max-width: 340px; }
+.quiz-option[aria-pressed="true"] .option-letter { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.site-footer a { display: inline-block; padding: 10px 2px; }
+.topic-choice .topic-best { flex: 1 0 100%; padding-left: 2px; }
 
 /* ---------- pictures in quiz questions (js/pictures.js) ---------- */
 .pic { margin: 0 0 14px; }

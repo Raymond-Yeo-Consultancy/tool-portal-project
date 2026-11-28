@@ -74,6 +74,13 @@ window.checkQuestions = function (topicId, list) {
   ['easy', 'medium', 'hard'].forEach(function (lv) {
     if (counts[lv] < 10) problems.push(topicId + ': only ' + counts[lv] + ' ' + lv + ' questions (needs at least 10)');
   });
+  // the correct option must not be the single longest too often, or pupils can guess by length
+  var longest = (list || []).filter(function (q) {
+    if (!q.options || q.options.length !== 4) return false;
+    var lens = q.options.map(function (o) { return String(o).length; }), max = Math.max.apply(null, lens);
+    return lens[q.answer] === max && lens.filter(function (n) { return n === max; }).length === 1;
+  }).length;
+  if ((list || []).length && longest > (list || []).length * 0.3) problems.push(topicId + ': the correct option is the longest in ' + longest + ' questions (keep it to 30% or fewer)');
   if (pics < 10) problems.push(topicId + ': only ' + pics + ' picture questions (needs at least 10)');
   if ((list || []).length < 30) problems.push(topicId + ': only ' + (list || []).length + ' questions (needs at least 30)');
   return problems;

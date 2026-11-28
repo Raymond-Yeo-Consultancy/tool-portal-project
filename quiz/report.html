@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parent Report · Revision Quiz</title>
+  <meta name="description" content="See which Science topics each pupil finds hard, and every question answered wrongly.">
+  <meta name="robots" content="noindex">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../css/style.css?v=42">
+  <script src="../js/theme.js?v=42" defer></script>
+  <script src="../js/players.js?v=42" defer></script>
+  <script src="../js/store.js?v=42" defer></script>
+  <script src="../js/pictures.js?v=42" defer></script>
+  <script src="../js/questions/index.js?v=42" defer></script>
+  <script src="../js/report.js?v=42" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container quiz-container">
+      <a class="back-link no-print" href="index.html">← Revision Quiz</a>
+      <h1>Parent Report</h1>
+      <p class="lead">See which topics each boy finds hard, and every question he answered wrongly.</p>
+      <p class="hint" id="device-note">This report shows the quizzes played <strong>on this device</strong>. Quizzes played on another phone, tablet or computer are kept on that device.</p>
+
+      <section class="card no-print" aria-labelledby="who-label" style="margin-top:18px">
+        <div class="report-filters">
+          <div>
+            <p id="who-label" class="filter-label">Show the report for</p>
+            <div class="mode-switch" role="group" aria-labelledby="who-label" id="who"></div>
+          </div>
+          <div>
+            <p id="when-label" class="filter-label">Answers from</p>
+            <div class="mode-switch" role="group" aria-labelledby="when-label" id="when">
+              <button type="button" data-days="7" aria-pressed="false">Last 7 days</button>
+              <button type="button" data-days="30" aria-pressed="false">Last 30 days</button>
+              <button type="button" data-days="0" aria-pressed="true">All time</button>
+            </div>
+          </div>
+        </div>
+        <div class="actions" style="margin-top:14px">
+          <button type="button" class="btn" id="print-btn">Print</button>
+          <button type="button" class="btn btn-secondary" id="csv-btn">Download as a spreadsheet file</button>
+        </div>
+      </section>
+
+      <p id="loading" aria-live="polite" style="margin-top:18px">Loading the questions…</p>
+      <div id="report"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science. <a href="answers.html">Teacher's answer sheet</a></div>
+  </footer>
+</body>
+</html>
