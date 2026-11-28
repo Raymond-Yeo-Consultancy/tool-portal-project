@@ -190,7 +190,7 @@ window.QUESTIONS.shadows = [
     options: ["Tracing paper, because it lets only some light pass through", "Cardboard, because it lets no light pass through", "Clear plastic, because it lets most light pass through", "Cardboard, because it lets most light pass through"], answer: 0,
     why: "A translucent material lets some light through. It blocks only part of the light, so its shadow is faint." },
   { id: "shadows-p07", level: "medium",
-    q: "A disc is moved from its position in set-up 1 to its position in set-up 2. The torch and the screen do not move. What happens to the shadow on the screen?",
+    q: "A disc is moved from its position in set-up 1 to its position in set-up 2. The torch and the screen do not move. The shadows are not drawn in the picture. What happens to the shadow on the screen?",
     pic: { kind: "shadow", showShadow: false, rows: [{ name: "Set-up 1", d: 15 }, { name: "Set-up 2", d: 40 }] },
     options: ["It becomes smaller", "It becomes bigger", "It stays the same size", "It disappears"], answer: 0,
     why: "In set-up 2 the disc is further from the torch. The further an object is from the light source, the smaller its shadow." },

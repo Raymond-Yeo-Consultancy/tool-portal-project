@@ -97,7 +97,8 @@
       s += P(l.pts.map(function (q, k) { return (k ? 'L' : 'M') + X(q[0]).toFixed(1) + ' ' + Y(q[1]).toFixed(1); }).join(' '), 'thick s' + (i + 1));
       l.pts.forEach(function (q) { s += '<circle class="pd s' + (i + 1) + '" cx="' + X(q[0]).toFixed(1) + '" cy="' + Y(q[1]).toFixed(1) + '" r="3.5"/>'; });
       var end = l.pts[l.pts.length - 1];
-      if (l.name) s += T(X(end[0]) + 8, Y(end[1]) + (l.dy || 4), l.name, { a: 'start' });
+      if (l.name && l.start) s += T(X(l.pts[0][0]) + 12, Y(l.pts[0][1]) + (l.pts[0][1] > end[1] ? -6 : 16), l.name, { a: 'start' });
+      else if (l.name) s += T(X(end[0]) + 8, Y(end[1]) + (l.dy || 4), l.name, { a: 'start' });
     });
     return svg(H, s, 'Line graph of ' + p.y + ' against ' + p.x + '. ' + p.lines.map(function (l) {
       return (l.name ? 'Line ' + l.name + ': ' : '') + l.pts.map(function (q) { return q[1] + ' at ' + q[0]; }).join(', ');
@@ -336,7 +337,7 @@
       var cy = 44 + i * rh, ox = sx + row.d * px, ex = sx + screenCm * px, half = objCm * v / 2;
       var sh = objCm * screenCm / row.d * v / 2;
       if (row.name) s += T(8, cy - 28, row.name, { a: 'start' });
-      s += '<polygon class="beam" points="' + sx + ',' + cy + ' ' + ex + ',' + (cy - sh - 6).toFixed(1) + ' ' + ex + ',' + (cy + sh + 6).toFixed(1) + '"/>';
+      s += '<polygon class="beam" points="' + sx + ',' + cy + ' ' + ex + ',' + (cy - 40) + ' ' + ex + ',' + (cy + 40) + '"/>';
       if (p.showShadow !== false) s += '<polygon class="dark" points="' + ox + ',' + (cy - half) + ' ' + ex + ',' + (cy - sh).toFixed(1) + ' ' + ex + ',' + (cy + sh).toFixed(1) + ' ' + ox + ',' + (cy + half) + '"/>';
       s += R(sx - 30, cy - 8, 26, 16, 'c5', 3) + R(sx - 6, cy - 11, 8, 22, 'c5', 2);
       s += R(ox - 2, cy - half, 4, half * 2, 'c6') + R(ex, cy - 40, 5, 80, '');
@@ -356,7 +357,7 @@
       if (lev > 0) s += '<rect class="liquid c' + (it.color || 1) + '" x="' + (l + 1) + '" y="' + ly + '" width="' + (w - 2) + '" height="' + (bot - ly - 1) + '"/>';
       s += P('M' + l + ' ' + top + ' V' + bot + ' H' + (l + w) + ' V' + top);
       if (it.lid) s += P('M' + (l - 4) + ' ' + (top - 3) + ' H' + (l + w + 4), 'thick');
-      if (it.cube) s += R(cx - 9, ly - 10, 18, 18, '', 2);
+      if (it.cube) s += R(cx - 9, bot - 21, 18, 18, 'c6', 2);
       if (it.text) s += T(cx, top - 12, it.text, { small: true });
       if (it.name) s += T(cx, 150, it.name);
       if (it.note) String(it.note).split('\n').forEach(function (line, k) { s += T(cx, 166 + k * 13, line, { small: true }); });
