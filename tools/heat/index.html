@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heat and Temperature</title>
+  <meta name="description" content="Watch heat flow from a hotter object to a colder one, and find out which materials are good conductors of heat.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=21">
+  <script src="../../js/theme.js?v=21" defer></script>
+  <script src="../../js/heat.js?v=21" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Heat and Temperature</h1>
+      <p class="lead">Which way does heat flow? And why is a metal spoon hot to hold when a wooden spoon is not?</p>
+      <p class="tags"><span class="tag tag-level">Primary 4</span><span class="tag">Energy</span></p>
+
+      <section class="card" aria-labelledby="pick-heading" style="margin-top:18px">
+        <h2 id="pick-heading">1. Pick an experiment</h2>
+        <div class="choices" id="mode-choices">
+          <button type="button" class="choice" data-mode="flow" aria-pressed="true"><span class="emoji" aria-hidden="true">🌡️</span>Hot meets cold</button>
+          <button type="button" class="choice" data-mode="spoon" aria-pressed="false"><span class="emoji" aria-hidden="true">🥄</span>Spoon race</button>
+        </div>
+      </section>
+
+      <div class="tool-layout friction-layout">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Experiment</h2>
+          <div class="drop-scene" id="scene"></div>
+          <p class="slowmo-note">Time is speeded up. Colours show temperature: red is hot, blue is cold.</p>
+          <p class="result-line" id="result" aria-live="polite"></p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading" id="heat-controls">
+          <h2 id="controls-heading">2. Set up</h2>
+
+          <div id="flow-controls">
+            <fieldset class="choice-group">
+              <legend>Block A starts at</legend>
+              <div class="choices three" id="hot-choices">
+                <button type="button" class="choice" data-temp="60" aria-pressed="false">60 °C</button>
+                <button type="button" class="choice" data-temp="80" aria-pressed="true">80 °C</button>
+                <button type="button" class="choice" data-temp="100" aria-pressed="false">100 °C</button>
+              </div>
+            </fieldset>
+            <fieldset class="choice-group">
+              <legend>Block B starts at</legend>
+              <div class="choices three" id="cold-choices">
+                <button type="button" class="choice" data-temp="0" aria-pressed="false">0 °C</button>
+                <button type="button" class="choice" data-temp="20" aria-pressed="true">20 °C</button>
+                <button type="button" class="choice" data-temp="40" aria-pressed="false">40 °C</button>
+              </div>
+            </fieldset>
+            <p class="slowmo-note" style="margin:0 0 12px">The two blocks are the same size and made of the same metal.</p>
+            <div class="actions">
+              <button type="button" class="btn btn-big" id="together-btn">Put them together</button>
+              <button type="button" class="btn btn-secondary reset-btn">Reset</button>
+            </div>
+          </div>
+
+          <div id="spoon-controls" hidden>
+            <p>Three spoons stand in hot water. A blob of butter holds a bead on each handle. When the butter melts, the bead slides down.</p>
+            <div class="actions">
+              <button type="button" class="btn btn-big" id="spoon-btn">Start</button>
+              <button type="button" class="btn btn-secondary reset-btn">Reset</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card span-all" id="graph-card" aria-labelledby="graph-heading">
+          <h2 id="graph-heading">Temperature graph</h2>
+          <div class="graph-legend" aria-hidden="true">
+            <span><svg width="24" height="14"><line x1="0" y1="7" x2="24" y2="7" style="stroke:var(--e-heat);stroke-width:3"/></svg> Block A</span>
+            <span><svg width="24" height="14"><line x1="0" y1="7" x2="24" y2="7" style="stroke:var(--e-kinetic);stroke-width:3;stroke-dasharray:6 4"/></svg> Block B</span>
+          </div>
+          <div id="graph"></div>
+        </section>
+
+        <section class="card span-all" id="spoon-card" aria-labelledby="spoon-heading" hidden>
+          <h2 id="spoon-heading">Results table</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Spoon</th><th scope="col">Did the butter melt?</th><th scope="col">What this shows</th></tr>
+              </thead>
+              <tbody id="spoon-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li><strong>Heat</strong> is a form of energy. <strong>Temperature</strong> tells us how hot or cold something is. We measure it with a thermometer, in degrees Celsius (°C).</li>
+            <li>Heat flows from a <strong>hotter</strong> object to a <strong>colder</strong> one, until both are at the same temperature.</li>
+            <li>An object that <strong>gains heat</strong> gets warmer. An object that <strong>loses heat</strong> gets cooler.</li>
+            <li><strong>Good conductors of heat</strong>, such as metals, let heat travel through them quickly. <strong>Poor conductors</strong>, such as wood and plastic, do not.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>Does “cold” flow from the cold block into the hot block?</summary>
+            <p><strong>No.</strong> Only heat flows, and always from the hotter object to the colder one. The hot block cools because it loses heat.</p>
+          </details>
+          <details>
+            <summary>Why do the temperatures change quickly at first and then slowly?</summary>
+            <p>At the start the blocks have very different temperatures, so heat flows quickly. As the temperatures get closer, heat flows more slowly. When they are equal, the flow stops.</p>
+          </details>
+          <details>
+            <summary>Why do cooking pots have metal bases but plastic or wooden handles?</summary>
+            <p>Metal is a good conductor of heat, so heat from the stove reaches the food quickly. Plastic and wood are poor conductors, so the handle stays cool enough to hold.</p>
+          </details>
+          <details>
+            <summary>What makes the spoon race a fair test?</summary>
+            <p>The spoons are the <strong>same size</strong>, stand in the <strong>same hot water</strong>, and have the <strong>same amount of butter</strong> at the same height. Only the material is different.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>
