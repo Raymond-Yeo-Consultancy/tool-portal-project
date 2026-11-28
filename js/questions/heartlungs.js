@@ -186,7 +186,7 @@ window.QUESTIONS.heartlungs = [
     why: "During exercise the body needs more energy. We breathe faster to take in more oxygen, and the heart beats faster to carry it round the body." },
   { id: "heartlungs-p06", level: "medium",
     q: "The diagram shows the path of blood round the body. At which place does oxygen pass into the blood?",
-    pic: { kind: "flow", per: 4, nodes: ["Heart", "Lungs", "Heart", "All parts\nof the body"] },
+    pic: { kind: "flow", nodes: ["Heart", "Lungs", "Heart", "All parts\nof the body"] },
     options: ["In the lungs", "In the heart", "In all parts of the body", "In the windpipe"], answer: 0,
     why: "In the lungs, oxygen passes into the blood and carbon dioxide passes out of it. The heart then pumps the blood round the body." },
   { id: "heartlungs-p07", level: "medium",

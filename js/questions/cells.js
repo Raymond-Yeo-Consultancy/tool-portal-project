@@ -184,7 +184,7 @@ window.QUESTIONS.cells = [
     options: ["Part Z", "Part X", "Part Y", "Parts X and Y together"], answer: 0,
     why: "Z is the cell membrane, the thin outer layer of an animal cell. It controls what goes in and out of the cell." },
   { id: "cells-p06", level: "medium",
-    q: "The picture shows a plant cell. Which labelled part would not be found in an animal cell?",
+    q: "The picture shows a plant cell. P points to the thin layer just inside the thick outer wall. Which labelled part would not be found in an animal cell?",
     pic: { kind: "parts", of: "plantcell", letters: { membrane: "P", cytoplasm: "Q", nucleus: "R", chloroplast: "S" } },
     options: ["Part S", "Part P", "Part Q", "Part R"], answer: 0,
     why: "S is a chloroplast. Chloroplasts are found in plant cells but not in animal cells." },

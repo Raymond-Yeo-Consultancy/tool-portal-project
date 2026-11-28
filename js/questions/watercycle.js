@@ -186,7 +186,7 @@ window.QUESTIONS.watercycle = [
     why: "Water boils at 100 °C. While it is changing state from water to steam, its temperature stays the same." },
   { id: "watercycle-p06", level: "medium",
     q: "The same amount of water is poured into containers A and B. They are left side by side in the same place. From which container will the water evaporate faster, and why?",
-    pic: { kind: "beakers", items: [{ name: "A", wide: true, level: 0.45 }, { name: "B", level: 0.75 }] },
+    pic: { kind: "beakers", items: [{ name: "A", wide: true, level: 0.45 }, { name: "B", level: 0.37 }] },
     options: ["A, because it has a larger exposed surface area", "B, because it has a larger exposed surface area", "A, because its water is warmer", "B, because its water is deeper"], answer: 0,
     why: "Water evaporates faster when the exposed surface area is larger. The wide container has more water surface open to the air." },
   { id: "watercycle-p07", level: "medium",

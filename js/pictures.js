@@ -110,28 +110,56 @@
      arrows: [[from, to], ...] (default: each node to the next; a cycle also closes) */
   function flow(p) {
     var n = p.nodes.length, at = p.at, H = p.h, i;
-    var per = p.per || (n > 4 ? 3 : n);
-    if (!at && p.layout === 'cycle') {
-      H = H || 236; at = [];
-      for (i = 0; i < n; i++) at.push([180 + 112 * Math.sin(2 * Math.PI * i / n), H / 2 - (H / 2 - 30) * Math.cos(2 * Math.PI * i / n)]);
-    } else if (!at) {
-      var rows = Math.ceil(n / per); H = H || rows * 66 + 4; at = [];
-      for (i = 0; i < n; i++) {
-        var r = Math.floor(i / per), c = i % per; if (r % 2) c = per - 1 - c;
-        at.push([W * (c + 0.5) / per, 35 + r * 66]);
-      }
+    var boxes = p.nodes.map(function (label) {
+      var lines = String(label).split('\n'), len = Math.max.apply(null, lines.map(function (l) { return l.length; }));
+      return { w: Math.max(32, len * 7.5 + 18), h: lines.length * 15 + 12, lines: lines };
+    });
+    if (at) {
+      H = H || 220;
+      boxes.forEach(function (b, k) { b.x = at[k][0]; b.y = at[k][1]; });
+      // boxes on the same level must not overlap or leave the frame
+      var levels = {};
+      boxes.forEach(function (b) { (levels[b.y] = levels[b.y] || []).push(b); });
+      Object.keys(levels).forEach(function (y) {
+        var row = levels[y].sort(function (a, b) { return a.x - b.x; }), k;
+        for (k = 0; k < row.length; k++) row[k].x = Math.max(row[k].x, (k ? row[k - 1].x + row[k - 1].w / 2 + 8 : 4) + row[k].w / 2);
+        for (k = row.length - 1; k >= 0; k--) row[k].x = Math.min(row[k].x, (k < row.length - 1 ? row[k + 1].x - row[k + 1].w / 2 - 8 : W - 4) - row[k].w / 2);
+      });
+    } else if (p.layout === 'cycle') {
+      H = H || 236;
+      boxes.forEach(function (b, k) {
+        b.x = 180 + 112 * Math.sin(2 * Math.PI * k / n); b.y = H / 2 - (H / 2 - 30) * Math.cos(2 * Math.PI * k / n);
+        b.x = Math.max(b.w / 2 + 4, Math.min(W - b.w / 2 - 4, b.x));
+      });
+    } else {
+      // rows that snake: left to right, then right to left on the next row
+      var rows = [[]], used = 0, GAP = 30;
+      boxes.forEach(function (b) {
+        var row = rows[rows.length - 1];
+        if (row.length && (used + GAP + b.w > W - 12 || (p.per && row.length >= p.per))) { row = []; rows.push(row); used = 0; }
+        used += (row.length ? GAP : 0) + b.w; row.push(b);
+      });
+      var y = 6, gap0 = 30;
+      rows.forEach(function (row, r) {
+        var rh = Math.max.apply(null, row.map(function (b) { return b.h; }));
+        var total = row.reduce(function (a, b) { return a + b.w; }, 0);
+        var gap = row.length > 1 ? Math.min(60, (W - 12 - total) / (row.length - 1)) : 0;
+        if (r === 0) gap0 = gap; else gap = Math.min(gap || gap0, gap0);
+        var x = rows.length > 1 ? (r % 2 ? W - 6 : 6) : (W - total - gap * (row.length - 1)) / 2;
+        row.forEach(function (b) {
+          if (r % 2) { b.x = x - b.w / 2; x -= b.w + gap; } else { b.x = x + b.w / 2; x += b.w + gap; }
+          b.y = y + rh / 2;
+        });
+        y += rh + 34;
+      });
+      H = H || y - 34 + 6;
     }
-    H = H || 220;
     var arrows = p.arrows;
     if (!arrows) {
       arrows = [];
       for (i = 0; i < n - 1; i++) arrows.push([i, i + 1]);
       if (p.layout === 'cycle') arrows.push([n - 1, 0]);
     }
-    var boxes = p.nodes.map(function (label, k) {
-      var lines = String(label).split('\n'), len = Math.max.apply(null, lines.map(function (l) { return l.length; }));
-      return { x: at[k][0], y: at[k][1], w: Math.max(32, len * 7.5 + 18), h: lines.length * 15 + 12, lines: lines };
-    });
     function edge(a, b) {
       var dx = b.x - a.x, dy = b.y - a.y;
       var s = Math.min(dx ? (a.w / 2 + 3) / Math.abs(dx) : 1e9, dy ? (a.h / 2 + 3) / Math.abs(dy) : 1e9);
@@ -170,7 +198,8 @@
       var lowest = par ? b + (c.bulbs - 1) * 24 : b;
       if (c.sw) {
         s += P('M' + l + ' ' + t + ' V' + (t + 14) + ' M' + l + ' ' + (t + 38) + ' V' + lowest);
-        s += c.sw === 'open' ? P('M' + l + ' ' + (t + 38) + ' L' + (l + 13) + ' ' + (t + 17)) : P('M' + l + ' ' + (t + 14) + ' V' + (t + 38));
+        s += c.sw === 'open' ? P('M' + l + ' ' + (t + 38) + ' L' + (l + 13) + ' ' + (t + 17)) : P('M' + l + ' ' + (t + 14) + ' V' + (t + 38), 'thick');
+        s += T(l + 17, t + 31, 'switch', { a: 'start', small: true });
         s += '<circle class="pd" cx="' + l + '" cy="' + (t + 14) + '" r="2.5"/><circle class="pd" cx="' + l + '" cy="' + (t + 38) + '" r="2.5"/>';
       } else s += P('M' + l + ' ' + t + ' V' + lowest);
       // right side, with a test object in a gap if there is one
@@ -254,27 +283,28 @@
       names: { mouth: 'the mouth', gullet: 'the tube from the mouth to the stomach', stomach: 'the bag-like organ below that tube', small: 'the narrow coiled tube', large: 'the wide tube round the outside', anus: 'the opening at the bottom' }
     },
     flower: {
-      h: 236, what: 'a flower cut in half',
+      h: 240, what: 'a flower cut in half',
       body: function () {
-        var s = P('M180 232 V196', 'thick');
-        s += '<path class="pf c2" d="M150 180 C70 170 40 90 78 40 C108 80 132 130 162 176 Z"/><path class="pf c2" d="M210 180 C290 170 320 90 282 40 C252 80 228 130 198 176 Z"/>';
-        s += '<ellipse class="pf c3" cx="180" cy="178" rx="24" ry="20"/>' + C(172, 178, 5, 'c5') + C(188, 178, 5, 'c5');
-        s += R(176, 78, 8, 82, 'c3') + '<ellipse class="pf c5" cx="180" cy="72" rx="13" ry="8"/>';
-        s += P('M150 186 Q128 150 126 104 M210 186 Q232 150 234 104') + '<ellipse class="pf c5" cx="126" cy="96" rx="8" ry="12"/><ellipse class="pf c5" cx="234" cy="96" rx="8" ry="12"/>';
+        var s = P('M180 236 V204', 'thick');
+        s += '<path class="pf c2" d="M158 184 C110 190 40 166 30 106 C70 116 120 146 160 172 Z"/><path class="pf c2" d="M202 184 C250 190 320 166 330 106 C290 116 240 146 200 172 Z"/>';
+        s += P('M164 172 Q146 138 140 100 M196 172 Q214 138 220 100');
+        s += '<ellipse class="pf c5" cx="140" cy="92" rx="8" ry="12"/><ellipse class="pf c5" cx="220" cy="92" rx="8" ry="12"/>';
+        s += R(176, 78, 8, 90, 'c3') + '<ellipse class="pf c5" cx="180" cy="72" rx="13" ry="8"/>';
+        s += '<ellipse class="pf c3" cx="180" cy="186" rx="26" ry="20"/>' + C(171, 186, 5, 'c5') + C(189, 186, 5, 'c5');
         return s;
       },
-      at: { petal: [34, 44, 74, 70], anther: [296, 26, 240, 90], filament: [318, 150, 232, 146], stigma: [180, 24, 180, 64], style: [72, 150, 176, 124], ovary: [300, 210, 204, 186], ovule: [72, 214, 170, 180] },
+      at: { petal: [28, 56, 62, 138], anther: [288, 38, 223, 88], filament: [84, 44, 149, 140], stigma: [180, 26, 180, 68], style: [128, 18, 177, 112], ovary: [264, 224, 188, 203], ovule: [96, 224, 170, 188] },
       names: { petal: 'a large coloured outer part', anther: 'the top of a thin stalk', filament: 'a thin stalk', stigma: 'the tip of the centre column', style: 'the centre column', ovary: 'the swollen base', ovule: 'a small round body inside the base' }
     },
     plantcell: {
       h: 190, what: 'a plant cell',
       body: function () {
-        var s = R(88, 8, 184, 174, 'c6', 4) + R(100, 20, 160, 150, '', 2) + R(105, 25, 150, 140, '', 2);
-        s += C(216, 132, 20, 'c1');
-        [[132, 50], [224, 54], [136, 138], [176, 96]].forEach(function (c) { s += '<ellipse class="pf c3" cx="' + c[0] + '" cy="' + c[1] + '" rx="14" ry="8"/>'; });
+        var s = R(84, 6, 192, 178, 'c6', 4) + R(98, 20, 164, 150, '', 2) + R(108, 30, 144, 130, '', 3);
+        s += C(214, 128, 19, 'c1');
+        [[136, 54], [222, 56], [138, 136], [176, 96]].forEach(function (c) { s += '<ellipse class="pf c3" cx="' + c[0] + '" cy="' + c[1] + '" rx="14" ry="8"/>'; });
         return s;
       },
-      at: { wall: [44, 30, 94, 40], membrane: [44, 96, 105, 96], cytoplasm: [312, 86, 220, 86], nucleus: [312, 140, 232, 134], chloroplast: [312, 34, 234, 50] },
+      at: { wall: [40, 30, 91, 40], membrane: [40, 100, 108, 100], cytoplasm: [312, 86, 220, 86], nucleus: [316, 140, 228, 130], chloroplast: [316, 34, 232, 54] },
       names: { wall: 'the thick outer layer', membrane: 'the thin line just inside the thick outer layer', cytoplasm: 'the jelly-like substance filling the cell', nucleus: 'the large round body', chloroplast: 'a small green oval' }
     },
     animalcell: {
@@ -371,10 +401,11 @@
   function forces(p) {
     var cx = 180, cy = p.on === 'air' ? 108 : 96, s = '', alt = [];
     if (p.on !== 'air') s += P('M40 118 H320', 'thick') + (p.surface ? T(318, 136, p.surface, { a: 'end', small: true }) : '');
-    s += R(cx - 34, cy - 22, 68, 44, 'c4', 4) + T(cx, cy + 5, p.object || 'box');
+    var bw = Math.max(68, String(p.object || 'box').length * 7.5 + 18);
+    s += R(cx - bw / 2, cy - 22, bw, 44, 'c4', 4) + T(cx, cy + 5, p.object || 'box');
     var V = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
     p.arrows.forEach(function (a) {
-      var v = V[a.dir], len = a.long ? 78 : 46, off = v[0] ? 38 : 26;
+      var v = V[a.dir], len = a.long ? 78 : 46, off = v[0] ? bw / 2 + 4 : 26;
       var x1 = cx + v[0] * off, y1 = cy + v[1] * off, x2 = x1 + v[0] * len, y2 = y1 + v[1] * len;
       s += arrow(x1, y1, x2, y2, 'thick');
       s += T(x2 + v[0] * 12 + (v[1] ? 14 : 0), y2 + (v[0] ? 5 : v[1] * 2 + 4), a.label);
