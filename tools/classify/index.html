@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Living Things Sorter</title>
+  <meta name="description" content="Sort things into living and non-living, then sort living things and animals into their groups.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=15">
+  <script src="../../js/theme.js?v=15" defer></script>
+  <script src="../../js/activities.js?v=15" defer></script>
+  <script src="../../js/classify.js?v=15" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Living Things Sorter</h1>
+      <p class="lead">Scientists put things into groups to study them. Can you sort these cards into the right groups?</p>
+      <p class="tags"><span class="tag tag-level">Primary 3</span><span class="tag">Diversity</span></p>
+
+      <section class="card" aria-labelledby="pick-heading" style="margin-top:18px">
+        <h2 id="pick-heading">1. Pick a round</h2>
+        <div class="choices three" id="round-choices">
+          <button type="button" class="choice" data-round="living" aria-pressed="true"><span class="emoji" aria-hidden="true">🌱</span>Living or non-living</button>
+          <button type="button" class="choice" data-round="kinds" aria-pressed="false"><span class="emoji" aria-hidden="true">🍄</span>Groups of living things</button>
+          <button type="button" class="choice" data-round="animals" aria-pressed="false"><span class="emoji" aria-hidden="true">🐾</span>Groups of animals</button>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="round-title" style="margin-top:18px">
+        <h2 id="round-title">Living or non-living?</h2>
+        <div id="activity"></div>
+      </section>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li><strong>Living things</strong> need air, food and water to stay alive. They grow, respond to changes around them, and reproduce.</li>
+            <li><strong>Non-living things</strong> do not do all of these things.</li>
+            <li>Living things can be grouped into <strong>plants</strong>, <strong>animals</strong>, <strong>fungi</strong> and <strong>bacteria</strong>.</li>
+            <li>Animals can be grouped by what they look like and how they live: for example by their body covering, how they move and how they reproduce.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>A toy robot can move and talk. Why is it not a living thing?</summary>
+            <p>It does not need air, food and water. It does not grow, and it cannot reproduce. A living thing does <strong>all</strong> of these.</p>
+          </details>
+          <details>
+            <summary>A tree does not move from place to place. Why is it a living thing?</summary>
+            <p>It needs air and water, makes its own food, grows, responds to light and reproduces by making seeds.</p>
+          </details>
+          <details>
+            <summary>Why is a mushroom not a plant?</summary>
+            <p>Plants make their own food. A mushroom <strong>cannot</strong>: it feeds on dead or living things. It is a fungus and reproduces by spores.</p>
+          </details>
+          <details>
+            <summary>A bat flies and a whale swims. Why are they both mammals?</summary>
+            <p>Both have hair, give birth to their young and feed them with milk. We group animals by features like these, not by where they live.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>

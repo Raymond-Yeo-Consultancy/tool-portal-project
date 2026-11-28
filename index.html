@@ -6,9 +6,9 @@
   <title>Primary Science Lab</title>
   <meta name="description" content="Try Primary 3 to 6 Science experiments in your browser, based on the Singapore Primary Science syllabus.">
   <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
-  <link rel="stylesheet" href="css/style.css?v=14">
-  <script src="js/theme.js?v=14" defer></script>
-  <script src="js/portal.js?v=14" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=15">
+  <script src="js/theme.js?v=15" defer></script>
+  <script src="js/portal.js?v=15" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -38,6 +38,20 @@
       <p class="hint" id="empty-level" hidden>Tools for this level are coming soon.</p>
 
       <!-- One <section class="level-section"> per level. Inside it, one theme heading (h3) and tool grid per theme. -->
+
+      <section class="level-section" data-level="3" aria-labelledby="p3-heading">
+        <h2 id="p3-heading">Primary 3</h2>
+
+        <h3 class="theme-heading">Diversity</h3>
+        <div class="tool-grid">
+          <a class="card tool-card" href="tools/classify/index.html">
+            <span class="tool-icon" aria-hidden="true">🗂️</span>
+            <h4>Living Things Sorter</h4>
+            <p>Is it living or non-living? Plant, animal, fungus or bacteria? Sort the cards into the right groups.</p>
+            <div class="tags"><span class="tag tag-level">P3</span><span class="tag">Classifying living things</span></div>
+          </a>
+        </div>
+      </section>
 
       <section class="level-section" data-level="6" aria-labelledby="p6-heading">
         <h2 id="p6-heading">Primary 6</h2>

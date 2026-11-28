@@ -922,6 +922,83 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
   color: var(--on-primary);
 }
 
+/* anything marked hidden stays hidden, whatever its display style */
+[hidden] { display: none !important; }
+
+/* ---------- shared activities: sort, order, match (js/activities.js) ---------- */
+.act-progress { margin: 0 0 10px; font-weight: 600; }
+
+.act-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 48px;
+  margin-bottom: 6px;
+}
+
+.act-card { cursor: pointer; border-color: var(--border); border-left-width: 2px; }
+.act-card:hover { background: var(--surface-2); }
+
+.act-card.selected {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px var(--focus);
+  font-weight: 700;
+}
+
+.act-bins {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 10px 0 14px;
+}
+
+@media (min-width: 700px) {
+  .act-bins { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+}
+
+.act-bin {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 110px;
+  padding: 10px;
+  border: 2px dashed var(--text-muted);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.act-bin:hover:not(:disabled) { border-color: var(--primary); border-style: solid; }
+.act-bin:disabled { cursor: default; border-style: solid; border-color: var(--border); }
+.act-bin strong { font-size: 1.05rem; }
+.act-bin-about { color: var(--text-muted); font-size: 0.9rem; line-height: 1.35; }
+.act-bin-items { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+.act-bin-items .chip {
+  min-height: 32px;
+  padding: 2px 8px;
+  font-size: 0.9rem;
+  border-color: var(--success);
+  border-left-width: 2px;
+}
+
+.act-slots {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.act-slots .arrow { font-size: 1.4rem; font-weight: 700; color: var(--text-muted); }
+.act-slots .blank { min-width: 110px; gap: 6px; }
+.activity .energy-palette { margin-bottom: 14px; }
+.activity .energy-palette .chip { border-color: var(--border); border-left-width: 2px; }
+.activity .chip:disabled { cursor: default; }
+
 /* ---------- adaptations tool ---------- */
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 

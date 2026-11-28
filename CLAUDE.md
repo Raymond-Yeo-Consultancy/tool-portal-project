@@ -24,30 +24,30 @@
 ├── css/style.css              # Shared styles; all colours are CSS variables for both themes
 ├── js/theme.js                # Light/dark toggle, shared by every page
 ├── js/portal.js               # Home page level filter (All, P3, P4, P5, P6)
-├── js/friction.js             # Friction Ramp tool logic
-├── js/energy.js               # Energy Conversion tool logic and example data
-├── js/spring.js               # Spring Stretch tool logic
-├── js/gravity.js              # Drop Race (gravity and air resistance) tool logic
-├── js/pendulum.js             # Swinging Pendulum tool logic
-├── js/photosynthesis.js       # Photosynthesis Lab tool logic
-├── js/foodweb.js              # Food Chain and Food Web tool logic and habitat data
-├── js/adaptations.js          # Adaptations Explorer tool logic and organism data
-└── tools/
-    ├── friction/index.html    # Friction Ramp tool page
-    ├── spring/index.html      # Spring Stretch tool page
-    ├── gravity/index.html     # Drop Race tool page
-    ├── pendulum/index.html    # Swinging Pendulum tool page
-    ├── photosynthesis/index.html  # Photosynthesis Lab tool page
-    ├── foodweb/index.html     # Food Chain and Food Web tool page
-    ├── adaptations/index.html # Adaptations Explorer tool page
-    └── energy/index.html      # Energy Conversion tool page
+├── js/activities.js           # Shared sort / order / match activities used by several tools
+├── js/<tool>.js               # One script per tool: its logic and data
+└── tools/<tool>/index.html    # One page per tool
 ```
+
+Tools (`<tool>` is the folder and script name):
+
+| Level | `<tool>` | Tool |
+|---|---|---|
+| P3 | `classify` | Living Things Sorter |
+| P6 | `friction` | Friction Ramp |
+| P6 | `spring` | Spring Stretch |
+| P6 | `gravity` | Drop Race (gravity and air resistance) |
+| P6 | `energy` | Energy Conversion |
+| P6 | `pendulum` | Swinging Pendulum |
+| P6 | `photosynthesis` | Photosynthesis Lab |
+| P6 | `foodweb` | Food Chain and Food Web |
+| P6 | `adaptations` | Adaptations Explorer |
 
 To add a tool: create `tools/<name>/index.html` and `js/<name>.js`, copy the header and the inline theme script from an existing tool page, and add a card to the right level section of `index.html`, with a level tag.
 
 Update this section when files or folders are added.
 
-**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=14`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages.
+**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=15`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages.
 
 ## Key Requirements
 
