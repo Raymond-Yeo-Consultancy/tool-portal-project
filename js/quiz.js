@@ -131,7 +131,8 @@
     $('practise-box').hidden = todo === 0;
     $('practise-btn').textContent = 'Practise my mistakes (' + todo + (todo === 1 ? ' question)' : ' questions)');
     $('player-note').textContent = !state.player ? 'Choose your name so your answers are saved for you.'
-      : state.player === 'guest' ? 'Guest answers are not saved.'
+      : state.player === 'guest' ? 'Guest answers are not kept for the Parent Report.'
+      : !window.Store.canSave() ? 'Hello, ' + window.Store.playerName(state.player) + '! This browser cannot save your answers, so they will be lost when you close the page.'
       : 'Hello, ' + window.Store.playerName(state.player) + '! Your answers are saved so you can see what to practise.';
   }
 
@@ -179,6 +180,7 @@
     renderTopics();
     show('setup');
     focusTopic();
+    window.scrollTo(0, 0); // so the name and the Practise my mistakes button can be seen
   }
 
   /* ---------- playing ---------- */
@@ -268,6 +270,7 @@
     var correctText = q.options[q.answer];
     document.querySelectorAll('#options .quiz-option').forEach(function (b) {
       b.disabled = true;
+      b.setAttribute('aria-pressed', 'false'); // the green or red mark now shows the result
       if (b.querySelector('.option-text').textContent === correctText) {
         b.classList.add('choice-right');
         b.appendChild(el('span', '✔ Correct answer', 'option-mark'));
@@ -295,7 +298,7 @@
     $('next-btn').hidden = false;
     // keep the question and picture where they are; only make sure the explanation can be seen
     $('next-btn').focus({ preventScroll: true });
-    if ($('why').scrollIntoView) $('why').scrollIntoView({ block: 'nearest' });
+    if ($('next-btn').scrollIntoView) $('next-btn').scrollIntoView({ block: 'nearest' });
   }
 
   function next() {
@@ -331,6 +334,14 @@
       item.appendChild(el('p', w.q.why, 'review-why'));
       review.appendChild(item);
     });
+    // after a practice quiz, say how many mistakes are left and how to clear them
+    var left = state.practice ? window.Store.mistakes(state.player).length : 0;
+    $('practice-message').hidden = !state.practice;
+    $('practice-message').textContent = !state.practice ? ''
+      : left === 0 ? 'You have cleared all your mistakes. Well done!'
+      : 'A question leaves your mistakes list when you get it right twice in a row. Still on your list: ' + left + (left === 1 ? ' question.' : ' questions.');
+    $('again-btn').hidden = state.practice && left === 0;
+    $('again-btn').textContent = state.practice ? 'Practise again' : 'Try again';
     $('tool-link').hidden = state.practice;
     if (!state.practice) {
       $('tool-link').href = '../tools/' + state.topic + '/index.html';
@@ -399,6 +410,9 @@
       $('setup-message').textContent = 'The best scores for ' + window.Store.playerName(state.player) + ' have been cleared.';
     });
 
-    if (params.practise && state.player && state.player !== 'guest') startPractice();
+    if (params.practise && state.player && state.player !== 'guest') {
+      if (window.Store.mistakes(state.player).length) startPractice();
+      else $('setup-message').textContent = window.Store.playerName(state.player) + ' has no mistakes to practise right now.';
+    }
   });
 })();

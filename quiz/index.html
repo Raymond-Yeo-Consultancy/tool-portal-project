@@ -6,13 +6,13 @@
   <title>Revision Quiz</title>
   <meta name="description" content="Test yourself on Primary 3 to 6 Science with easy, medium and hard questions on every topic.">
   <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
-  <link rel="stylesheet" href="../css/style.css?v=42">
-  <script src="../js/theme.js?v=42" defer></script>
-  <script src="../js/players.js?v=42" defer></script>
-  <script src="../js/store.js?v=42" defer></script>
-  <script src="../js/pictures.js?v=42" defer></script>
-  <script src="../js/questions/index.js?v=42" defer></script>
-  <script src="../js/quiz.js?v=42" defer></script>
+  <link rel="stylesheet" href="../css/style.css?v=43">
+  <script src="../js/theme.js?v=43" defer></script>
+  <script src="../js/players.js?v=43" defer></script>
+  <script src="../js/store.js?v=43" defer></script>
+  <script src="../js/pictures.js?v=43" defer></script>
+  <script src="../js/questions/index.js?v=43" defer></script>
+  <script src="../js/quiz.js?v=43" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -87,12 +87,12 @@
           <h2 id="question" tabindex="-1" class="quiz-question"></h2>
           <div id="question-pic"></div>
           <div class="quiz-options" id="options"></div>
+          <p class="feedback" id="feedback" aria-live="polite" style="margin-top:12px"></p>
+          <div class="hint" id="why" hidden><strong>Why?</strong> <span id="why-text"></span></div>
           <div class="actions" style="margin-top:14px">
             <button type="button" class="btn btn-big" id="submit-btn" disabled>Submit answer</button>
             <button type="button" class="btn btn-big" id="next-btn" hidden>Next question →</button>
           </div>
-          <p class="feedback" id="feedback" aria-live="polite" style="margin-top:12px"></p>
-          <div class="hint" id="why" hidden><strong>Why?</strong> <span id="why-text"></span></div>
         </section>
       </div>
 
@@ -102,6 +102,7 @@
           <h2 id="results-heading">Your score</h2>
           <p class="quiz-score" id="score" tabindex="-1"></p>
           <p id="score-message" style="font-size:1.15rem"></p>
+          <p id="practice-message" class="hint" hidden></p>
           <div class="actions">
             <button type="button" class="btn btn-big" id="again-btn">Try again</button>
             <button type="button" class="btn btn-secondary" id="change-btn">Choose another topic</button>

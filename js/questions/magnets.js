@@ -129,7 +129,7 @@ window.QUESTIONS.magnets = [
     answer: 0,
     why: "A piece of iron is attracted to both poles of a magnet and is never pushed away. Only another magnet can be repelled." },
   { id: "magnets-h05", level: "hard",
-    q: "Ken tests three magnets by counting the paper clips each one picks up. What must he do to make the test fair?",
+    q: "Wei tests three magnets by counting the paper clips each one picks up. What must he do to make the test fair?",
     options: ["Use the same kind of paper clips each time", "Use bigger paper clips for the biggest magnet", "Use a different kind of clip for each magnet", "Test only one magnet"],
     answer: 0,
     why: "Only the magnet should be different. The paper clips must be the same kind each time." },
@@ -206,7 +206,7 @@ window.QUESTIONS.magnets = [
     options: ["A piece of iron that is not a magnet", "A magnet", "A piece of plastic", "A piece of copper"], answer: 0,
     why: "One end of a magnet would be repelled by one of the poles. Iron is attracted to both poles and is never pushed away. Plastic and copper are not attracted at all." },
   { id: "magnets-p10", level: "hard",
-    q: "Ken tests three magnets by counting the paper clips each one picks up. The table shows what he did. Why can he not be sure that magnet B is stronger than magnet C?",
+    q: "Wei tests three magnets by counting the paper clips each one picks up. The table shows what he did. Why can he not be sure that magnet B is stronger than magnet C?",
     pic: { kind: "table", head: ["Magnet", "Kind of paper clips used", "Paper clips picked up"], rows: [["A", "Small", "4"], ["B", "Small", "10"], ["C", "Large", "6"]] },
     options: ["He used a different kind of paper clip for magnet C, so the test was not fair", "He should have used only one magnet", "Magnet C picked up more paper clips than magnet B", "Paper clips are not attracted by magnets"], answer: 0,
     why: "In a fair test only the magnet is different. Large paper clips are heavier, so magnet C might pick up fewer of them even if it is just as strong." }

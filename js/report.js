@@ -85,6 +85,7 @@
   function scoreCell(row) {
     var box = el('span', null, 'score-cell');
     if (!row) { box.textContent = 'Not tried'; box.className = 'score-cell none'; return box; }
+    if (row.total < MIN_ANSWERS) { box.textContent = 'Too few yet'; box.className = 'score-cell none'; return box; }
     var pct = percent(row.right, row.total);
     box.appendChild(el('strong', pct + '%'));
     box.appendChild(bar(pct));
@@ -105,7 +106,7 @@
     var right = recs.filter(function (r) { return r.ok; }).length;
     var days = {}; recs.forEach(function (r) { days[dateText(r.t)] = true; });
     var stats = el('div', null, 'stat-row report-stats');
-    [['Questions answered', recs.length], ['Correct', right + ' (' + percent(right, recs.length) + '%)'], ['Wrong', recs.length - right],
+    [['Answers given', recs.length], ['Correct answers', right + ' (' + percent(right, recs.length) + '%)'], ['Wrong answers', recs.length - right],
       ['Days played', Object.keys(days).length], ['Last played', dateText(recs[recs.length - 1].t)]].forEach(function (s) {
       var box = el('div', null, 'report-stat');
       box.appendChild(el('span', s[0], 'report-stat-label'));
@@ -120,14 +121,15 @@
     var enough = rows.filter(function (r) { return r.total >= MIN_ANSWERS; }).sort(function (a, b) { return a.right / a.total - b.right / b.total || b.total - a.total; });
     var few = rows.filter(function (r) { return r.total < MIN_ANSWERS; }).sort(function (a, b) { return b.total - a.total; });
     section.appendChild(el('h3', 'Topics, weakest first'));
+    section.appendChild(el('p', 'A score is shown once a topic has at least ' + MIN_ANSWERS + ' answers. With fewer, it says "Too few yet".', 'report-note'));
+    if (window.Store.records(player.id).length >= window.Store.limit - 300) section.appendChild(el('p', 'This record is nearly full (' + window.Store.limit + ' answers). The oldest answers will be dropped as new ones are added. Download the spreadsheet file first if you want to keep them.', 'hint'));
     if (enough.length) {
       var weak = enough.filter(function (r) { return r.right / r.total < 0.6; }).slice(0, 3).map(function (r) { return topicById(r.key).name; });
       section.appendChild(el('p', weak.length ? 'Needs the most practice: ' + weak.join(', ') + '.' : 'No topic is below 60% so far. Well done!', 'report-headline'));
     }
     section.appendChild(table(['Topic', 'Answered', 'Correct', 'Score'], enough.concat(few).map(function (r) {
       var t = topicById(r.key);
-      var score = r.total >= MIN_ANSWERS ? scoreCell(r) : el('span', 'Not enough answers yet', 'score-cell none');
-      return ['P' + t.level + ' · ' + t.name, r.total, r.right, score];
+      return ['P' + t.level + ' · ' + t.name, r.total, r.right, scoreCell(r)];
     })));
 
     var byLevel = tally(recs, function (r) { return 'P' + topicById(window.Store.topicOf(r.q)).level; });
@@ -154,7 +156,7 @@
     var clear = el('button', 'Clear ' + player.name + '’s record', 'btn btn-secondary');
     clear.type = 'button';
     clear.addEventListener('click', function () {
-      if (!window.confirm('Delete every saved answer for ' + player.name + ' on this device? This cannot be undone.')) return;
+      if (!window.confirm('Delete every saved answer and best score for ' + player.name + ' on this device? This cannot be undone.')) return;
       window.Store.clear(player.id);
       render();
     });
@@ -171,7 +173,9 @@
       if (r.ok) { if (m.wrong) m.rightSince = true; } else { m.wrong += 1; m.last = r; m.rightSince = false; }
     });
     var wrong = Object.keys(byQ).map(function (k) { return byQ[k]; }).filter(function (m) { return m.wrong > 0 && questionById(m.q); });
-    section.appendChild(el('h3', 'Questions answered wrongly (' + wrong.length + ')'));
+    var wrongHead = el('h3', 'Different questions answered wrongly (' + wrong.length + ')');
+    section.appendChild(wrongHead);
+    section.appendChild(el('p', 'A question he got wrong more than once is listed once, with the number of times.', 'report-note'));
     if (!wrong.length) { section.appendChild(el('p', 'None in this period.', 'report-empty')); return; }
 
     var topics = [];
@@ -187,6 +191,8 @@
     var list = el('div', null, 'report-wrong'); section.appendChild(list);
     function draw() {
       list.innerHTML = '';
+      var showing = select.value === 'all' ? wrong.length : wrong.filter(function (m) { return window.Store.topicOf(m.q) === select.value; }).length;
+      wrongHead.textContent = 'Different questions answered wrongly (' + wrong.length + ')' + (select.value === 'all' ? '' : ': showing ' + showing + ' for ' + topicById(select.value).name);
       topics.filter(function (t) { return select.value === 'all' || select.value === t; }).forEach(function (t) {
         var mine = wrong.filter(function (m) { return window.Store.topicOf(m.q) === t; }).sort(function (a, b) { return b.wrong - a.wrong || b.last.t - a.last.t; });
         list.appendChild(el('h4', 'P' + topicById(t).level + ' · ' + topicById(t).name + ' (' + mine.length + ')'));
@@ -216,9 +222,8 @@
     var rows = window.QUIZ_TOPICS.filter(function (t) { return tallies.some(function (x) { return x[t.id]; }); }).map(function (t) {
       return ['P' + t.level + ' · ' + t.name].concat(tallies.map(function (x) {
         var r = x[t.id];
-        if (!r) return scoreCell(null);
-        if (r.total < MIN_ANSWERS) return el('span', r.right + ' of ' + r.total + ' (too few yet)', 'score-cell none');
-        return scoreCell(r);
+        if (r && r.total < MIN_ANSWERS) return el('span', r.right + ' of ' + r.total + ' (too few yet)', 'score-cell none');
+        return scoreCell(r || null);
       }));
     });
     if (!rows.length) section.appendChild(el('p', 'Nobody has answered any quiz questions ' + (state.days ? 'in this period' : 'on this device yet') + '.', 'report-empty'));
@@ -230,6 +235,8 @@
   function render() {
     var root = $('report');
     root.innerHTML = '';
+    var names = state.who === 'both' ? window.PLAYERS.map(function (p) { return p.name; }).join(' and ') : window.Store.playerName(state.who);
+    $('print-info').textContent = 'Report for ' + names + ' · ' + (state.days ? 'answers from the last ' + state.days + ' days' : 'all answers') + ' · made on ' + dateText(Date.now());
     if (state.who === 'both') renderBoth(root);
     else renderPlayer(window.PLAYERS.filter(function (p) { return p.id === state.who; })[0], root);
   }

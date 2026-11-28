@@ -12,7 +12,7 @@
   // Every answer is saved under its own key ("quiz-answer|pupil|time|number"), never as one big list.
   // Saving an answer therefore only ever adds an entry: it cannot overwrite answers saved earlier,
   // even if two pages are open at once or a page was showing an out-of-date copy.
-  var ANSWER = 'quiz-answer|', PLAYER_KEY = 'quiz-player', MAX_RECORDS = 6000;
+  var ANSWER = 'quiz-answer|', BEST = 'quiz-best|', PLAYER_KEY = 'quiz-player', MAX_RECORDS = 5000;
   var memory = { extra: [], player: null, counter: 0 }; // extra: answers kept only in memory when storage is blocked
 
   function read(key) {
@@ -38,12 +38,13 @@
     } catch (e) { /* storage blocked */ }
     return out;
   }
-  // when there are far too many saved answers, drop the oldest ones
-  function trim() {
-    var all = keys();
-    if (all.length <= MAX_RECORDS) return;
-    all.sort(function (a, b) { return Number(a.split('|')[2]) - Number(b.split('|')[2]); });
-    all.slice(0, all.length - MAX_RECORDS).forEach(function (k) { try { localStorage.removeItem(k); } catch (e) { /* ignore */ } });
+  // A browser can only hold so much. When one pupil has more than MAX_RECORDS answers, his own
+  // oldest ones are dropped. Another pupil's answers are never touched.
+  function trim(playerId) {
+    var mine = keys(playerId);
+    if (mine.length <= MAX_RECORDS) return;
+    mine.sort(function (a, b) { return Number(a.split('|')[2]) - Number(b.split('|')[2]); });
+    mine.slice(0, mine.length - MAX_RECORDS).forEach(function (k) { try { localStorage.removeItem(k); } catch (e) { /* ignore */ } });
   }
 
   window.Store = {
@@ -68,7 +69,7 @@
       memory.counter += 1;
       var key = ANSWER + playerId + '|' + r.t + '|' + memory.counter + Math.floor(Math.random() * 1e6);
       if (!write(key, JSON.stringify(r))) memory.extra.push(r);
-      else if (memory.counter % 50 === 0) trim();
+      else if (memory.counter % 50 === 0) trim(playerId);
     },
     // every record for one pupil, oldest first
     records: function (playerId) {
@@ -83,7 +84,15 @@
     clear: function (playerId) {
       memory.extra = memory.extra.filter(function (r) { return r.p !== playerId; });
       keys(playerId).forEach(function (k) { try { localStorage.removeItem(k); } catch (e) { /* ignore */ } });
+      // his best scores go too, so the quiz and the report agree
+      try {
+        var best = [];
+        for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf(BEST + playerId + '|') === 0) best.push(k); }
+        best.forEach(function (k) { localStorage.removeItem(k); });
+      } catch (e) { /* ignore */ }
     },
+    // the most answers kept for one pupil; older ones are dropped after this
+    limit: MAX_RECORDS,
     topicOf: function (questionId) { return questionId.split('-')[0]; },
     // questions this pupil still needs to practise: got wrong at least once and not yet
     // answered correctly twice in a row since. Most often wrong first.

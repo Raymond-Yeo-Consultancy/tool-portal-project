@@ -138,7 +138,7 @@ window.QUESTIONS.circuits = [
     answer: 0,
     why: "The open switch breaks only the path through X. Bulb Y still has its own complete path to the battery, so it stays lit." },
   { id: "circuits-h07", level: "hard",
-    q: "In Test 1, a circuit has one battery and one bulb. In Test 2, it has two batteries and two bulbs in series. The bulbs look equally bright in both tests. Ken says, 'Adding batteries does not change the brightness.' What is wrong with his conclusion?",
+    q: "In Test 1, a circuit has one battery and one bulb. In Test 2, it has two batteries and two bulbs in series. The bulbs look equally bright in both tests. Wei says, 'Adding batteries does not change the brightness.' What is wrong with his conclusion?",
     options: ["He changed both the number of batteries and the number of bulbs, so it was not a fair test", "He used too many batteries", "He should have used different kinds of bulbs and different kinds of batteries in the two tests", "Nothing is wrong with his conclusion"],
     answer: 0,
     why: "Two things were changed at once. To test the effect of batteries, the number of bulbs must stay the same." },

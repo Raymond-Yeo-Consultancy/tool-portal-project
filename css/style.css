@@ -1147,7 +1147,7 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
   font-weight: 700;
 }
 
-.option-text { flex: 1 1 200px; }
+.option-text { flex: 1 1 0; min-width: 0; }
 .option-mark { flex: 0 0 auto; font-weight: 700; font-size: 0.95rem; }
 .choice-right .option-mark { color: var(--success); }
 .choice-wrong .option-mark { color: var(--error); }
@@ -1210,6 +1210,15 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .score-cell strong { min-width: 2.7em; }
   .score-bar { width: 40px; }
   .report-player .score-bar { display: none; }
+}
+.report-note { color: var(--text-muted); font-size: 0.9rem; margin: 0 0 8px; }
+.report-print-info { font-weight: 700; margin: 16px 0 0; }
+@media (max-width: 360px) {
+  .report-table { font-size: 0.82rem; }
+  .report-table th, .report-table td { padding: 5px 3px; overflow-wrap: anywhere; }
+  .report-table thead th { font-size: 0.74rem; }
+  .score-cell { white-space: normal; }
+  .report-compare .score-bar { display: none; }
 }
 .report-pick { margin: 6px 0 12px; }
 .report-pick select { font: inherit; padding: 8px 10px; min-height: 44px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); max-width: 100%; }
@@ -1286,5 +1295,9 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .sheet-why, .sheet-id, .sheet-topic h4 { color: #333333; }
   .sheet-topic { break-before: auto; }
   .hint { background: none; }
+  .review-item, .report-stat, .report-table tr, .pic { break-inside: avoid; }
+  .report-player h3, .report-wrong h4 { break-after: avoid; }
+  .score-bar, .score-bar span { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .score-bar .low, .score-bar .mid, .score-bar .high { background: #000000; }
   .pic { --text: #000000; --ink: #000000; --ink-soft: #777777; --surface: #ffffff; --surface-2: #eeeeee; --border: #999999; }
 }
