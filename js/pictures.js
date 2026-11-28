@@ -129,7 +129,7 @@
     }
     var boxes = p.nodes.map(function (label, k) {
       var lines = String(label).split('\n'), len = Math.max.apply(null, lines.map(function (l) { return l.length; }));
-      return { x: at[k][0], y: at[k][1], w: Math.max(30, len * 6.9 + 16), h: lines.length * 15 + 12, lines: lines };
+      return { x: at[k][0], y: at[k][1], w: Math.max(32, len * 7.5 + 18), h: lines.length * 15 + 12, lines: lines };
     });
     function edge(a, b) {
       var dx = b.x - a.x, dy = b.y - a.y;
