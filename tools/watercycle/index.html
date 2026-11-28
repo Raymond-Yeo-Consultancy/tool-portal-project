@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Water Cycle and Changes of State</title>
+  <meta name="description" content="Heat ice until it boils, follow water round the water cycle, and test what makes water evaporate faster.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=24">
+  <script src="../../js/theme.js?v=24" defer></script>
+  <script src="../../js/watercycle.js?v=24" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Water Cycle and Changes of State</h1>
+      <p class="lead">Water can be a solid, a liquid or a gas. Find out how it changes state, and how these changes keep water moving around the Earth.</p>
+      <p class="tags"><span class="tag tag-level">Primary 5</span><span class="tag">Cycles</span><span class="tag">Standard &amp; Foundation Science</span></p>
+
+      <section class="card" aria-labelledby="pick-heading" style="margin-top:18px">
+        <h2 id="pick-heading">1. Pick an activity</h2>
+        <div class="choices three" id="mode-choices">
+          <button type="button" class="choice" data-mode="state" aria-pressed="true"><span class="emoji" aria-hidden="true">🧊</span>Changes of state</button>
+          <button type="button" class="choice" data-mode="cycle" aria-pressed="false"><span class="emoji" aria-hidden="true">🌧️</span>The water cycle</button>
+          <button type="button" class="choice" data-mode="evap" aria-pressed="false"><span class="emoji" aria-hidden="true">💨</span>Evaporation test</button>
+        </div>
+      </section>
+
+      <div class="tool-layout friction-layout" id="lab">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Experiment</h2>
+          <div class="drop-scene" id="scene"></div>
+          <div class="stat-row" id="state-readout">
+            <div class="stat"><span class="stat-label">What is happening</span><span class="stat-value" id="stage-label" style="font-size:1.05rem"></span></div>
+            <div class="stat"><span class="stat-label">State of the water</span><span class="stat-value" id="state-label" style="font-size:1.05rem"></span></div>
+          </div>
+          <p class="slowmo-note">Time is speeded up.</p>
+          <p class="result-line" id="result" aria-live="polite"></p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading" id="lab-controls">
+          <h2 id="controls-heading">2. Set up</h2>
+
+          <div id="state-controls">
+            <fieldset class="choice-group">
+              <legend>What do you want to do?</legend>
+              <div class="choices" id="run-choices">
+                <button type="button" class="choice" data-run="heat" aria-pressed="true"><span class="emoji" aria-hidden="true">🔥</span>Heat ice</button>
+                <button type="button" class="choice" data-run="cool" aria-pressed="false"><span class="emoji" aria-hidden="true">❄️</span>Cool water</button>
+              </div>
+            </fieldset>
+            <div class="actions">
+              <button type="button" class="btn btn-big" id="state-btn">Start</button>
+              <button type="button" class="btn btn-secondary" id="state-reset">Reset</button>
+            </div>
+          </div>
+
+          <div id="evap-controls" hidden>
+            <fieldset class="choice-group">
+              <legend>Temperature of the surroundings</legend>
+              <div class="choices" id="temp-choices">
+                <button type="button" class="choice" data-warm="false" aria-pressed="true">Cool</button>
+                <button type="button" class="choice" data-warm="true" aria-pressed="false">Warm</button>
+              </div>
+            </fieldset>
+            <fieldset class="choice-group">
+              <legend>Wind</legend>
+              <div class="choices" id="wind-choices">
+                <button type="button" class="choice" data-windy="false" aria-pressed="true">No wind</button>
+                <button type="button" class="choice" data-windy="true" aria-pressed="false">Windy (fan on)</button>
+              </div>
+            </fieldset>
+            <fieldset class="choice-group">
+              <legend>Exposed surface area of the water</legend>
+              <div class="choices" id="area-choices">
+                <button type="button" class="choice" data-wide="false" aria-pressed="true">Small (narrow beaker)</button>
+                <button type="button" class="choice" data-wide="true" aria-pressed="false">Large (wide dish)</button>
+              </div>
+            </fieldset>
+            <div class="actions">
+              <button type="button" class="btn btn-big" id="evap-btn">Start</button>
+            </div>
+            <div class="hint" id="fair-test-hint" hidden style="margin-top:14px">
+              <strong>Fair test tip:</strong> you changed <em>more than one</em> thing since your last run. Change only <em>one</em> thing at a time, so you know which change made the difference.
+            </div>
+          </div>
+        </section>
+
+        <section class="card span-all" id="graph-card" aria-labelledby="graph-heading">
+          <h2 id="graph-heading">Temperature graph</h2>
+          <div id="graph"></div>
+        </section>
+
+        <section class="card span-all" id="evap-card" aria-labelledby="evap-heading" hidden>
+          <div class="actions" style="justify-content:space-between">
+            <h2 id="evap-heading" style="margin:0">Results table</h2>
+            <button type="button" class="btn btn-secondary" id="evap-clear">Clear results</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Run</th><th scope="col">Temperature</th><th scope="col">Wind</th><th scope="col">Exposed surface area</th><th scope="col">Water evaporated in 3 hours</th></tr>
+              </thead>
+              <tbody id="evap-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <div class="tool-layout energy-layout" id="cycle-lab" hidden>
+        <section class="card" aria-labelledby="cycle-heading">
+          <h2 id="cycle-heading">The water cycle</h2>
+          <div class="illustration" id="cycle"></div>
+        </section>
+        <section class="card" aria-labelledby="process-title">
+          <h2 id="process-title">The water cycle</h2>
+          <p id="process-text" aria-live="polite" style="min-height:7em"></p>
+          <div class="choices" id="process-choices"></div>
+        </section>
+      </div>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>Water changes state when it <strong>gains</strong> or <strong>loses</strong> heat.</li>
+            <li><strong>Melting</strong> (ice to water) and <strong>freezing</strong> (water to ice) happen at <strong>0 °C</strong>.</li>
+            <li><strong>Boiling</strong> (water to steam) happens at <strong>100 °C</strong>. <strong>Evaporation</strong> (water to water vapour) can happen at any temperature.</li>
+            <li><strong>Condensation</strong> is water vapour changing into water when it loses heat.</li>
+            <li>While water is changing state, its temperature <strong>stays the same</strong>.</li>
+            <li>Water evaporates faster when it is <strong>warmer</strong>, when it is <strong>windy</strong>, and when the <strong>exposed surface area</strong> is larger.</li>
+            <li>In the <strong>water cycle</strong>, water evaporates, condenses into clouds, falls as rain and flows back to the sea.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>The ice is being heated all the time. Why does its temperature stay at 0 °C while it melts?</summary>
+            <p>The heat it gains is used to change the ice into water, not to raise its temperature. Only when all the ice has melted does the temperature start to rise.</p>
+          </details>
+          <details>
+            <summary>How is evaporation different from boiling?</summary>
+            <p>Both change water into a gas. <strong>Boiling</strong> happens only at 100 °C, throughout the water, with bubbles. <strong>Evaporation</strong> happens at any temperature, only at the surface.</p>
+          </details>
+          <details>
+            <summary>Why do wet clothes dry faster when they are spread out on a windy, sunny day?</summary>
+            <p>Spreading them out gives a larger exposed surface area. The Sun makes them warmer and the wind carries the water vapour away. All three make the water evaporate faster.</p>
+          </details>
+          <details>
+            <summary>Water droplets form on the outside of a cold glass. Where do they come from?</summary>
+            <p>From the <strong>air</strong>. Water vapour in the air touches the cold glass, loses heat and condenses into water droplets.</p>
+          </details>
+          <details>
+            <summary>Why is the water cycle important?</summary>
+            <p>It gives us a continuous supply of fresh water. Rain fills our rivers and reservoirs, and living things need this water to stay alive.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>

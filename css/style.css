@@ -922,6 +922,10 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
   color: var(--on-primary);
 }
 
+/* falling rain (water cycle) */
+@keyframes rainfall { from { transform: translateY(0); opacity: 1; } to { transform: translateY(70px); opacity: 0; } }
+.anim-rain { animation: rainfall 0.9s linear infinite; }
+
 /* tappable parts of a drawing (plant parts, body parts, cells) */
 .plant-part { cursor: pointer; }
 .plant-part:focus { outline: none; }
