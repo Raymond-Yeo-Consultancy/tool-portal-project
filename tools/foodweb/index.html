@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Food Chain and Food Web</title>
+  <meta name="description" content="Explore a food web, build food chains, and find out what happens when one organism is removed.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=12">
+  <script src="../../js/theme.js?v=12" defer></script>
+  <script src="../../js/foodweb.js?v=12" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> P6 Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Food Chain and Food Web</h1>
+      <p class="lead">Who eats whom? Explore a food web, build food chains, and see what happens when one organism disappears.</p>
+      <p><span class="tag">Standard &amp; Foundation Science</span></p>
+
+      <div class="tool-layout friction-layout">
+        <section class="card" aria-labelledby="web-heading">
+          <h2 id="web-heading" class="visually-hidden">Food web</h2>
+          <div class="drop-scene web-scene" id="web"></div>
+          <p class="slowmo-note">Each arrow means <strong>“is eaten by”</strong>. The moving dashes show energy passing from one organism to the next.</p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">Explore</h2>
+
+          <fieldset class="choice-group">
+            <legend>1. Habitat</legend>
+            <div class="choices" id="habitat-choices">
+              <button type="button" class="choice" data-habitat="pond" aria-pressed="true"><span class="emoji" aria-hidden="true">🏞️</span>Pond</button>
+              <button type="button" class="choice" data-habitat="garden" aria-pressed="false"><span class="emoji" aria-hidden="true">🌳</span>Garden</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="choice-group">
+            <legend>2. What do you want to do?</legend>
+            <div class="choices three" id="mode-choices">
+              <button type="button" class="choice" data-mode="web" aria-pressed="true">Look at the web</button>
+              <button type="button" class="choice" data-mode="chain" aria-pressed="false">Build a chain</button>
+              <button type="button" class="choice" data-mode="whatif" aria-pressed="false">What if?</button>
+            </div>
+          </fieldset>
+
+          <div class="web-panel" id="panel" aria-live="polite"></div>
+          <div class="actions" style="margin-top:12px">
+            <button type="button" class="btn btn-secondary" id="again-btn" hidden>Start a new chain</button>
+          </div>
+        </section>
+
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>A <strong>food chain</strong> shows the food relationship between organisms. Each arrow means “is eaten by”.</li>
+            <li>A food chain starts with a <strong>producer</strong>. Plants are producers: they make their own food by photosynthesis.</li>
+            <li>Animals are <strong>consumers</strong>. They get their energy by eating other organisms.</li>
+            <li>A <strong>predator</strong> hunts and eats other animals. The animals it eats are its <strong>prey</strong>.</li>
+            <li>A <strong>food web</strong> is made up of food chains that are linked together.</li>
+            <li>When the population of one organism changes, other organisms in the food web are affected.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>Where does the energy in a food chain come from?</summary>
+            <p>From the <strong>Sun</strong>. Plants trap light energy to make food. The energy is passed on when an animal eats the plant, and again when another animal eats that animal.</p>
+          </details>
+          <details>
+            <summary>Why does every food chain start with a plant?</summary>
+            <p>Only plants can <strong>make their own food</strong>. Animals cannot, so they depend on plants directly (by eating them) or indirectly (by eating animals that eat plants).</p>
+          </details>
+          <details>
+            <summary>Can an animal be a predator and a prey?</summary>
+            <p>Yes. In the garden, the frog is a <strong>predator</strong> of grasshoppers and snails, and it is <strong>prey</strong> for the snake.</p>
+          </details>
+          <details>
+            <summary>In the garden, what happens at first if all the frogs are removed?</summary>
+            <p>The <strong>snakes decrease</strong>, because they have nothing to eat. The <strong>grasshoppers and snails increase</strong>, because fewer are eaten. Try it in “What if?”.</p>
+          </details>
+          <details>
+            <summary>Why is a food web a better picture of a habitat than one food chain?</summary>
+            <p>Most animals eat more than one kind of food. A food web shows all these links, so we can see how a change to one organism can affect many others.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 6 pupils preparing for PSLE Science.</div>
+  </footer>
+</body>
+</html>

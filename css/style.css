@@ -872,3 +872,29 @@ tbody th { font-size: 1rem; color: var(--text); }
 }
 
 .eq-arrow small { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
+
+/* ---------- food web tool ---------- */
+.web-scene svg { max-height: 620px; margin: 0 auto; }
+
+.web-node { cursor: pointer; }
+.web-node:focus { outline: none; }
+.web-node:focus-visible rect { stroke: var(--focus) !important; stroke-width: 4 !important; }
+.web-node:hover rect { fill: var(--surface-2) !important; }
+
+.web-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  min-height: 6em;
+}
+
+.web-panel h3 { margin-bottom: 6px; }
+.web-panel ul { margin: 0; padding-left: 1.2em; }
+.web-panel p { margin: 0 0 8px; }
+.web-panel p:last-child { margin-bottom: 0; }
+.web-panel .chain { margin: 0 0 8px; }
+.web-panel .chip { min-height: 36px; padding: 4px 10px; }
+.chain-empty { color: var(--text-muted); font-style: italic; }
+.fx-up { color: var(--success); }
+.fx-down { color: var(--error); }
