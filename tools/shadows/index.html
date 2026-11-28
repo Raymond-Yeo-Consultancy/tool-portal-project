@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Light and Shadows</title>
+  <meta name="description" content="Move an object in front of a torch and change its material to see how its shadow changes.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=20">
+  <script src="../../js/theme.js?v=20" defer></script>
+  <script src="../../js/shadows.js?v=20" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Light and Shadows</h1>
+      <p class="lead">A torch shines on a disc in front of a screen. Move the disc and change what it is made of. What happens to the shadow?</p>
+      <p class="tags"><span class="tag tag-level">Primary 4</span><span class="tag">Energy</span></p>
+
+      <div class="tool-layout friction-layout">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Experiment</h2>
+          <div class="drop-scene" id="scene"></div>
+          <p class="slowmo-note">The two orange lines are rays of light that just pass the edges of the disc. Light travels in straight lines.</p>
+          <p class="result-line" id="result" aria-live="polite"></p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">Set up your experiment</h2>
+
+          <div class="choice-group">
+            <label for="distance" style="font-weight:700; display:block; margin-bottom:6px">1. Distance of the disc from the torch: <span id="distance-readout" style="color:var(--primary)">30 cm</span></label>
+            <input type="range" id="distance" class="slider" min="10" max="50" step="10" value="30" aria-describedby="distance-help">
+            <div class="slider-ends" id="distance-help"><span>10 cm (near the torch)</span><span>50 cm (near the screen)</span></div>
+          </div>
+
+          <fieldset class="choice-group">
+            <legend>2. What is the disc made of?</legend>
+            <div class="choices three" id="material-choices">
+              <button type="button" class="choice" data-material="opaque" aria-pressed="true">Cardboard</button>
+              <button type="button" class="choice" data-material="translucent" aria-pressed="false">Tracing paper</button>
+              <button type="button" class="choice" data-material="transparent" aria-pressed="false">Clear plastic</button>
+            </div>
+          </fieldset>
+
+          <div class="actions">
+            <button type="button" class="btn btn-big" id="record-btn">Record result</button>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="table-heading">
+          <div class="actions" style="justify-content:space-between">
+            <h2 id="table-heading" style="margin:0">Results table</h2>
+            <button type="button" class="btn btn-secondary" id="clear-btn">Clear results</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Disc</th><th scope="col">Distance from torch</th><th scope="col">Height of shadow</th><th scope="col">Shadow</th></tr>
+              </thead>
+              <tbody id="results-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li><strong>Light travels in straight lines.</strong></li>
+            <li>A <strong>shadow</strong> forms when an object blocks light.</li>
+            <li>The <strong>nearer</strong> the object is to the light source, the <strong>bigger</strong> its shadow.</li>
+            <li><strong>Opaque</strong> objects do not let light through. <strong>Translucent</strong> objects let some light through. <strong>Transparent</strong> objects let most light through.</li>
+          </ul>
+        </section>
+
+        <section class="card span-all" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>Why does the shadow get bigger when the disc moves towards the torch?</summary>
+            <p>Light spreads out from the torch in straight lines. Near the torch, the disc blocks a wider part of the light, so the dark area on the screen is bigger.</p>
+          </details>
+          <details>
+            <summary>Why is the shadow the same shape as the disc?</summary>
+            <p>Light travels in straight lines and cannot bend round the disc. The light is blocked only where the disc is, so the shadow has the outline of the disc.</p>
+          </details>
+          <details>
+            <summary>How could you make the shadow bigger without moving the disc?</summary>
+            <p>Move the <strong>torch closer</strong> to the disc, or move the <strong>screen further away</strong>.</p>
+          </details>
+          <details>
+            <summary>To test how distance affects the shadow, what must you keep the same?</summary>
+            <p>The <strong>same disc</strong> (size and material), the <strong>same torch</strong> and the <strong>same screen position</strong>. Change only the distance between the disc and the torch.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>
