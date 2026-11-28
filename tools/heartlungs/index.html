@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heart and Lungs</title>
+  <meta name="description" content="See how the lungs and heart work together to bring oxygen to the body, and how they speed up during exercise.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=27">
+  <script src="../../js/theme.js?v=27" defer></script>
+  <script src="../../js/activities.js?v=27" defer></script>
+  <script src="../../js/heartlungs.js?v=27" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Heart and Lungs</h1>
+      <p class="lead">Your lungs take in oxygen and your heart pumps blood to carry it round your body. Watch them work, then see what exercise does.</p>
+      <p class="tags"><span class="tag tag-level">Primary 5</span><span class="tag">Systems</span><span class="tag">Standard &amp; Foundation Science</span></p>
+
+      <div class="tool-layout energy-layout">
+        <section class="card" aria-labelledby="diagram-heading">
+          <h2 id="diagram-heading">The respiratory and circulatory systems</h2>
+          <div class="drop-scene web-scene" id="diagram"></div>
+          <div class="graph-legend" style="margin-top:10px">
+            <span><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="6" style="fill:#d1342b;stroke:#ffffff;stroke-width:1.5"/></svg> Blood rich in oxygen</span>
+            <span><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="6" style="fill:#3b4c9b;stroke:#ffffff;stroke-width:1.5"/></svg> Blood rich in carbon dioxide</span>
+          </div>
+        </section>
+
+        <div>
+          <section class="card" aria-labelledby="level-heading">
+            <h2 id="level-heading">What is the person doing?</h2>
+            <div class="choices three" id="level-choices">
+              <button type="button" class="choice" data-level="rest" aria-pressed="true"><span class="emoji" aria-hidden="true">🧘</span>Resting</button>
+              <button type="button" class="choice" data-level="walk" aria-pressed="false"><span class="emoji" aria-hidden="true">🚶</span>Walking</button>
+              <button type="button" class="choice" data-level="run" aria-pressed="false"><span class="emoji" aria-hidden="true">🏃</span>Running</button>
+            </div>
+            <div class="stat-row">
+              <div class="stat"><span class="stat-label">Breathing rate</span><span class="stat-value" id="breaths" style="font-size:1.25rem"></span></div>
+              <div class="stat"><span class="stat-label">Heart rate</span><span class="stat-value" id="beats" style="font-size:1.25rem"></span></div>
+            </div>
+            <div class="table-wrap" style="margin-top:10px">
+              <table>
+                <thead>
+                  <tr><th scope="col">Activity</th><th scope="col">Breaths per minute</th><th scope="col">Heartbeats per minute</th></tr>
+                </thead>
+                <tbody id="results-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="parts-heading" style="margin-top:18px">
+            <div class="actions" style="justify-content:space-between; margin-bottom:10px">
+              <h2 id="parts-heading" style="margin:0">The parts</h2>
+              <div class="mode-switch" role="group" aria-label="Mode">
+                <button type="button" id="mode-explore" aria-pressed="true">Explore</button>
+                <button type="button" id="mode-test" aria-pressed="false">Test yourself</button>
+              </div>
+            </div>
+            <div id="explore-panel">
+              <div class="choices five" id="part-choices" style="margin-bottom:12px"></div>
+              <div class="web-panel" id="panel" aria-live="polite"></div>
+            </div>
+            <div id="test-panel" hidden>
+              <h3>A. Name the parts</h3>
+              <div id="name-activity"></div>
+              <h3 style="margin-top:18px">B. What does each part do?</h3>
+              <div id="function-activity"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>The <strong>respiratory system</strong> (nose, windpipe, lungs) takes air into the body and removes carbon dioxide.</li>
+            <li>In the <strong>lungs</strong>, oxygen passes into the blood and carbon dioxide passes out of it.</li>
+            <li>The <strong>circulatory system</strong> (heart, blood vessels, blood) transports oxygen, digested food and water to all parts of the body, and carries carbon dioxide away.</li>
+            <li>The <strong>heart</strong> pumps the blood round the body.</li>
+            <li>The body needs oxygen and digested food to release energy. During exercise it needs more, so we breathe faster and the heart beats faster.</li>
+            <li>The respiratory, circulatory and digestive systems <strong>work together</strong>.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>Why do you breathe faster when you run?</summary>
+            <p>Your muscles work harder and need more energy. To release more energy they need <strong>more oxygen</strong>, and they produce <strong>more carbon dioxide</strong>. Faster breathing takes in more oxygen and removes more carbon dioxide.</p>
+          </details>
+          <details>
+            <summary>Why does your heart beat faster too?</summary>
+            <p>The heart must pump blood round the body more quickly, to deliver oxygen and digested food to the muscles faster and carry carbon dioxide away faster.</p>
+          </details>
+          <details>
+            <summary>Where does the blood change from rich in carbon dioxide to rich in oxygen?</summary>
+            <p>In the <strong>lungs</strong>. Carbon dioxide passes out of the blood into the air, and oxygen passes from the air into the blood.</p>
+          </details>
+          <details>
+            <summary>How do the digestive, respiratory and circulatory systems work together?</summary>
+            <p>The digestive system provides digested food. The respiratory system provides oxygen. The circulatory system carries both to every part of the body, where they are used to release energy.</p>
+          </details>
+          <details>
+            <summary>How would you measure your own heart rate?</summary>
+            <p>Feel your pulse at your wrist and count the beats in one minute. Do it sitting still, then again straight after exercise, and compare.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>

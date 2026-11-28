@@ -922,6 +922,9 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
   color: var(--on-primary);
 }
 
+/* a row of five short choices (numbered parts) */
+.choices.five { grid-template-columns: repeat(5, 1fr); }
+
 /* falling rain (water cycle) */
 @keyframes rainfall { from { transform: translateY(0); opacity: 1; } to { transform: translateY(70px); opacity: 0; } }
 .anim-rain { animation: rainfall 0.9s linear infinite; }
