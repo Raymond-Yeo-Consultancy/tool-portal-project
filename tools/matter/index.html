@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>States of Matter</title>
+  <meta name="description" content="Find out how solids, liquids and gases differ in shape and volume, and which can be compressed.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=19">
+  <script src="../../js/theme.js?v=19" defer></script>
+  <script src="../../js/activities.js?v=19" defer></script>
+  <script src="../../js/matter.js?v=19" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>States of Matter</h1>
+      <p class="lead">Matter can be a solid, a liquid or a gas. Find out how the three states are different.</p>
+      <p class="tags"><span class="tag tag-level">Primary 4</span><span class="tag">Cycles</span></p>
+
+      <section class="card" aria-labelledby="pick-heading" style="margin-top:18px">
+        <h2 id="pick-heading">1. Pick an activity</h2>
+        <div class="choices three" id="mode-choices">
+          <button type="button" class="choice" data-mode="shape" aria-pressed="true"><span class="emoji" aria-hidden="true">🫙</span>Change the container</button>
+          <button type="button" class="choice" data-mode="squeeze" aria-pressed="false"><span class="emoji" aria-hidden="true">💉</span>Squeeze it</button>
+          <button type="button" class="choice" data-mode="sort" aria-pressed="false"><span class="emoji" aria-hidden="true">🗂️</span>Sort it</button>
+        </div>
+      </section>
+
+      <div class="tool-layout friction-layout" id="lab">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Experiment</h2>
+          <div class="drop-scene" id="scene"></div>
+          <p class="result-line" id="result" aria-live="polite"></p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">2. Set up</h2>
+          <fieldset class="choice-group">
+            <legend>What is inside?</legend>
+            <div class="choices three" id="matter-choices">
+              <button type="button" class="choice" data-matter="solid" aria-pressed="false">Wooden block<br><span class="tag">solid</span></button>
+              <button type="button" class="choice" data-matter="liquid" aria-pressed="true">Water<br><span class="tag">liquid</span></button>
+              <button type="button" class="choice" data-matter="gas" aria-pressed="false">Air<br><span class="tag">gas</span></button>
+            </div>
+          </fieldset>
+          <fieldset class="choice-group" id="container-group">
+            <legend>Which container?</legend>
+            <div class="choices three" id="container-choices">
+              <button type="button" class="choice" data-container="tall" aria-pressed="true">Tall cylinder</button>
+              <button type="button" class="choice" data-container="jar" aria-pressed="false">Jar</button>
+              <button type="button" class="choice" data-container="dish" aria-pressed="false">Wide dish</button>
+            </div>
+          </fieldset>
+          <div id="push-group" hidden>
+            <button type="button" class="btn btn-big" id="push-btn">Push the plunger</button>
+          </div>
+        </section>
+      </div>
+
+      <section class="card" id="sort-card" aria-labelledby="sort-heading" style="margin-top:18px" hidden>
+        <h2 id="sort-heading">Solid, liquid or gas?</h2>
+        <div id="sort-activity"></div>
+      </section>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <p>Matter is anything that has <strong>mass</strong> and <strong>occupies space</strong>.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">State</th><th scope="col">Definite shape?</th><th scope="col">Definite volume?</th><th scope="col">Can be compressed?</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Solid</th><td>Yes</td><td>Yes</td><td>No</td></tr>
+                <tr><th scope="row">Liquid</th><td>No</td><td>Yes</td><td>No</td></tr>
+                <tr><th scope="row">Gas</th><td>No</td><td>No</td><td>Yes</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>The water looks “more” in the tall cylinder than in the wide dish. Is it?</summary>
+            <p><strong>No.</strong> The water level is higher because the cylinder is narrow, but the volume is still 100 cm³. A liquid changes shape, not volume.</p>
+          </details>
+          <details>
+            <summary>Sand can be poured like water. Why is it a solid?</summary>
+            <p>Look at one grain: it keeps its own shape. Sand is made of many tiny solids. A pile of sand does not become flat like water does.</p>
+          </details>
+          <details>
+            <summary>Why can a lot of air be pumped into a bicycle tyre?</summary>
+            <p>Air is a gas, and a gas <strong>can be compressed</strong>. More and more air is squeezed into the same space inside the tyre.</p>
+          </details>
+          <details>
+            <summary>An “empty” bottle is pushed upside down into water. Why does water not fill it?</summary>
+            <p>The bottle is not empty: it is full of <strong>air</strong>. Air is matter and occupies space, so the water cannot get in unless the air gets out.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>

@@ -37,6 +37,7 @@ Tools (`<tool>` is the folder and script name):
 | P3 | `materials` | Materials Tester |
 | P3 | `lifecycles` | Life Cycles |
 | P3 | `magnets` | Magnets Lab |
+| P4 | `matter` | States of Matter |
 | P6 | `friction` | Friction Ramp |
 | P6 | `spring` | Spring Stretch |
 | P6 | `gravity` | Drop Race (gravity and air resistance) |
@@ -50,7 +51,7 @@ To add a tool: create `tools/<name>/index.html` and `js/<name>.js`, copy the hea
 
 Update this section when files or folders are added.
 
-**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=18`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages.
+**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=19`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages.
 
 ## Key Requirements
 
