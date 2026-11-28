@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Magnets Lab</title>
+  <meta name="description" content="Find out how magnets attract and repel, which objects are magnetic, which magnet is strongest, and how to make a magnet.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=18">
+  <script src="../../js/theme.js?v=18" defer></script>
+  <script src="../../js/magnets.js?v=18" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Magnets Lab</h1>
+      <p class="lead">Magnets can pull and push without touching. Try four experiments to find out how they work.</p>
+      <p class="tags"><span class="tag tag-level">Primary 3</span><span class="tag">Interactions</span></p>
+
+      <section class="card" aria-labelledby="pick-heading" style="margin-top:18px">
+        <h2 id="pick-heading">1. Pick an experiment</h2>
+        <div class="scenario-grid" id="mode-choices">
+          <button type="button" class="choice" data-mode="poles" aria-pressed="true"><span class="emoji" aria-hidden="true">🧲</span>Push or pull?</button>
+          <button type="button" class="choice" data-mode="objects" aria-pressed="false"><span class="emoji" aria-hidden="true">📎</span>Magnetic or not?</button>
+          <button type="button" class="choice" data-mode="strength" aria-pressed="false"><span class="emoji" aria-hidden="true">💪</span>Which is strongest?</button>
+          <button type="button" class="choice" data-mode="make" aria-pressed="false"><span class="emoji" aria-hidden="true">🔩</span>Make a magnet</button>
+        </div>
+      </section>
+
+      <div class="tool-layout friction-layout">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Experiment</h2>
+          <div class="drop-scene" id="scene"></div>
+          <p class="slowmo-note">On each magnet, <strong>N</strong> is the north pole and <strong>S</strong> is the south pole.</p>
+          <p class="result-line" id="result" aria-live="polite"></p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">2. Do the experiment</h2>
+
+          <div id="controls-poles">
+            <div class="actions">
+              <button type="button" class="btn btn-secondary" id="flip-left">Turn the left magnet round</button>
+              <button type="button" class="btn btn-secondary" id="flip-right">Turn the right magnet round</button>
+            </div>
+            <div class="actions" style="margin-top:12px">
+              <button type="button" class="btn btn-big" id="together-btn">Bring together</button>
+            </div>
+          </div>
+
+          <div id="controls-objects" hidden>
+            <fieldset class="choice-group">
+              <legend>Choose an object</legend>
+              <div class="choices three" id="object-choices"></div>
+            </fieldset>
+            <button type="button" class="btn btn-big" id="test-btn">Test with the magnet</button>
+          </div>
+
+          <div id="controls-strength" hidden>
+            <fieldset class="choice-group">
+              <legend>Choose a magnet</legend>
+              <div class="choices three" id="magnet-choices">
+                <button type="button" class="choice" data-magnet="A" aria-pressed="true">Magnet A</button>
+                <button type="button" class="choice" data-magnet="B" aria-pressed="false">Magnet B</button>
+                <button type="button" class="choice" data-magnet="C" aria-pressed="false">Magnet C</button>
+              </div>
+            </fieldset>
+            <button type="button" class="btn btn-big" id="dip-btn">Dip into the paper clips</button>
+          </div>
+
+          <div id="controls-make" hidden>
+            <fieldset class="choice-group">
+              <legend>Choose a method</legend>
+              <div class="choices" id="method-choices">
+                <button type="button" class="choice" data-method="stroke" aria-pressed="true">Stroking method</button>
+                <button type="button" class="choice" data-method="electric" aria-pressed="false">Electrical method</button>
+              </div>
+            </fieldset>
+            <div id="stroke-controls">
+              <fieldset class="choice-group">
+                <legend>How many strokes with the magnet?</legend>
+                <div class="choices four" id="stroke-choices">
+                  <button type="button" class="choice" data-strokes="0" aria-pressed="false">0</button>
+                  <button type="button" class="choice" data-strokes="10" aria-pressed="true">10</button>
+                  <button type="button" class="choice" data-strokes="20" aria-pressed="false">20</button>
+                  <button type="button" class="choice" data-strokes="40" aria-pressed="false">40</button>
+                </div>
+              </fieldset>
+              <button type="button" class="btn btn-big" id="stroke-btn">Stroke the nail, then test it</button>
+            </div>
+            <div id="electric-controls" hidden>
+              <fieldset class="choice-group">
+                <legend>How many batteries?</legend>
+                <div class="choices three" id="battery-choices">
+                  <button type="button" class="choice" data-batteries="1" aria-pressed="true">1</button>
+                  <button type="button" class="choice" data-batteries="2" aria-pressed="false">2</button>
+                  <button type="button" class="choice" data-batteries="3" aria-pressed="false">3</button>
+                </div>
+              </fieldset>
+              <button type="button" class="btn btn-big" id="switch-btn">Switch on</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card span-all" aria-labelledby="table-heading">
+          <div class="actions" style="justify-content:space-between">
+            <h2 id="table-heading" style="margin:0">Results table</h2>
+            <button type="button" class="btn btn-secondary" id="clear-btn">Clear results</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr id="table-head"></tr></thead>
+              <tbody id="results-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>A magnet has two poles: a <strong>north pole</strong> and a <strong>south pole</strong>.</li>
+            <li><strong>Like poles repel</strong> (push each other away). <strong>Unlike poles attract</strong> (pull together).</li>
+            <li>Magnets attract <strong>magnetic materials</strong> such as iron and steel. They do not attract non-magnetic materials such as plastic, wood, glass, copper and aluminium.</li>
+            <li>A magnet is strongest at its poles.</li>
+            <li>We can make a magnet by the <strong>stroking method</strong> or the <strong>electrical method</strong>.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>Are all metals magnetic?</summary>
+            <p><strong>No.</strong> Iron and steel are magnetic. Copper, aluminium and gold are metals, but a magnet does not attract them.</p>
+          </details>
+          <details>
+            <summary>How can you tell which magnet is the strongest?</summary>
+            <p>Count how many paper clips each magnet picks up. The magnet that picks up the <strong>most</strong> is the strongest. Use the same kind of paper clips each time to make the test fair.</p>
+          </details>
+          <details>
+            <summary>How do you know an object is a magnet, and not just a piece of iron?</summary>
+            <p>Bring a magnet near it. Only another magnet can be <strong>repelled</strong>. A piece of iron is attracted to both poles and is never pushed away.</p>
+          </details>
+          <details>
+            <summary>What happens to the electromagnet when you switch it off?</summary>
+            <p>The nail stops being a magnet and the paper clips fall off. It is a magnet only while electricity flows through the wire.</p>
+          </details>
+          <details>
+            <summary>Why must you stroke the nail in the same direction every time?</summary>
+            <p>Stroking in one direction turns the nail into a magnet. Stroking backwards and forwards would undo the effect.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>
