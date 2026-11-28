@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digestive Journey</title>
+  <meta name="description" content="Follow a bite of food through the human digestive system and find out what happens in each organ.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=23">
+  <script src="../../js/theme.js?v=23" defer></script>
+  <script src="../../js/activities.js?v=23" defer></script>
+  <script src="../../js/digestion.js?v=23" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Digestive Journey</h1>
+      <p class="lead">What happens to your food after you swallow it? Follow one bite on its journey through your body.</p>
+      <p class="tags"><span class="tag tag-level">Primary 4</span><span class="tag">Systems</span></p>
+
+      <div class="tool-layout energy-layout">
+        <section class="card" aria-labelledby="body-heading">
+          <h2 id="body-heading">The digestive system</h2>
+          <div class="drop-scene web-scene" id="body"></div>
+          <p class="slowmo-note">The white dot is the food. Tap any part to jump there.</p>
+        </section>
+
+        <section class="card" aria-labelledby="journey-heading">
+          <div class="actions" style="justify-content:space-between; margin-bottom:10px">
+            <h2 id="journey-heading" style="margin:0">The journey</h2>
+            <div class="mode-switch" role="group" aria-label="Mode">
+              <button type="button" id="mode-explore" aria-pressed="true">Explore</button>
+              <button type="button" id="mode-test" aria-pressed="false">Test yourself</button>
+            </div>
+          </div>
+
+          <div id="explore-panel">
+            <div class="web-panel" id="panel" aria-live="polite"></div>
+            <div class="actions" style="margin-top:12px">
+              <button type="button" class="btn btn-big" id="play-btn">▶ Start the journey</button>
+              <button type="button" class="btn btn-secondary" id="next-btn">Next stop →</button>
+            </div>
+          </div>
+
+          <div id="test-panel" hidden>
+            <h3>A. Put the parts in order</h3>
+            <p>Which way does food travel?</p>
+            <div id="order-activity"></div>
+            <h3 style="margin-top:18px">B. What happens in each part?</h3>
+            <div id="function-activity"></div>
+          </div>
+        </section>
+      </div>
+
+      <section class="card" aria-labelledby="summary-heading" style="margin-top:18px">
+        <h2 id="summary-heading">Summary</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Part</th><th scope="col">What happens</th><th scope="col">Is food digested here?</th></tr>
+            </thead>
+            <tbody id="summary-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li><strong>Digestion</strong> breaks food down into simpler substances that the body can use.</li>
+            <li>Food travels through the <strong>mouth</strong>, <strong>gullet</strong>, <strong>stomach</strong>, <strong>small intestine</strong> and <strong>large intestine</strong>, and undigested food leaves through the <strong>anus</strong>.</li>
+            <li>Digestion takes place in the mouth, the stomach and the small intestine. It is completed in the small intestine.</li>
+            <li>Digested food passes into the blood in the small intestine. The blood carries it to all parts of the body.</li>
+            <li>The organs work together as the <strong>digestive system</strong>.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>Why should you chew your food well?</summary>
+            <p>Chewing breaks food into smaller pieces. Digestive juices can then mix with it and digest it more easily.</p>
+          </details>
+          <details>
+            <summary>Where does digestion start, and where is it completed?</summary>
+            <p>It starts in the <strong>mouth</strong> and is completed in the <strong>small intestine</strong>.</p>
+          </details>
+          <details>
+            <summary>What does the gullet do? Is food digested there?</summary>
+            <p>The gullet only <strong>moves</strong> food from the mouth to the stomach. No digestion takes place in the gullet.</p>
+          </details>
+          <details>
+            <summary>How does digested food reach your muscles and your brain?</summary>
+            <p>In the small intestine, digested food passes into the <strong>blood</strong>. The blood carries it to every part of the body.</p>
+          </details>
+          <details>
+            <summary>What happens in the large intestine?</summary>
+            <p>There is no digestion here. <strong>Water</strong> is taken in from the undigested food, and the solid waste that is left passes out through the anus.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>
