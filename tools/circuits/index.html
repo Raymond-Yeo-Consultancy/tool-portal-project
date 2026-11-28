@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Electric Circuits</title>
+  <meta name="description" content="Build circuits with batteries, bulbs and a switch, compare series and parallel, and test conductors and insulators.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=29">
+  <script src="../../js/theme.js?v=29" defer></script>
+  <script src="../../js/circuits.js?v=29" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Electric Circuits</h1>
+      <p class="lead">Build a circuit and make the bulbs light up. What makes them brighter or dimmer? And which objects let electricity pass through?</p>
+      <p class="tags"><span class="tag tag-level">Primary 5</span><span class="tag">Systems</span><span class="tag">Standard &amp; Foundation Science</span></p>
+
+      <section class="card" aria-labelledby="pick-heading" style="margin-top:18px">
+        <h2 id="pick-heading">1. Pick an activity</h2>
+        <div class="choices" id="mode-choices">
+          <button type="button" class="choice" data-mode="build" aria-pressed="true"><span class="emoji" aria-hidden="true">💡</span>Build a circuit</button>
+          <button type="button" class="choice" data-mode="tester" aria-pressed="false"><span class="emoji" aria-hidden="true">🔌</span>Conductor or insulator?</button>
+        </div>
+      </section>
+
+      <div class="tool-layout friction-layout">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Circuit</h2>
+          <div class="drop-scene" id="scene"></div>
+          <p class="slowmo-note">Moving orange dashes show where electric current is flowing.</p>
+          <p class="result-line" id="result" aria-live="polite"></p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">2. Set up</h2>
+
+          <div id="build-controls">
+            <fieldset class="choice-group">
+              <legend>Number of batteries</legend>
+              <div class="choices three" id="battery-choices">
+                <button type="button" class="choice" data-n="1" aria-pressed="true">1</button>
+                <button type="button" class="choice" data-n="2" aria-pressed="false">2</button>
+                <button type="button" class="choice" data-n="3" aria-pressed="false">3</button>
+              </div>
+            </fieldset>
+            <fieldset class="choice-group">
+              <legend>Number of bulbs</legend>
+              <div class="choices three" id="bulb-choices">
+                <button type="button" class="choice" data-n="1" aria-pressed="true">1</button>
+                <button type="button" class="choice" data-n="2" aria-pressed="false">2</button>
+                <button type="button" class="choice" data-n="3" aria-pressed="false">3</button>
+              </div>
+            </fieldset>
+            <fieldset class="choice-group">
+              <legend>How are the bulbs arranged?</legend>
+              <div class="choices" id="layout-choices">
+                <button type="button" class="choice" data-layout="series" aria-pressed="true">In series<br><span class="tag">one path</span></button>
+                <button type="button" class="choice" data-layout="parallel" aria-pressed="false">In parallel<br><span class="tag">a path each</span></button>
+              </div>
+            </fieldset>
+            <div class="actions">
+              <button type="button" class="btn btn-secondary" id="switch-btn">Open the switch</button>
+              <button type="button" class="btn btn-secondary" id="remove-btn">Remove one bulb</button>
+            </div>
+            <div class="actions" style="margin-top:12px">
+              <button type="button" class="btn btn-big" id="record-btn">Record result</button>
+            </div>
+          </div>
+
+          <div id="tester-controls" hidden>
+            <fieldset class="choice-group">
+              <legend>Put an object in the gap</legend>
+              <div class="choices three" id="object-choices"></div>
+            </fieldset>
+          </div>
+        </section>
+
+        <section class="card span-all" id="build-table" aria-labelledby="table-heading">
+          <div class="actions" style="justify-content:space-between">
+            <h2 id="table-heading" style="margin:0">Results table</h2>
+            <button type="button" class="btn btn-secondary" id="clear-btn">Clear results</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Batteries</th><th scope="col">Bulbs</th><th scope="col">Arrangement</th><th scope="col">Switch</th><th scope="col">Bulb removed?</th><th scope="col">Bulbs still in the circuit</th></tr>
+              </thead>
+              <tbody id="results-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card span-all" id="tester-table" aria-labelledby="tester-heading" hidden>
+          <h2 id="tester-heading">Results table</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Object</th><th scope="col">Made of</th><th scope="col">Did the bulb light up?</th><th scope="col">Conductor or insulator</th></tr>
+              </thead>
+              <tbody id="tester-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>An electric current flows only in a <strong>closed circuit</strong>: a complete path with no gaps.</li>
+            <li>A <strong>battery</strong> is the source of electrical energy. A <strong>switch</strong> opens or closes the circuit.</li>
+            <li>More batteries make the bulbs <strong>brighter</strong>.</li>
+            <li>More bulbs <strong>in series</strong> are <strong>dimmer</strong>. If one is removed, they all go out.</li>
+            <li>Bulbs <strong>in parallel</strong> are each as bright as a single bulb. If one is removed, the others stay lit.</li>
+            <li><strong>Electrical conductors</strong> (such as metals) let electricity pass through. <strong>Electrical insulators</strong> (such as plastic, wood, rubber and glass) do not.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>Why do the bulbs get dimmer when more are added in series?</summary>
+            <p>There is only one path, and all the bulbs share the electrical energy from the batteries. With more bulbs, each gets a smaller share.</p>
+          </details>
+          <details>
+            <summary>The lights in your home are connected in parallel. Why is that useful?</summary>
+            <p>Each light has its own path. If one bulb blows, the others stay on, and each light can have its own switch.</p>
+          </details>
+          <details>
+            <summary>Why are electrical wires made of copper and covered in plastic?</summary>
+            <p>Copper is an electrical <strong>conductor</strong>, so the current flows through it easily. Plastic is an <strong>insulator</strong>: it stops the current from passing into your hand, which keeps you safe.</p>
+          </details>
+          <details>
+            <summary>You want to find out how the number of batteries affects brightness. What must you keep the same?</summary>
+            <p>Keep the <strong>number of bulbs</strong> and their <strong>arrangement</strong> the same, and use the same kind of bulbs. Change only the number of batteries.</p>
+          </details>
+          <details>
+            <summary>Why should you never touch a switch with wet hands?</summary>
+            <p>Tap water conducts electricity. Current could pass through the water and into your body, giving you an electric shock.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>
