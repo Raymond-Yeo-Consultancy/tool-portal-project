@@ -1,9 +1,11 @@
 /* Quiz questions: Food Chain and Food Web (Primary 6).
-   The garden and pond food webs are the ones in js/foodweb.js. Hard questions describe the web in words. */
+   The garden and pond food webs are the ones in js/foodweb.js. Hard questions show the web as a picture. */
 window.QUESTIONS = window.QUESTIONS || {};
 (function () {
-  var GARDEN = "In a garden, leafy plants are eaten by caterpillars, grasshoppers and snails. Caterpillars and grasshoppers are eaten by small birds. Grasshoppers and snails are eaten by frogs. Frogs are eaten by snakes. Snakes and small birds are eaten by eagles. ";
-  var POND = "In a pond, water plants are eaten by snails, shrimps, mosquito larvae and ducks. Snails are also eaten by ducks. Shrimps and mosquito larvae are eaten by small fish. Small fish are eaten by kingfishers. ";
+  var GARDEN = "The diagram shows a food web in a garden. ";
+  var POND = "The diagram shows a food web in a pond. ";
+  var GARDEN_PIC = { kind: "flow", h: 262, nodes: ["Leafy plants", "Caterpillar", "Grasshopper", "Snail", "Small bird", "Frog", "Snake", "Eagle"], at: [[180, 240], [62, 178], [180, 178], [300, 178], [80, 112], [276, 112], [276, 58], [150, 18]], arrows: [[0, 1], [0, 2], [0, 3], [1, 4], [2, 4], [2, 5], [3, 5], [5, 6], [6, 7], [4, 7]] };
+  var POND_PIC = { kind: "flow", h: 250, nodes: ["Water plants", "Snail", "Shrimp", "Mosquito larva", "Duck", "Small fish", "Kingfisher"], at: [[180, 225], [60, 150], [180, 150], [295, 150], [60, 75], [240, 75], [240, 20]], arrows: [[0, 1], [0, 2], [0, 3], [0, 4], [1, 4], [2, 5], [3, 5], [5, 6]] };
 
   window.QUESTIONS.foodweb = [
     /* ---------- easy ---------- */
@@ -113,51 +115,61 @@ window.QUESTIONS = window.QUESTIONS || {};
     /* ---------- hard ---------- */
     { id: "foodweb-h01", level: "hard",
       q: GARDEN + "All the grasshoppers are killed by insecticide. Which animals lose one of their sources of food straight away?",
+      pic: GARDEN_PIC,
       options: ["Small birds and frogs", "Caterpillars and snails", "Snakes and eagles", "Only frogs"],
       answer: 0,
       why: "Grasshoppers are eaten by both small birds and frogs, so both of these lose a source of food straight away." },
     { id: "foodweb-h02", level: "hard",
       q: GARDEN + "All the frogs are removed. Which populations are most likely to increase at first?",
+      pic: GARDEN_PIC,
       options: ["Grasshoppers and snails", "Snakes and eagles", "Caterpillars and small birds", "Leafy plants"],
       answer: 0,
       why: "Frogs eat grasshoppers and snails. With no frogs, fewer of these are eaten, so their numbers go up at first." },
     { id: "foodweb-h03", level: "hard",
       q: GARDEN + "Which animal in this food web is a predator but is not the prey of any other animal there?",
+      pic: GARDEN_PIC,
       options: ["The eagle", "The frog", "The snake", "The small bird"],
       answer: 0,
       why: "Eagles eat snakes and small birds, but nothing in this food web eats the eagle." },
     { id: "foodweb-h04", level: "hard",
       q: GARDEN + "How many different food chains in this food web start with leafy plants and end with eagles?",
+      pic: GARDEN_PIC,
       options: ["4", "2", "3", "5"],
       answer: 0,
       why: "The chains go through caterpillar → small bird; grasshopper → small bird; grasshopper → frog → snake; and snail → frog → snake. That makes 4." },
     { id: "foodweb-h05", level: "hard",
       q: GARDEN + "A long drought kills most of the leafy plants. Which populations will decrease first?",
+      pic: GARDEN_PIC,
       options: ["Caterpillars, grasshoppers and snails", "Snakes and eagles", "Small birds and frogs", "Only eagles"],
       answer: 0,
       why: "Caterpillars, grasshoppers and snails feed directly on the plants, so they lose their food first. The other animals are affected later." },
     { id: "foodweb-h06", level: "hard",
       q: POND + "All the small fish are caught and removed. What is most likely to happen to the number of mosquito larvae at first?",
+      pic: POND_PIC,
       options: ["It increases, because fewer larvae are eaten", "It decreases, because the kingfishers eat them", "It stays the same, because small fish do not eat larvae", "It decreases, because there are fewer water plants"],
       answer: 0,
       why: "Small fish eat mosquito larvae. With no small fish, fewer larvae are eaten, so their number goes up at first." },
     { id: "foodweb-h07", level: "hard",
       q: POND + "Which animal in this food web eats both plants and animals?",
+      pic: POND_PIC,
       options: ["The duck", "The snail", "The small fish", "The kingfisher"],
       answer: 0,
       why: "Ducks eat water plants and snails. Snails eat only plants, and small fish and kingfishers eat only animals." },
     { id: "foodweb-h08", level: "hard",
       q: GARDEN + "All the snakes are removed, and after a while there are many more frogs. Which populations are most likely to decrease because of the extra frogs?",
+      pic: GARDEN_PIC,
       options: ["Grasshoppers and snails", "Eagles and small birds", "Caterpillars and leafy plants", "Only caterpillars"],
       answer: 0,
       why: "Frogs eat grasshoppers and snails. More frogs eat more of them, so their numbers go down." },
     { id: "foodweb-h09", level: "hard",
       q: POND + "All the small fish are caught and removed. What is most likely to happen to the kingfishers?",
+      pic: POND_PIC,
       options: ["Their number decreases, because they have no food", "Their number increases, because there are more shrimps", "Their number stays the same, because they eat water plants", "Their number increases, because there are more mosquito larvae"],
       answer: 0,
       why: "In this food web kingfishers eat only small fish. With no small fish, they have no food, so their number goes down." },
     { id: "foodweb-h10", level: "hard",
       q: GARDEN + "A new kind of animal that eats only snails is brought into the garden. Which animal already living there will it compete with for food?",
+      pic: GARDEN_PIC,
       options: ["The frog", "The small bird", "The snake", "The caterpillar"],
       answer: 0,
       why: "Frogs also eat snails. Two animals that eat the same food compete with each other for it." },
