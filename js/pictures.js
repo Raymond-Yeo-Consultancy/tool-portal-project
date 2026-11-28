@@ -60,18 +60,18 @@
       s += P('M' + left + ' ' + y + ' H' + right, 'grid') + T(left - 6, y + 4, v, { a: 'end', small: true });
     }
     s += P('M' + left + ' ' + top + ' V' + bottom + ' H' + right);
-    s += T(13, (top + bottom) / 2, yTitle, { rot: -90, small: true });
+    s += T(14, (top + bottom) / 2, yTitle, { rot: -90, small: true });
     return s;
   }
   function bars(p) {
-    var left = 52, top = 14, right = 348, bottom = 168, H = 212;
+    var left = 56, top = 14, right = 348, bottom = 168, H = 224;
     var maxV = Math.max.apply(null, p.bars.map(function (b) { return b[1]; }));
     var step = p.step || niceStep(p.max || maxV), max = p.max || Math.ceil(maxV / step) * step;
     var s = axes(left, top, right, bottom, max, step, p.y), n = p.bars.length, slot = (right - left) / n;
     p.bars.forEach(function (b, i) {
       var h = (bottom - top) * b[1] / max, x = left + slot * i + slot * 0.2;
       s += R(x, bottom - h, slot * 0.6, h, 'c1');
-      String(b[0]).split('\n').forEach(function (line, k) { s += T(left + slot * (i + 0.5), bottom + 16 + k * 13, line, { small: true }); });
+      String(b[0]).split('\n').forEach(function (line, k) { s += T(left + slot * (i + 0.5), bottom + 17 + k * 15, line, { small: true }); });
     });
     if (p.x) s += T((left + right) / 2, H - 4, p.x, { small: true });
     return svg(H, s, 'Bar chart of ' + p.y + '. ' + p.bars.map(function (b) { return String(b[0]).replace('\n', ' ') + ': ' + b[1]; }).join('; ') + '.');
@@ -79,7 +79,7 @@
 
   /* ---------- line graph: lines [{ name, pts: [[x, y], ...] }], x and y titles ---------- */
   function line(p) {
-    var left = 52, top = 14, right = 330, bottom = 168, H = 208, all = [];
+    var left = 56, top = 14, right = 328, bottom = 168, H = 214, all = [];
     p.lines.forEach(function (l) { all = all.concat(l.pts); });
     var maxY = p.ymax || Math.max.apply(null, all.map(function (q) { return q[1]; }));
     var minY = p.ymin || 0;
@@ -90,9 +90,9 @@
     var Y = function (v) { return bottom - (bottom - top) * (v - minY) / (maxY - minY); };
     var s = '';
     for (var v = minY; v <= maxY + 1e-9; v += stepY) s += P('M' + left + ' ' + Y(v) + ' H' + right, 'grid') + T(left - 6, Y(v) + 4, v, { a: 'end', small: true });
-    for (var u = 0; u <= maxX + 1e-9; u += stepX) s += P('M' + X(u) + ' ' + top + ' V' + bottom, 'grid') + T(X(u), bottom + 15, u, { small: true });
+    for (var u = 0; u <= maxX + 1e-9; u += stepX) s += P('M' + X(u) + ' ' + top + ' V' + bottom, 'grid') + T(X(u), bottom + 17, u, { small: true });
     s += P('M' + left + ' ' + top + ' V' + bottom + ' H' + right);
-    s += T(13, (top + bottom) / 2, p.y, { rot: -90, small: true }) + T((left + right) / 2, H - 6, p.x, { small: true });
+    s += T(14, (top + bottom) / 2, p.y, { rot: -90, small: true }) + T((left + right) / 2, H - 7, p.x, { small: true });
     p.lines.forEach(function (l, i) {
       s += P(l.pts.map(function (q, k) { return (k ? 'L' : 'M') + X(q[0]).toFixed(1) + ' ' + Y(q[1]).toFixed(1); }).join(' '), 'thick s' + (i + 1));
       l.pts.forEach(function (q) { s += '<circle class="pd s' + (i + 1) + '" cx="' + X(q[0]).toFixed(1) + '" cy="' + Y(q[1]).toFixed(1) + '" r="3.5"/>'; });
@@ -112,7 +112,7 @@
     var n = p.nodes.length, at = p.at, H = p.h, i;
     var boxes = p.nodes.map(function (label) {
       var lines = String(label).split('\n'), len = Math.max.apply(null, lines.map(function (l) { return l.length; }));
-      return { w: Math.max(32, len * 7.5 + 18), h: lines.length * 15 + 12, lines: lines };
+      return { w: Math.max(34, len * 8.5 + 18), h: lines.length * 17 + 12, lines: lines };
     });
     if (at) {
       H = H || 220;
@@ -172,7 +172,7 @@
     });
     boxes.forEach(function (b) {
       s += R(b.x - b.w / 2, b.y - b.h / 2, b.w, b.h, '', 6);
-      b.lines.forEach(function (l, k) { s += T(b.x, b.y - (b.lines.length - 1) * 7.5 + k * 15 + 4.5, l); });
+      b.lines.forEach(function (l, k) { s += T(b.x, b.y - (b.lines.length - 1) * 8.5 + k * 17 + 5, l); });
     });
     var name = function (k) { return String(p.nodes[k]).replace(/\n/g, ' '); };
     return svg(H, s, 'Diagram with arrows. ' + arrows.map(function (ar) { return name(ar[0]) + ' → ' + name(ar[1]); }).join('; ') + '.');
@@ -390,12 +390,12 @@
       if (it.lid) s += P('M' + (l - 4) + ' ' + (top - 3) + ' H' + (l + w + 4), 'thick');
       if (it.cube) s += R(cx - 9, bot - 21, 18, 18, 'c6', 2);
       if (it.text) s += T(cx, top - 12, it.text, { small: true });
-      if (it.name) s += T(cx, 150, it.name);
-      if (it.note) String(it.note).split('\n').forEach(function (line, k) { s += T(cx, 166 + k * 13, line, { small: true }); });
+      if (it.name) s += T(cx, 151, it.name);
+      if (it.note) String(it.note).split('\n').forEach(function (line, k) { s += T(cx, 168 + k * 15, line, { small: true }); });
       alt.push((it.name || 'Container') + ': ' + (it.wide ? 'wide, shallow container' : 'tall, narrow container') + (it.lid ? ' with a lid' : '') +
         (it.text ? ', ' + it.text : '') + (it.note ? ', ' + String(it.note).replace(/\n/g, ' ') : ''));
     });
-    return svg(p.h || 186, s, 'Containers of liquid. ' + alt.join('. ') + '.');
+    return svg(p.h || 192, s, 'Containers of liquid. ' + alt.join('. ') + '.');
   }
 
   /* ---------- forces: an object with labelled arrows. arrows [{ dir: 'up' | 'down' | 'left' | 'right', label, long }], on: 'table' | 'air' ---------- */

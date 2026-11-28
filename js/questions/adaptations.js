@@ -160,7 +160,7 @@ window.QUESTIONS.adaptations = [
   /* ---------- picture questions ---------- */
   { id: "adaptations-p01", level: "easy",
     q: "The diagram sorts adaptations into two groups. Which adaptation could be X?",
-    pic: { kind: "flow", h: 206, nodes: ["Adaptations", "Structural\n(a body part\nor covering)", "Behavioural\n(something\nit does)", "Webbed\nfeet", "Thick\nfur", "Hibernating", "X"], at: [[180, 20], [96, 92], [270, 92], [50, 178], [140, 178], [232, 178], [318, 178]], arrows: [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [2, 6]] },
+    pic: { kind: "flow", h: 224, nodes: ["Adaptations", "Structural\n(a body part\nor covering)", "Behavioural\n(something\nit does)", "Webbed\nfeet", "Thick\nfur", "Hibernating", "X"], at: [[180, 20], [96, 96], [270, 96], [50, 190], [140, 190], [232, 190], [318, 190]], arrows: [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [2, 6]] },
     options: ["Rolling into a ball", "Sharp spines", "Gills", "Wide, flat feet"], answer: 0,
     why: "X is a behavioural adaptation: something the organism does. Rolling into a ball is an action. The others are body parts." },
   { id: "adaptations-p02", level: "easy",
@@ -190,7 +190,7 @@ window.QUESTIONS.adaptations = [
     why: "A water lily has plenty of water. Its large, flat leaves float on the surface, where they trap as much sunlight as possible." },
   { id: "adaptations-p07", level: "medium",
     q: "The diagram sorts four adaptations into two groups. Which adaptation has been put in the wrong group?",
-    pic: { kind: "flow", h: 206, nodes: ["Adaptations", "Structural\n(a body part\nor covering)", "Behavioural\n(something\nit does)", "Webbed\nfeet", "Hibernating", "Thick\nfur", "Rolling\ninto a ball"], at: [[180, 20], [110, 92], [286, 92], [40, 178], [124, 178], [206, 178], [300, 178]], arrows: [[0, 1], [0, 2], [1, 3], [1, 4], [1, 5], [2, 6]] },
+    pic: { kind: "flow", h: 224, nodes: ["Adaptations", "Structural\n(a body part\nor covering)", "Behavioural\n(something\nit does)", "Webbed\nfeet", "Hibernating", "Thick\nfur", "Rolling\ninto\na ball"], at: [[180, 20], [110, 96], [286, 96], [40, 186], [124, 186], [206, 186], [308, 186]], arrows: [[0, 1], [0, 2], [1, 3], [1, 4], [1, 5], [2, 6]] },
     options: ["Hibernating", "Webbed feet", "Thick fur", "Rolling into a ball"], answer: 0,
     why: "Hibernating (sleeping through the winter) is something an animal does, so it is a behavioural adaptation, not a structural one." },
   { id: "adaptations-p08", level: "hard",
