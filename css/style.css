@@ -898,3 +898,30 @@ tbody th { font-size: 1rem; color: var(--text); }
 .chain-empty { color: var(--text-muted); font-style: italic; }
 .fx-up { color: var(--success); }
 .fx-down { color: var(--error); }
+
+/* ---------- adaptations tool ---------- */
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+.organism-picture { aspect-ratio: 16 / 10; }
+.organism-emoji { font-size: clamp(5rem, 22vw, 9rem); line-height: 1; animation: bob 3s ease-in-out infinite; }
+
+.feature {
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px 14px;
+  margin-bottom: 10px;
+}
+
+.feature[open] { border-color: var(--primary); padding-bottom: 6px; }
+.feature p { margin: 0 0 8px; }
+.feature-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.match-row { margin-bottom: 12px; }
+.match-feature { display: block; font-weight: 700; margin-bottom: 4px; }
+.match-row .blank { width: 100%; justify-content: flex-start; text-align: left; }
+.energy-palette .chip { text-align: left; }
+.chip.used { opacity: 0.45; }
+
+@media (prefers-reduced-motion: reduce) {
+  .organism-emoji { animation: none; }
+}

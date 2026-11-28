@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adaptations Explorer</title>
+  <meta name="description" content="Discover how the features of animals and plants help them survive where they live, then test yourself.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=13">
+  <script src="../../js/theme.js?v=13" defer></script>
+  <script src="../../js/adaptations.js?v=13" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> P6 Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Adaptations Explorer</h1>
+      <p class="lead">Animals and plants have special features that help them survive where they live. Pick one and find out how.</p>
+      <p><span class="tag">Standard &amp; Foundation Science</span></p>
+
+      <section class="card" aria-labelledby="pick-heading" style="margin-top:18px">
+        <h2 id="pick-heading">1. Pick an animal or plant</h2>
+        <div class="scenario-grid" id="organism-choices"></div>
+      </section>
+
+      <div class="tool-layout energy-layout">
+        <section class="card" aria-labelledby="org-name">
+          <h2 id="org-name">Camel</h2>
+          <div class="illustration organism-picture">
+            <span class="organism-emoji" id="org-emoji" aria-hidden="true">🐫</span>
+          </div>
+          <p class="step-caption" id="org-home" style="min-height:0"></p>
+        </section>
+
+        <section class="card" aria-labelledby="adapt-heading">
+          <div class="actions" style="justify-content:space-between; margin-bottom:10px">
+            <h2 id="adapt-heading" style="margin:0">2. Its adaptations</h2>
+            <div class="mode-switch" role="group" aria-label="Mode">
+              <button type="button" id="mode-explore" aria-pressed="true">Explore</button>
+              <button type="button" id="mode-test" aria-pressed="false">Test yourself</button>
+            </div>
+          </div>
+
+          <div id="explore-panel">
+            <p id="progress" aria-live="polite" style="margin:0 0 8px"></p>
+            <div id="feature-list"></div>
+          </div>
+
+          <div id="test-panel" hidden>
+            <p style="margin:0 0 10px">Match each adaptation to how it helps. Tap a box, then tap an answer below.</p>
+            <div id="match-rows"></div>
+            <p style="margin:12px 0 8px; font-weight:700">How it helps</p>
+            <div class="energy-palette" id="purpose-palette"></div>
+            <div class="actions" style="margin-top:14px">
+              <button type="button" class="btn" id="check-btn">Check</button>
+              <button type="button" class="btn btn-secondary" id="clear-btn">Clear</button>
+            </div>
+            <p class="feedback" id="feedback" aria-live="polite"></p>
+          </div>
+        </section>
+      </div>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>An <strong>adaptation</strong> is a feature that helps an organism survive in its environment.</li>
+            <li>A <strong>structural adaptation</strong> is a body part or body covering, such as webbed feet or thick fur.</li>
+            <li>A <strong>behavioural adaptation</strong> is something the organism does, such as hibernating or rolling into a ball.</li>
+            <li>Adaptations help organisms to move, breathe, get food, protect themselves, and cope with heat, cold or a lack of water.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>A camel and a cactus both live in the desert. What problem do they share?</summary>
+            <p>There is very <strong>little water</strong>. The cactus stores water in its stem and loses very little through its spines. The camel can go a long time without food or water.</p>
+          </details>
+          <details>
+            <summary>Is “thick fur” structural or behavioural? What about “hibernating”?</summary>
+            <p>Thick fur is <strong>structural</strong>: it is part of the animal's body. Hibernating is <strong>behavioural</strong>: it is something the animal does.</p>
+          </details>
+          <details>
+            <summary>Why would a polar bear struggle to survive in a desert?</summary>
+            <p>Its thick fur and fat keep heat in, so it would <strong>overheat</strong>. Its white fur would no longer hide it. Adaptations suit the place where an organism lives.</p>
+          </details>
+          <details>
+            <summary>A duck and a fish both live in water. How do they move in different ways?</summary>
+            <p>The duck paddles with its <strong>webbed feet</strong> at the surface. The fish pushes itself with its <strong>tail</strong> and steers with its <strong>fins</strong>, and its streamlined body cuts through the water.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 6 pupils preparing for PSLE Science.</div>
+  </footer>
+</body>
+</html>

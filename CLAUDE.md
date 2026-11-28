@@ -29,6 +29,7 @@
 ├── js/pendulum.js             # Swinging Pendulum tool logic
 ├── js/photosynthesis.js       # Photosynthesis Lab tool logic
 ├── js/foodweb.js              # Food Chain and Food Web tool logic and habitat data
+├── js/adaptations.js          # Adaptations Explorer tool logic and organism data
 └── tools/
     ├── friction/index.html    # Friction Ramp tool page
     ├── spring/index.html      # Spring Stretch tool page
@@ -36,6 +37,7 @@
     ├── pendulum/index.html    # Swinging Pendulum tool page
     ├── photosynthesis/index.html  # Photosynthesis Lab tool page
     ├── foodweb/index.html     # Food Chain and Food Web tool page
+    ├── adaptations/index.html # Adaptations Explorer tool page
     └── energy/index.html      # Energy Conversion tool page
 ```
 
@@ -43,7 +45,7 @@ To add a tool: create `tools/<name>/index.html` and `js/<name>.js`, copy the hea
 
 Update this section when files or folders are added.
 
-**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=12`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages.
+**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=13`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages.
 
 ## Key Requirements
 
