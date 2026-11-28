@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plant Reproduction</title>
+  <meta name="description" content="Explore the parts of a flower, follow pollination and fertilisation to the fruit, and sort seeds by how they are dispersed.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=25">
+  <script src="../../js/theme.js?v=25" defer></script>
+  <script src="../../js/activities.js?v=25" defer></script>
+  <script src="../../js/plantrepro.js?v=25" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Plant Reproduction</h1>
+      <p class="lead">How does a flower turn into a fruit? And how do seeds get to new places to grow?</p>
+      <p class="tags"><span class="tag tag-level">Primary 5</span><span class="tag">Cycles</span><span class="tag">Standard &amp; Foundation Science</span></p>
+
+      <section class="card" aria-labelledby="pick-heading" style="margin-top:18px">
+        <h2 id="pick-heading">1. Pick an activity</h2>
+        <div class="choices three" id="mode-choices">
+          <button type="button" class="choice" data-mode="parts" aria-pressed="true"><span class="emoji" aria-hidden="true">🌸</span>Parts of a flower</button>
+          <button type="button" class="choice" data-mode="story" aria-pressed="false"><span class="emoji" aria-hidden="true">🐝</span>From flower to fruit</button>
+          <button type="button" class="choice" data-mode="seeds" aria-pressed="false"><span class="emoji" aria-hidden="true">🌬️</span>How seeds travel</button>
+        </div>
+      </section>
+
+      <div class="tool-layout energy-layout" id="lab-parts">
+        <section class="card" aria-labelledby="flower-heading">
+          <h2 id="flower-heading">A flower cut in half</h2>
+          <div class="drop-scene web-scene" id="flower"></div>
+        </section>
+        <section class="card" aria-labelledby="parts-heading">
+          <div class="actions" style="justify-content:space-between; margin-bottom:10px">
+            <h2 id="parts-heading" style="margin:0">Its parts</h2>
+            <div class="mode-switch" role="group" aria-label="Mode">
+              <button type="button" id="mode-explore" aria-pressed="true">Explore</button>
+              <button type="button" id="mode-test" aria-pressed="false">Test yourself</button>
+            </div>
+          </div>
+          <div id="explore-panel">
+            <div class="choices four" id="part-choices" style="margin-bottom:12px"></div>
+            <div class="web-panel" id="panel" aria-live="polite"></div>
+          </div>
+          <div id="test-panel" hidden>
+            <p>Name each numbered part.</p>
+            <div id="label-activity"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="tool-layout energy-layout" id="lab-story" hidden>
+        <section class="card" aria-labelledby="story-heading">
+          <h2 id="story-heading">From flower to fruit</h2>
+          <div class="drop-scene web-scene" id="story"></div>
+        </section>
+        <section class="card" aria-labelledby="step-title">
+          <h2 id="step-title"></h2>
+          <p id="step-text" aria-live="polite" style="min-height:7.5em"></p>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" id="prev-btn">← Back</button>
+            <button type="button" class="btn" id="next-btn">Next step →</button>
+            <button type="button" class="btn btn-secondary" id="replay-btn">↺ Replay</button>
+          </div>
+        </section>
+      </div>
+
+      <section class="card" id="lab-seeds" aria-labelledby="seeds-heading" style="margin-top:18px" hidden>
+        <h2 id="seeds-heading">How is each seed or fruit dispersed?</h2>
+        <p>Read the clue about each one, then choose how it travels away from the parent plant.</p>
+        <div id="seed-activity"></div>
+      </section>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>The <strong>male parts</strong> of a flower are the anther and the filament. The <strong>female parts</strong> are the stigma, the style and the ovary, which contains ovules.</li>
+            <li><strong>Pollination</strong> is the transfer of pollen grains from the anther to the stigma.</li>
+            <li><strong>Fertilisation</strong> takes place when the male reproductive cell fuses with the egg cell in the ovule.</li>
+            <li>After fertilisation, the <strong>ovary</strong> develops into the <strong>fruit</strong> and the <strong>ovules</strong> develop into <strong>seeds</strong>.</li>
+            <li>Seeds are <strong>dispersed</strong> by wind, water, animals or splitting. This lets young plants grow away from the parent plant.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>What is the difference between pollination and fertilisation?</summary>
+            <p><strong>Pollination</strong> is pollen landing on the stigma. <strong>Fertilisation</strong> comes later, when the male reproductive cell fuses with the egg cell inside the ovule. Pollination must happen first.</p>
+          </details>
+          <details>
+            <summary>Why do many flowers have bright petals, scent and nectar?</summary>
+            <p>They attract insects such as bees. As the insects feed, they carry pollen grains from one flower to another.</p>
+          </details>
+          <details>
+            <summary>Why is it important for seeds to be dispersed far from the parent plant?</summary>
+            <p>If all the seeds grew next to the parent, the plants would be overcrowded. They would compete for water, sunlight, mineral salts and space.</p>
+          </details>
+          <details>
+            <summary>A fruit is light and has a wing-like structure. How is it likely to be dispersed? Why?</summary>
+            <p>By <strong>wind</strong>. The wing helps it stay in the air longer, so the wind can carry it further away.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>
