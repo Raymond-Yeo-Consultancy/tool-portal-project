@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cells</title>
+  <meta name="description" content="Compare an animal cell and a plant cell, find out what each part does, and test yourself.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=28">
+  <script src="../../js/theme.js?v=28" defer></script>
+  <script src="../../js/activities.js?v=28" defer></script>
+  <script src="../../js/cells.js?v=28" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Cells</h1>
+      <p class="lead">All living things are made of cells, far too small to see without a microscope. Look inside an animal cell and a plant cell.</p>
+      <p class="tags"><span class="tag tag-level">Primary 5</span><span class="tag">Systems</span><span class="tag">Standard Science</span></p>
+
+      <section class="card" aria-labelledby="cells-heading" style="margin-top:18px">
+        <h2 id="cells-heading">Two cells under the microscope</h2>
+        <div class="drop-scene web-scene" id="cells"></div>
+      </section>
+
+      <section class="card" aria-labelledby="parts-heading" style="margin-top:18px">
+        <div class="actions" style="justify-content:space-between; margin-bottom:10px">
+          <h2 id="parts-heading" style="margin:0">Parts of a cell</h2>
+          <div class="mode-switch" role="group" aria-label="Mode">
+            <button type="button" id="mode-explore" aria-pressed="true">Explore</button>
+            <button type="button" id="mode-test" aria-pressed="false">Test yourself</button>
+          </div>
+        </div>
+        <div id="explore-panel">
+          <div class="choices five" id="part-choices" style="margin-bottom:12px"></div>
+          <div class="web-panel" id="panel" aria-live="polite"></div>
+        </div>
+        <div id="test-panel" hidden>
+          <h3>A. Name the parts</h3>
+          <div id="name-activity"></div>
+          <h3 style="margin-top:18px">B. What does each part do?</h3>
+          <div id="function-activity"></div>
+          <h3 style="margin-top:18px">C. Which cells have each part?</h3>
+          <div id="where-activity"></div>
+        </div>
+      </section>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0 0 12px; padding-left:1.2em">
+            <li>A <strong>cell</strong> is the basic unit of life. All living things are made of cells.</li>
+            <li>Each part of a cell has its own function. The parts work together as a system.</li>
+          </ul>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Part</th><th scope="col">Animal cell</th><th scope="col">Plant cell</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Nucleus</th><td>Yes</td><td>Yes</td></tr>
+                <tr><th scope="row">Cytoplasm</th><td>Yes</td><td>Yes</td></tr>
+                <tr><th scope="row">Cell membrane</th><td>Yes</td><td>Yes</td></tr>
+                <tr><th scope="row">Cell wall</th><td>No</td><td>Yes</td></tr>
+                <tr><th scope="row">Chloroplasts</th><td>No</td><td>Yes</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>How can you tell a plant cell from an animal cell under a microscope?</summary>
+            <p>A plant cell has a <strong>cell wall</strong>, so it has a regular shape, and it may have green <strong>chloroplasts</strong>. An animal cell has neither, and its shape is irregular.</p>
+          </details>
+          <details>
+            <summary>Why do animal cells not need chloroplasts?</summary>
+            <p>Chloroplasts are for making food from light. Animals do not make their own food. They get it by eating plants or other animals.</p>
+          </details>
+          <details>
+            <summary>A root cell is a plant cell, but it has no chloroplasts. Why?</summary>
+            <p>Roots grow underground where there is <strong>no light</strong>, so chloroplasts would be of no use there. Not every plant cell has chloroplasts.</p>
+          </details>
+          <details>
+            <summary>What would happen to a cell without a nucleus?</summary>
+            <p>The nucleus controls all the cell's activities. Without it, the cell could not carry out its activities properly and would die.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>

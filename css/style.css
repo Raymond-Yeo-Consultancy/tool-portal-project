@@ -922,6 +922,10 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
   color: var(--on-primary);
 }
 
+/* chloroplasts drift gently inside the plant cell (decorative) */
+.chl { animation: bob 5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .chl { animation: none; } }
+
 /* a row of five short choices (numbered parts) */
 .choices.five { grid-template-columns: repeat(5, 1fr); }
 
