@@ -91,7 +91,7 @@ window.QUESTIONS.lifecycles = [
     why: "A tadpole slowly grows legs and loses its tail as it becomes an adult frog." },
   { id: "lifecycles-m08", level: "medium",
     q: "Which stages of a mosquito's life cycle happen in water?",
-    options: ["Egg, larva and pupa", "Adult only", "Egg and adult only", "None of the stages"],
+    options: ["Egg, larva and pupa", "Adult only", "Egg and adult only", "Pupa and adult only"],
     answer: 0,
     why: "The mosquito lays eggs on still water. The larva and the pupa live in the water. The adult flies away." },
   { id: "lifecycles-m09", level: "medium",

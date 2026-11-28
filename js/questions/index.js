@@ -12,10 +12,10 @@
  */
 window.QUESTIONS = window.QUESTIONS || {};
 window.QUIZ_TOPICS = [
-  { id: 'classify', name: 'Living Things Sorter', level: 3, theme: 'Diversity', ready: false },
-  { id: 'materials', name: 'Materials Tester', level: 3, theme: 'Diversity', ready: false },
-  { id: 'lifecycles', name: 'Life Cycles', level: 3, theme: 'Cycles', ready: false },
-  { id: 'magnets', name: 'Magnets Lab', level: 3, theme: 'Interactions', ready: false },
+  { id: 'classify', name: 'Living Things Sorter', level: 3, theme: 'Diversity', ready: true },
+  { id: 'materials', name: 'Materials Tester', level: 3, theme: 'Diversity', ready: true },
+  { id: 'lifecycles', name: 'Life Cycles', level: 3, theme: 'Cycles', ready: true },
+  { id: 'magnets', name: 'Magnets Lab', level: 3, theme: 'Interactions', ready: true },
   { id: 'matter', name: 'States of Matter', level: 4, theme: 'Cycles', ready: true },
   { id: 'shadows', name: 'Light and Shadows', level: 4, theme: 'Energy', ready: true },
   { id: 'heat', name: 'Heat and Temperature', level: 4, theme: 'Energy', ready: true },
