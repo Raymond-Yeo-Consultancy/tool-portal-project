@@ -28,13 +28,13 @@ window.QUIZ_TOPICS = [
   { id: 'cells', name: 'Cells', level: 5, theme: 'Systems', ready: false },
   { id: 'circuits', name: 'Electric Circuits', level: 5, theme: 'Systems', ready: false },
   { id: 'friction', name: 'Friction Ramp', level: 6, theme: 'Interactions: Forces', ready: true },
-  { id: 'spring', name: 'Spring Stretch', level: 6, theme: 'Interactions: Forces', ready: false },
-  { id: 'gravity', name: 'Drop Race', level: 6, theme: 'Interactions: Forces', ready: false },
-  { id: 'energy', name: 'Energy Conversion', level: 6, theme: 'Energy', ready: false },
-  { id: 'pendulum', name: 'Swinging Pendulum', level: 6, theme: 'Energy', ready: false },
-  { id: 'photosynthesis', name: 'Photosynthesis Lab', level: 6, theme: 'Energy', ready: false },
-  { id: 'foodweb', name: 'Food Chain and Food Web', level: 6, theme: 'Interactions: Living things and the environment', ready: false },
-  { id: 'adaptations', name: 'Adaptations Explorer', level: 6, theme: 'Interactions: Living things and the environment', ready: false }
+  { id: 'spring', name: 'Spring Stretch', level: 6, theme: 'Interactions: Forces', ready: true },
+  { id: 'gravity', name: 'Drop Race', level: 6, theme: 'Interactions: Forces', ready: true },
+  { id: 'energy', name: 'Energy Conversion', level: 6, theme: 'Energy', ready: true },
+  { id: 'pendulum', name: 'Swinging Pendulum', level: 6, theme: 'Energy', ready: true },
+  { id: 'photosynthesis', name: 'Photosynthesis Lab', level: 6, theme: 'Energy', ready: true },
+  { id: 'foodweb', name: 'Food Chain and Food Web', level: 6, theme: 'Interactions: Living things and the environment', ready: true },
+  { id: 'adaptations', name: 'Adaptations Explorer', level: 6, theme: 'Interactions: Living things and the environment', ready: true }
 ];
 
 // Structure checks used by the teacher sheet and the tests. Returns a list of problems (empty if all is well).

@@ -82,7 +82,7 @@ Rules for writing questions:
 
 Before a topic is marked ready: open `quiz/answers.html` and confirm the automatic checks pass, and have every question answered by an independent reviewer who cannot see the answer key. Fix or replace any question the reviewer gets "wrong" or flags as unclear.
 
-**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=30`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages (including `quiz/index.html` and `quiz/answers.html`).
+**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=31`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages (including `quiz/index.html` and `quiz/answers.html`).
 
 ## Key Requirements
 
