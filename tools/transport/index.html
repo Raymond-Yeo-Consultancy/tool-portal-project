@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plant Transport</title>
+  <meta name="description" content="See how water and food travel through a plant with the celery and ring-of-bark experiments.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=26">
+  <script src="../../js/theme.js?v=26" defer></script>
+  <script src="../../js/activities.js?v=26" defer></script>
+  <script src="../../js/transport.js?v=26" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Plant Transport</h1>
+      <p class="lead">A plant has tiny tubes inside it. Some carry water and others carry food. Two experiments show where they are and what they do.</p>
+      <p class="tags"><span class="tag tag-level">Primary 5</span><span class="tag">Systems</span><span class="tag">Standard &amp; Foundation Science</span></p>
+
+      <section class="card" aria-labelledby="pick-heading" style="margin-top:18px">
+        <h2 id="pick-heading">1. Pick an activity</h2>
+        <div class="choices three" id="mode-choices">
+          <button type="button" class="choice" data-mode="celery" aria-pressed="true"><span class="emoji" aria-hidden="true">🥬</span>Celery in red water</button>
+          <button type="button" class="choice" data-mode="ring" aria-pressed="false"><span class="emoji" aria-hidden="true">🌳</span>Ring of bark</button>
+          <button type="button" class="choice" data-mode="sort" aria-pressed="false"><span class="emoji" aria-hidden="true">🗂️</span>Which tubes?</button>
+        </div>
+      </section>
+
+      <div class="tool-layout friction-layout" id="lab">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Experiment</h2>
+          <div class="drop-scene" id="scene"></div>
+          <p class="slowmo-note" id="scene-note"></p>
+          <p class="result-line" id="result" aria-live="polite"></p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading" id="lab-controls">
+          <h2 id="controls-heading">2. Run the experiment</h2>
+          <fieldset class="choice-group" id="ring-group" hidden>
+            <legend>Which tree?</legend>
+            <div class="choices" id="ring-choices">
+              <button type="button" class="choice" data-ringed="true" aria-pressed="true">Ring of bark removed</button>
+              <button type="button" class="choice" data-ringed="false" aria-pressed="false">Bark left whole</button>
+            </div>
+          </fieldset>
+          <div class="actions">
+            <button type="button" class="btn btn-big" id="start-btn">Start</button>
+            <button type="button" class="btn btn-secondary" id="reset-btn">Reset</button>
+          </div>
+        </section>
+      </div>
+
+      <section class="card" id="sort-card" aria-labelledby="sort-heading" style="margin-top:18px" hidden>
+        <h2 id="sort-heading">Water-carrying tubes or food-carrying tubes?</h2>
+        <div id="sort-activity"></div>
+      </section>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li><strong>Water-carrying tubes</strong> transport water and mineral salts from the roots, up the stem, to all parts of the plant.</li>
+            <li><strong>Food-carrying tubes</strong> transport food made in the leaves to all parts of the plant, including the roots.</li>
+            <li>The tubes run through the roots, the stem and the leaves. Together they form the plant's <strong>transport system</strong>.</li>
+            <li>In a tree trunk, the food-carrying tubes lie just under the bark. The water-carrying tubes are deeper inside.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>In the celery experiment, why are only some of the tubes red?</summary>
+            <p>The red dye is in the water, so it colours only the tubes that carry water. The food-carrying tubes do not carry water from the beaker, so they are not stained.</p>
+          </details>
+          <details>
+            <summary>Why does the trunk swell above the ring and not below it?</summary>
+            <p>Food travels <strong>down</strong> from the leaves. It cannot pass the ring, so it collects just <strong>above</strong> it. Below the ring, no food arrives.</p>
+          </details>
+          <details>
+            <summary>The leaves of the ringed tree stay green at first. Why?</summary>
+            <p>Only the bark and the food-carrying tubes were removed. The water-carrying tubes deeper in the trunk still carry water up to the leaves.</p>
+          </details>
+          <details>
+            <summary>What will happen to the ringed tree after many months?</summary>
+            <p>The roots get no food, so they die. Then the plant cannot take in water, and the whole tree dies.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>
