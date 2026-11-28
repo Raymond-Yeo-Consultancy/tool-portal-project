@@ -39,7 +39,15 @@
 
   /* ---------- saved scores ---------- */
   function scores() {
-    try { return JSON.parse(localStorage.getItem(SCORE_KEY)) || {}; } catch (e) { return {}; }
+    var raw, out = {};
+    try { raw = JSON.parse(localStorage.getItem(SCORE_KEY)); } catch (e) { raw = null; }
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return out;
+    // keep only whole-number scores from 0 to 10
+    Object.keys(raw).forEach(function (k) {
+      var v = raw[k];
+      if (typeof v === 'number' && v >= 0 && v <= QUIZ_LENGTH && v === Math.floor(v)) out[k] = v;
+    });
+    return out;
   }
   function saveScore(topic, difficulty, score) {
     var all = scores(), key = topic + '|' + difficulty;
@@ -48,8 +56,10 @@
   }
   function bestFor(topic) {
     var all = scores(), best = null;
-    Object.keys(all).forEach(function (k) {
-      if (k.split('|')[0] === topic && (best === null || all[k] > best)) best = all[k];
+    // the highest score; on a tie, the harder difficulty
+    ['easy', 'medium', 'mixed', 'hard'].forEach(function (d) {
+      var v = all[topic + '|' + d];
+      if (v !== undefined && (best === null || v >= best.score)) best = { score: v, difficulty: d };
     });
     return best;
   }
@@ -99,16 +109,23 @@
       b.appendChild(el('span', 'P' + t.level, 'tag tag-level'));
       b.appendChild(el('span', t.name, 'topic-name'));
       var best = bestFor(t.id);
-      b.appendChild(el('span', best === null ? 'Not tried yet' : 'Best: ' + best + ' / ' + QUIZ_LENGTH, 'topic-best'));
+      b.appendChild(el('span', best === null ? 'Not tried yet' : 'Best: ' + best.score + ' / ' + QUIZ_LENGTH + ' (' + best.difficulty + ')', 'topic-best'));
       b.addEventListener('click', function () {
         state.topic = t.id;
         renderTopics();
+        focusTopic();
       });
       box.appendChild(b);
     });
     if (state.topic && !list.some(function (t) { return t.id === state.topic; })) state.topic = null;
     $('start-btn').disabled = !state.topic;
-    $('setup-message').textContent = state.topic ? 'Topic: ' + topicById(state.topic).name + '. Choose a difficulty and press Start.' : 'Choose a topic to begin.';
+    $('setup-message').textContent = state.topic ? 'Topic: ' + topicById(state.topic).name + '. Press Start when you are ready.' : 'Choose a topic to begin.';
+  }
+
+  // after the topic list is rebuilt, put keyboard focus back on the chosen topic
+  function focusTopic() {
+    var b = state.topic && document.querySelector('#topic-choices [data-topic="' + state.topic + '"]');
+    (b || $('start-btn')).focus();
   }
 
   function pressGroup(id, attr, value) {
@@ -254,11 +271,20 @@
     $('start-btn').addEventListener('click', start);
     $('next-btn').addEventListener('click', next);
     $('again-btn').addEventListener('click', start);
-    $('change-btn').addEventListener('click', function () { renderTopics(); show('setup'); });
-    $('quit-btn').addEventListener('click', function () { renderTopics(); show('setup'); });
+    $('change-btn').addEventListener('click', function () { renderTopics(); show('setup'); focusTopic(); });
+    $('quit-btn').addEventListener('click', function () {
+      if (!window.confirm('Stop this quiz? Your answers so far will not be saved.')) return;
+      renderTopics(); show('setup'); focusTopic();
+    });
+    // warn before a reload or the Back button throws away a quiz in progress
+    window.addEventListener('beforeunload', function (e) {
+      if (!$('play').hidden) { e.preventDefault(); e.returnValue = ''; }
+    });
     $('clear-scores').addEventListener('click', function () {
+      if (!window.confirm('Clear all your best scores on this device?')) return;
       try { localStorage.removeItem(SCORE_KEY); } catch (e) { /* nothing saved */ }
       renderTopics();
+      $('setup-message').textContent = 'Your best scores have been cleared.';
     });
   });
 })();

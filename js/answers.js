@@ -33,12 +33,21 @@
     [3, 4, 5, 6].forEach(function (level) {
       var mine = topics.filter(function (t) { return t.level === level; });
       if (!mine.length) return;
-      sheet.appendChild(el('h2', 'Primary ' + level, 'sheet-level'));
+      var group = el('div', null, 'sheet-group');
+      group.setAttribute('data-level', level);
+      sheet.appendChild(group);
+      group.appendChild(el('h2', 'Primary ' + level, 'sheet-level'));
       mine.forEach(function (t) {
         var list = window.QUESTIONS[t.id] || [];
         total += list.length;
         problems = problems.concat(window.checkQuestions(t.id, list));
         var section = el('section', null, 'sheet-topic');
+        section.id = 'topic-' + t.id;
+        var item = el('li'), link = el('a', 'P' + level + ' · ' + t.name);
+        link.href = '#topic-' + t.id;
+        item.setAttribute('data-level', level);
+        item.appendChild(link);
+        $('contents').appendChild(item);
         section.appendChild(el('h3', t.name + ' (' + list.length + ' questions)'));
         ['easy', 'medium', 'hard'].forEach(function (lv) {
           var qs = list.filter(function (q) { return q.level === lv; });
@@ -61,7 +70,7 @@
           });
           section.appendChild(ol);
         });
-        sheet.appendChild(section);
+        group.appendChild(section);
       });
     });
 
@@ -77,6 +86,16 @@
       problems.forEach(function (p) { ul.appendChild(el('li', p)); });
       box.appendChild(ul);
     }
+    // show (and so print) one level at a time
+    document.querySelectorAll('#sheet-filter button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var want = b.getAttribute('data-level');
+        document.querySelectorAll('#sheet-filter button').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+        document.querySelectorAll('.sheet-group, #contents li').forEach(function (g) {
+          g.hidden = want !== 'all' && g.getAttribute('data-level') !== want;
+        });
+      });
+    });
     // exposed for the tests
     window.bankReport = { topics: topics.length, questions: total, problems: problems };
   }

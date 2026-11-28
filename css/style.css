@@ -1220,15 +1220,29 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .pic .liquid { stroke: none; opacity: 0.55; }
 .pic .beam { fill: var(--e-light); opacity: 0.28; }
 .pic .dark { fill: #000000; opacity: 0.5; }
-.pic-table { border-collapse: collapse; width: 100%; max-width: 560px; font-size: 0.98rem; }
+.pic-scroll { overflow-x: auto; max-width: 560px; }
+.pic-table { border-collapse: collapse; width: 100%; font-size: 0.98rem; }
 .pic-table th, .pic-table td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
 .pic-table thead th { background: var(--surface-2); }
 .pic-table tbody th { font-weight: 600; }
-.pic-table { display: block; overflow-x: auto; }
+@media (max-width: 480px) {
+  .pic-table { font-size: 0.86rem; }
+  .pic-table th, .pic-table td { padding: 5px 6px; }
+}
+@media (max-width: 380px) {
+  .mode-switch button { padding: 4px 11px; }
+}
+.sheet-contents { columns: 2 220px; padding-left: 1.2em; }
+.sheet-contents li { break-inside: avoid; }
 .pic-tag { font-size: 0.8rem; color: var(--text-muted); }
 .review-item .pic svg, .sheet-questions .pic svg { max-width: 340px; }
 
 @media print {
+  :root, :root[data-theme="dark"] {
+    --bg: #ffffff; --surface: #ffffff; --surface-2: #eeeeee; --text: #000000; --text-muted: #333333;
+    --border: #999999; --primary: #000000; --success: #000000; --ink: #000000; --ink-soft: #777777;
+    --hint-bg: #ffffff; --hint-border: #666666;
+  }
   .site-header, .site-footer, .no-print, .theme-toggle { display: none !important; }
   body { background: #ffffff; color: #000000; font-size: 11pt; }
   main { padding: 0; }

@@ -205,7 +205,7 @@ window.QUESTIONS.plantrepro = [
     why: "A is the anther, which makes pollen. With the anthers removed and the bag keeping other pollen out, no pollen reached the stigma (B)." },
   { id: "plantrepro-p10", level: "hard",
     q: "The diagram shows the steps from pollination to the forming of a fruit. What happens at step X?",
-    pic: { kind: "flow", per: 2, nodes: ["Pollen grain lands\non the stigma", "Pollen tube grows\ndown the style", "X", "Ovary develops\ninto the fruit"] },
+    pic: { kind: "flow", per: 2, nodes: ["Pollen grain\nlands on\nthe stigma", "Pollen tube\ngrows down\nthe style", "X", "Ovary\ndevelops into\nthe fruit"] },
     options: ["Fertilisation: the male reproductive cell fuses with the egg cell in the ovule", "Seed dispersal: the seeds are carried away from the parent plant", "Germination: the seed grows into a seedling", "Pollination: pollen is transferred from the anther to the stigma"], answer: 0,
     why: "After the pollen tube reaches the ovule, the male reproductive cell fuses with the egg cell. This is fertilisation." }
 ];

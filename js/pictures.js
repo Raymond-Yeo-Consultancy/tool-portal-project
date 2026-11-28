@@ -45,11 +45,11 @@
 
   /* ---------- table (plain HTML) ---------- */
   function table(p) {
-    var h = '<table class="pic-table"><thead><tr>' + p.head.map(function (c) { return '<th scope="col">' + esc(c) + '</th>'; }).join('') + '</tr></thead><tbody>';
+    var h = '<div class="pic-scroll" tabindex="0" role="group" aria-label="Table of results"><table class="pic-table"><thead><tr>' + p.head.map(function (c) { return '<th scope="col">' + esc(c) + '</th>'; }).join('') + '</tr></thead><tbody>';
     p.rows.forEach(function (r) {
       h += '<tr>' + r.map(function (c, i) { return i === 0 ? '<th scope="row">' + esc(c) + '</th>' : '<td>' + esc(c) + '</td>'; }).join('') + '</tr>';
     });
-    return h + '</tbody></table>';
+    return h + '</tbody></table></div>';
   }
 
   /* ---------- bar chart: bars [[label, value], ...], y axis title ---------- */
