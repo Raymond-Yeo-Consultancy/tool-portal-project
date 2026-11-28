@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plant Parts</title>
+  <meta name="description" content="Tap the roots, stem, leaves and flower of a plant to find out what each part does, then test yourself.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=22">
+  <script src="../../js/theme.js?v=22" defer></script>
+  <script src="../../js/activities.js?v=22" defer></script>
+  <script src="../../js/plantparts.js?v=22" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Plant Parts</h1>
+      <p class="lead">A plant has different parts, and each part has a job to do. Together they keep the plant alive.</p>
+      <p class="tags"><span class="tag tag-level">Primary 4</span><span class="tag">Systems</span></p>
+
+      <div class="tool-layout energy-layout">
+        <section class="card" aria-labelledby="plant-heading">
+          <h2 id="plant-heading">The plant</h2>
+          <div class="drop-scene web-scene" id="plant"></div>
+          <label class="check-row" style="margin-top:8px">
+            <input type="checkbox" id="water-toggle" checked>
+            Show water moving through the plant
+          </label>
+        </section>
+
+        <section class="card" aria-labelledby="parts-heading">
+          <div class="actions" style="justify-content:space-between; margin-bottom:10px">
+            <h2 id="parts-heading" style="margin:0">Its parts</h2>
+            <div class="mode-switch" role="group" aria-label="Mode">
+              <button type="button" id="mode-explore" aria-pressed="true">Explore</button>
+              <button type="button" id="mode-test" aria-pressed="false">Test yourself</button>
+            </div>
+          </div>
+
+          <div id="explore-panel">
+            <div class="choices four" id="part-choices" style="margin-bottom:12px"></div>
+            <div class="web-panel" id="panel" aria-live="polite"></div>
+          </div>
+
+          <div id="test-panel" hidden>
+            <h3>A. Name the parts</h3>
+            <div id="name-activity"></div>
+            <h3 style="margin-top:18px">B. What does each part do?</h3>
+            <div id="function-activity"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li><strong>Roots</strong> take in water and mineral salts, and hold the plant firmly in the soil.</li>
+            <li>The <strong>stem</strong> holds the plant upright and carries water from the roots to the other parts.</li>
+            <li><strong>Leaves</strong> make food for the plant.</li>
+            <li><strong>Flowers</strong> help the plant to reproduce.</li>
+            <li>The parts work together as a <strong>system</strong>. If one part cannot do its job, the whole plant is affected.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>What would happen to a plant if its roots were cut off?</summary>
+            <p>It could not take in water, so it would wilt and die. It would also fall over, because nothing would hold it in the soil.</p>
+          </details>
+          <details>
+            <summary>A white flower is left standing in blue-coloured water. After a day its petals turn blue. Why?</summary>
+            <p>The stem carried the coloured water up to the flower. This shows that water travels through the stem to the other parts of the plant.</p>
+          </details>
+          <details>
+            <summary>Why do most leaves grow where they can catch sunlight?</summary>
+            <p>Leaves need sunlight to make food. The stem holds them up and spreads them out so that they get as much light as possible.</p>
+          </details>
+          <details>
+            <summary>All the leaves are eaten by caterpillars. Why does the plant stop growing?</summary>
+            <p>Without leaves, the plant cannot make food. With no food, it cannot grow.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>

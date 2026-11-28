@@ -922,6 +922,13 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
   color: var(--on-primary);
 }
 
+/* tappable parts of a drawing (plant parts, body parts, cells) */
+.plant-part { cursor: pointer; }
+.plant-part:focus { outline: none; }
+.plant-part:hover { filter: drop-shadow(0 0 3px var(--ink-soft)); }
+.plant-part.selected { filter: drop-shadow(0 0 3px var(--focus)) drop-shadow(0 0 6px var(--focus)); }
+.plant-part:focus-visible { filter: drop-shadow(0 0 2px var(--focus)) drop-shadow(0 0 5px var(--focus)); }
+
 /* sliders */
 .slider {
   width: 100%;
