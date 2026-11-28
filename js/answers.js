@@ -48,6 +48,8 @@
           qs.forEach(function (q) {
             var li = el('li');
             li.appendChild(el('p', q.q, 'sheet-q'));
+            var fig = window.Pictures.draw(q.pic);
+            if (fig) li.appendChild(fig);
             var opts = el('ul', null, 'sheet-options');
             q.options.forEach(function (o, i) {
               opts.appendChild(el('li', (i === q.answer ? '✔ ' : '') + o, i === q.answer ? 'sheet-correct' : ''));
@@ -67,7 +69,7 @@
     var box = $('checks');
     if (!problems.length) {
       box.className = 'hint check-ok';
-      box.textContent = '✔ All automatic checks passed: every topic has at least 30 questions (10 easy, 10 medium, 10 hard), and every question has four different options, one marked answer and an explanation.';
+      box.textContent = '✔ All automatic checks passed: every topic has at least 30 questions (10 easy, 10 medium, 10 hard) and at least 10 picture questions, and every question has four different options, one marked answer and an explanation.';
     } else {
       box.className = 'hint check-bad';
       box.textContent = '✘ ' + problems.length + ' problem' + (problems.length === 1 ? '' : 's') + ' found:';

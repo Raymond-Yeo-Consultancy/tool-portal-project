@@ -64,12 +64,19 @@
     document.head.appendChild(s);
   }
 
+  // n random questions, with at least minPics picture questions when the pool has them
+  function pick(pool, n, minPics) {
+    var pics = shuffle(pool.filter(function (q) { return q.pic; })).slice(0, minPics);
+    var rest = shuffle(pool.filter(function (q) { return pics.indexOf(q) === -1; })).slice(0, n - pics.length);
+    return shuffle(pics.concat(rest));
+  }
+
   function draw(list, difficulty) {
     var by = { easy: [], medium: [], hard: [] };
     list.forEach(function (q) { by[q.level].push(q); });
-    if (difficulty !== 'mixed') return shuffle(by[difficulty]).slice(0, QUIZ_LENGTH);
+    if (difficulty !== 'mixed') return pick(by[difficulty], QUIZ_LENGTH, 3);
     var picked = [];
-    Object.keys(MIX).forEach(function (lv) { picked = picked.concat(shuffle(by[lv]).slice(0, MIX[lv])); });
+    Object.keys(MIX).forEach(function (lv) { picked = picked.concat(pick(by[lv], MIX[lv], 1)); });
     return picked; // easy first, then medium, then hard
   }
 
@@ -131,6 +138,9 @@
     $('difficulty-tag').textContent = q.level.charAt(0).toUpperCase() + q.level.slice(1);
     $('question').textContent = q.q;
     $('question').setAttribute('data-id', q.id);
+    var picBox = $('question-pic'), fig = window.Pictures.draw(q.pic);
+    picBox.innerHTML = '';
+    if (fig) picBox.appendChild(fig);
     var box = $('options');
     box.innerHTML = '';
     shuffle(q.options.map(function (text, i) { return { text: text, correct: i === q.answer }; })).forEach(function (o, i) {
@@ -204,6 +214,8 @@
     state.wrong.forEach(function (w) {
       var item = el('div', null, 'review-item');
       item.appendChild(el('p', w.q.q, 'review-question'));
+      var fig = window.Pictures.draw(w.q.pic);
+      if (fig) item.appendChild(fig);
       item.appendChild(el('p', '✘ Your answer: ' + w.chosen, 'review-wrong'));
       item.appendChild(el('p', '✔ Correct answer: ' + w.q.options[w.q.answer], 'review-right'));
       item.appendChild(el('p', w.q.why, 'review-why'));

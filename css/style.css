@@ -1183,6 +1183,51 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .sheet-why { margin: 0; color: var(--text-muted); }
 .sheet-id { margin: 0; color: var(--text-muted); font-size: 0.8rem; }
 
+/* ---------- pictures in quiz questions (js/pictures.js) ---------- */
+.pic { margin: 0 0 14px; }
+.pic svg {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.pic figcaption { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
+.pic .pl { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pic .pl.thin { stroke-width: 1.2; }
+.pic .pl.thick { stroke-width: 3.5; }
+.pic .pl.grid { stroke: var(--border); stroke-width: 1; }
+.pic .pl.dash { stroke: var(--ink-soft); stroke-width: 1.5; stroke-dasharray: 5 5; }
+.pic .pl.root { stroke: var(--ramp); stroke-width: 5; }
+.pic .pl.s1, .pic .pd.s1 { stroke: var(--e-kinetic); }
+.pic .pl.s2, .pic .pd.s2 { stroke: var(--e-heat); }
+.pic .pl.s2 { stroke-dasharray: 7 5; }
+.pic .pf { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+.pic .pd { fill: var(--ink); stroke: var(--ink); stroke-width: 1; }
+.pic .pd.s1 { fill: var(--e-kinetic); }
+.pic .pd.s2 { fill: var(--e-heat); }
+.pic .ph { fill: var(--ink); stroke: var(--ink); stroke-width: 1; }
+.pic .pt { fill: var(--text); font: 600 13px var(--font); }
+.pic .pt.ps { font-size: 11.5px; font-weight: 500; }
+.pic .c1 { fill: var(--e-kinetic); }
+.pic .c2 { fill: var(--e-sound); }
+.pic .c3 { fill: var(--e-chem); }
+.pic .c4 { fill: var(--surface-2); }
+.pic .c5 { fill: var(--e-light); }
+.pic .c6 { fill: var(--ink-soft); }
+.pic .liquid { stroke: none; opacity: 0.55; }
+.pic .beam { fill: var(--e-light); opacity: 0.28; }
+.pic .dark { fill: #000000; opacity: 0.5; }
+.pic-table { border-collapse: collapse; width: 100%; max-width: 560px; font-size: 0.98rem; }
+.pic-table th, .pic-table td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+.pic-table thead th { background: var(--surface-2); }
+.pic-table tbody th { font-weight: 600; }
+.pic-table { display: block; overflow-x: auto; }
+.pic-tag { font-size: 0.8rem; color: var(--text-muted); }
+.review-item .pic svg, .sheet-questions .pic svg { max-width: 340px; }
+
 @media print {
   .site-header, .site-footer, .no-print, .theme-toggle { display: none !important; }
   body { background: #ffffff; color: #000000; font-size: 11pt; }
@@ -1191,4 +1236,5 @@ p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .sheet-why, .sheet-id, .sheet-topic h4 { color: #333333; }
   .sheet-topic { break-before: auto; }
   .hint { background: none; }
+  .pic { --text: #000000; --ink: #000000; --ink-soft: #777777; --surface: #ffffff; --surface-2: #eeeeee; --border: #999999; }
 }

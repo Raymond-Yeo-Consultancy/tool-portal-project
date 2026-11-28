@@ -31,6 +31,7 @@
 ├── quiz/answers.html          # Teacher's answer sheet: every question, answer and explanation; printable
 ├── js/quiz.js                 # Quiz engine
 ├── js/answers.js              # Builds the teacher's answer sheet and runs the question checks
+├── js/pictures.js             # Draws the pictures used in quiz questions (tables, charts, diagrams)
 ├── js/questions/index.js      # List of quiz topics (one per tool) and the question checks
 └── js/questions/<tool>.js     # One question file per topic
 ```
@@ -69,7 +70,7 @@ Update this section when files or folders are added.
 
 ## Quiz Questions
 
-Each topic (one per tool) has at least 30 questions: 10 easy (recall a fact), 10 medium (explain or apply) and 10 hard (PSLE-style thinking, such as reading results or spotting a fair test). A topic is offered in the quiz only when `ready: true` is set for it in `js/questions/index.js`.
+Each topic (one per tool) has at least 40 questions: 30 text questions (10 easy, 10 medium, 10 hard) and 10 picture questions (ids `<tool>-p01` to `-p10`: 3 easy, 4 medium, 3 hard). Easy means recall a fact, medium means explain or apply, and hard means PSLE-style thinking, such as reading results or spotting a fair test. Every 10-question quiz includes at least 3 picture questions. A topic is offered in the quiz only when `ready: true` is set for it in `js/questions/index.js`.
 
 Rules for writing questions:
 
@@ -78,11 +79,12 @@ Rules for writing questions:
 3. Any number in a question comes from the tool's own model, not from working it out by hand.
 4. Avoid facts that depend on details the question does not give.
 5. Every question has a `why`: one or two sentences that teach the idea.
-6. Text only: the question must make sense without a picture.
+6. A text question must make sense without a picture. A picture question has a `pic` object, drawn by `js/pictures.js` (a table, bar chart, line graph, arrow diagram, circuit, magnets, labelled drawing and so on). Its text must say what the picture shows, and the picture must not give the answer away by colour or position.
+7. Pictures use the CSS colour variables, so they work in both themes, and each gets a text description for screen readers built from its data.
 
-Before a topic is marked ready: open `quiz/answers.html` and confirm the automatic checks pass, and have every question answered by an independent reviewer who cannot see the answer key. Fix or replace any question the reviewer gets "wrong" or flags as unclear.
+Before a topic is marked ready: open `quiz/answers.html` and confirm the automatic checks pass, and have every question answered by an independent reviewer who cannot see the answer key (for picture questions, the reviewer looks at the drawn picture). Fix or replace any question the reviewer gets "wrong" or flags as unclear.
 
-**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=34`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages (including `quiz/index.html` and `quiz/answers.html`).
+**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=35`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages (including `quiz/index.html` and `quiz/answers.html`).
 
 ## Key Requirements
 

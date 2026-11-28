@@ -41,7 +41,7 @@ window.QUIZ_TOPICS = [
 window.checkQuestions = function (topicId, list) {
   var problems = [];
   var counts = { easy: 0, medium: 0, hard: 0 };
-  var ids = {}, texts = {};
+  var ids = {}, texts = {}, pics = 0;
   (list || []).forEach(function (q, i) {
     var name = q.id || ('question ' + (i + 1));
     if (!q.id || q.id.indexOf(topicId + '-') !== 0) problems.push(name + ': id should start with "' + topicId + '-"');
@@ -66,10 +66,15 @@ window.checkQuestions = function (topicId, list) {
     }
     if (typeof q.answer !== 'number' || q.answer < 0 || q.answer > 3 || q.answer !== Math.floor(q.answer)) problems.push(name + ': answer must be 0, 1, 2 or 3');
     if (!q.why || q.why.length < 20) problems.push(name + ': explanation missing or too short');
+    if (q.pic) {
+      pics += 1;
+      if (window.Pictures && window.Pictures.kinds.indexOf(q.pic.kind) === -1) problems.push(name + ': unknown kind of picture');
+    }
   });
   ['easy', 'medium', 'hard'].forEach(function (lv) {
     if (counts[lv] < 10) problems.push(topicId + ': only ' + counts[lv] + ' ' + lv + ' questions (needs at least 10)');
   });
+  if (pics < 10) problems.push(topicId + ': only ' + pics + ' picture questions (needs at least 10)');
   if ((list || []).length < 30) problems.push(topicId + ': only ' + (list || []).length + ' questions (needs at least 30)');
   return problems;
 };

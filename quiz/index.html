@@ -6,10 +6,11 @@
   <title>Revision Quiz</title>
   <meta name="description" content="Test yourself on Primary 3 to 6 Science with easy, medium and hard questions on every topic.">
   <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
-  <link rel="stylesheet" href="../css/style.css?v=34">
-  <script src="../js/theme.js?v=34" defer></script>
-  <script src="../js/questions/index.js?v=34" defer></script>
-  <script src="../js/quiz.js?v=34" defer></script>
+  <link rel="stylesheet" href="../css/style.css?v=35">
+  <script src="../js/theme.js?v=35" defer></script>
+  <script src="../js/pictures.js?v=35" defer></script>
+  <script src="../js/questions/index.js?v=35" defer></script>
+  <script src="../js/quiz.js?v=35" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -73,6 +74,7 @@
           <div class="quiz-progress" aria-hidden="true"><div id="progress-bar"></div></div>
           <p class="tags" style="margin:10px 0 6px"><span class="tag" id="progress"></span><span class="tag" id="difficulty-tag"></span></p>
           <h2 id="question" tabindex="-1" class="quiz-question"></h2>
+          <div id="question-pic"></div>
           <div class="quiz-options" id="options"></div>
           <p class="feedback" id="feedback" aria-live="polite" style="margin-top:12px"></p>
           <div class="hint" id="why" hidden><strong>Why?</strong> <span id="why-text"></span></div>
