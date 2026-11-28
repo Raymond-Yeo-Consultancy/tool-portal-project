@@ -250,12 +250,13 @@
   var DRAWINGS = {
     plant: {
       h: 250, what: 'a flowering plant',
-      body: function () {
+      body: function (p) {
         var s = P('M0 178 H360', 'thick');
         s += P('M180 178 V240 M180 190 Q158 198 140 226 M180 190 Q204 200 222 228 M180 208 Q166 218 160 240 M180 208 Q196 218 202 240', 'root');
         s += R(175, 60, 10, 118, 'c3', 4);
         s += '<ellipse class="pf c3" cx="140" cy="128" rx="36" ry="14" transform="rotate(22 140 128)"/><ellipse class="pf c3" cx="222" cy="104" rx="36" ry="14" transform="rotate(-22 222 104)"/>';
         for (var i = 0; i < 6; i++) s += C(180 + Math.cos(i * Math.PI / 3) * 19, 42 + Math.sin(i * Math.PI / 3) * 19, 12, 'c2');
+        if (p.ring) s += R(173, 142, 14, 9, '') + T(194, 151, 'ring of bark removed', { a: 'start', small: true });
         return s + C(180, 42, 11, 'c5');
       },
       at: { flower: [262, 30, 212, 40], leaf: [300, 96, 256, 100], stem: [112, 160, 174, 160], roots: [270, 222, 216, 224] },
@@ -293,7 +294,7 @@
         s += '<ellipse class="pf c3" cx="180" cy="186" rx="26" ry="20"/>' + C(171, 186, 5, 'c5') + C(189, 186, 5, 'c5');
         return s;
       },
-      at: { petal: [28, 56, 62, 138], anther: [288, 38, 223, 88], filament: [84, 44, 149, 140], stigma: [180, 26, 180, 68], style: [128, 18, 177, 112], ovary: [264, 224, 188, 203], ovule: [96, 224, 170, 188] },
+      at: { petal: [28, 56, 62, 138], anther: [288, 38, 223, 88], filament: [84, 44, 149, 140], stigma: [180, 26, 180, 68], style: [128, 18, 177, 112], ovary: [264, 224, 199, 196], ovule: [96, 224, 170, 188] },
       names: { petal: 'a large coloured outer part', anther: 'the top of a thin stalk', filament: 'a thin stalk', stigma: 'the tip of the centre column', style: 'the centre column', ovary: 'the swollen base', ovule: 'a small round body inside the base' }
     },
     plantcell: {
@@ -317,13 +318,13 @@
     }
   };
   function parts(p) {
-    var d = DRAWINGS[p.of], s = d.body(), alt = [];
+    var d = DRAWINGS[p.of], s = d.body(p), alt = [];
     Object.keys(p.letters).forEach(function (id) {
       var a = d.at[id];
       s += badge(a[0], a[1], p.letters[id], a[2], a[3]);
       alt.push(p.letters[id] + ' points to ' + d.names[id]);
     });
-    return svg(d.h, s, 'Drawing of ' + d.what + '. ' + alt.join('; ') + '.');
+    return svg(d.h, s, 'Drawing of ' + d.what + (p.ring ? ', with a ring of bark removed from the stem below the leaves' : '') + '. ' + alt.join('; ') + '.');
   }
 
   /* ---------- springs: items [{ name, len (cm), load: '100 g' }], hanging from a bar ---------- */

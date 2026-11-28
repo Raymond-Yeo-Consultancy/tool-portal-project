@@ -204,8 +204,8 @@ window.QUESTIONS.transport = [
     options: ["Set-ups 1 and 2", "Set-ups 1 and 3", "Set-ups 2 and 3", "Set-up 3 only"], answer: 0,
     why: "In a fair test only one thing is changed. Set-ups 1 and 2 differ only in the temperature of the water." },
   { id: "transport-p10", level: "hard",
-    q: "The picture shows a plant. Imagine it is a young tree with bark on part B. A complete ring of bark is removed from the bottom of part B, below all the leaves. After many months, which part will die first because it receives no food?",
-    pic: { kind: "parts", of: "plant", letters: { roots: "A", stem: "B", leaf: "C" } },
+    q: "The picture shows a young tree. A complete ring of bark has been removed from its trunk (part B), at the place marked. After many months, which part will die first because it receives no food?",
+    pic: { kind: "parts", of: "plant", ring: true, letters: { roots: "A", stem: "B", leaf: "C" } },
     options: ["Part A", "Part C", "Part B above the ring", "No part will be affected"], answer: 0,
     why: "Food made in the leaves can no longer pass the ring to reach the roots (A). The roots cannot make their own food, so they die." }
 ];
