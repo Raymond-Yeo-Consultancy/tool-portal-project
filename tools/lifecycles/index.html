@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Life Cycles</title>
+  <meta name="description" content="Watch the life cycles of animals and plants, compare three-stage and four-stage life cycles, and put the stages in order.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=17">
+  <script src="../../js/theme.js?v=17" defer></script>
+  <script src="../../js/activities.js?v=17" defer></script>
+  <script src="../../js/lifecycles.js?v=17" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Life Cycles</h1>
+      <p class="lead">Every living thing goes through stages as it grows. Pick an animal or plant and watch its life cycle go round.</p>
+      <p class="tags"><span class="tag tag-level">Primary 3</span><span class="tag">Cycles</span></p>
+
+      <section class="card" aria-labelledby="pick-heading" style="margin-top:18px">
+        <h2 id="pick-heading">1. Pick an animal or plant</h2>
+        <div class="scenario-grid" id="cycle-choices"></div>
+      </section>
+
+      <section class="card" aria-labelledby="cycle-name" style="margin-top:18px">
+        <div class="actions" style="justify-content:space-between; margin-bottom:10px">
+          <h2 id="cycle-name" style="margin:0">Life cycle</h2>
+          <div class="mode-switch" role="group" aria-label="Mode">
+            <button type="button" id="mode-learn" aria-pressed="true">Learn</button>
+            <button type="button" id="mode-test" aria-pressed="false">Test yourself</button>
+          </div>
+        </div>
+
+        <div id="learn-panel" class="tool-layout energy-layout" style="margin-top:0">
+          <div>
+            <div class="drop-scene web-scene" id="wheel"></div>
+          </div>
+          <div>
+            <p id="cycle-facts" style="font-weight:700"></p>
+            <div class="web-panel">
+              <h3 id="stage-title"></h3>
+              <p id="stage-text"></p>
+            </div>
+            <div class="actions" style="margin-top:12px">
+              <button type="button" class="btn" id="play-btn">⏸ Pause</button>
+            </div>
+            <p class="slowmo-note">Tap a stage on the wheel to read about it.</p>
+          </div>
+        </div>
+
+        <div id="test-panel" hidden>
+          <p>Put the stages of this life cycle in order.</p>
+          <div id="order-activity"></div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="compare-heading" style="margin-top:18px">
+        <h2 id="compare-heading">Compare the life cycles</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Living thing</th><th scope="col">Number of stages</th><th scope="col">Stages</th><th scope="col">Young looks like the adult?</th></tr>
+            </thead>
+            <tbody id="compare-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="tool-layout energy-layout">
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>A <strong>life cycle</strong> shows the stages a living thing goes through as it grows. The adult reproduces, and the cycle starts again.</li>
+            <li>Some animals have a <strong>3-stage</strong> life cycle: egg, young, adult. Examples: chicken, frog, cockroach, grasshopper.</li>
+            <li>Some animals have a <strong>4-stage</strong> life cycle: egg, larva, pupa, adult. Examples: butterfly, mosquito, beetle.</li>
+            <li>In some life cycles the young looks like the adult. In others it looks very different.</li>
+            <li>A flowering plant grows from a seed into a seedling and then an adult plant.</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>How is a butterfly's life cycle different from a chicken's?</summary>
+            <p>A butterfly has <strong>4 stages</strong> and its young (the caterpillar) does not look like the adult. A chicken has <strong>3 stages</strong> and the chick looks like a small adult.</p>
+          </details>
+          <details>
+            <summary>A nymph and a larva are both young insects. How are they different?</summary>
+            <p>A <strong>nymph</strong> looks like a small adult without wings, and there is no pupa stage. A <strong>larva</strong> looks very different from the adult and becomes a pupa before it becomes an adult.</p>
+          </details>
+          <details>
+            <summary>Mosquitoes spread dengue. Which stages of the mosquito's life cycle happen in water?</summary>
+            <p>The <strong>egg</strong>, <strong>larva</strong> and <strong>pupa</strong> stages. That is why we remove still water around our homes: mosquitoes cannot complete their life cycle without it.</p>
+          </details>
+          <details>
+            <summary>Why is it called a life “cycle”?</summary>
+            <p>A cycle goes round and round. The adult reproduces to make new young, which grow into adults and reproduce in turn. This is how each kind of living thing continues.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>
