@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>P6 Science Lab</title>
-  <meta name="description" content="Try Primary 6 Science experiments in your browser, based on the Singapore PSLE Science syllabus.">
+  <title>Primary Science Lab</title>
+  <meta name="description" content="Try Primary 3 to 6 Science experiments in your browser, based on the Singapore Primary Science syllabus.">
   <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
-  <link rel="stylesheet" href="css/style.css?v=13">
-  <script src="js/theme.js?v=13" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=14">
+  <script src="js/theme.js?v=14" defer></script>
+  <script src="js/portal.js?v=14" defer></script>
 </head>
 <body>
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">🔬</span> P6 Science Lab</a>
+      <a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
       <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
         <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
       </button>
@@ -21,71 +22,83 @@
 
   <main>
     <div class="container">
-      <h1>Try Primary 6 Science experiments right in your browser</h1>
-      <p class="lead">Pick a tool, change one thing at a time, and see what happens. Every tool follows the Singapore PSLE Primary 6 Science syllabus.</p>
+      <h1>Try Science experiments right in your browser</h1>
+      <p class="lead">Pick a tool, change one thing at a time, and see what happens. Every tool follows the Singapore Primary Science syllabus for Primary 3 to 6.</p>
 
-      <section class="topic-section" aria-labelledby="forces-heading">
-        <h2 id="forces-heading">Interactions: Forces</h2>
+      <div class="level-filter">
+        <span id="level-label">Show tools for:</span>
+        <div class="mode-switch" role="group" aria-labelledby="level-label" id="level-filter">
+          <button type="button" data-level="all" aria-pressed="true">All</button>
+          <button type="button" data-level="3" aria-pressed="false">P3</button>
+          <button type="button" data-level="4" aria-pressed="false">P4</button>
+          <button type="button" data-level="5" aria-pressed="false">P5</button>
+          <button type="button" data-level="6" aria-pressed="false">P6</button>
+        </div>
+      </div>
+      <p class="hint" id="empty-level" hidden>Tools for this level are coming soon.</p>
+
+      <!-- One <section class="level-section"> per level. Inside it, one theme heading (h3) and tool grid per theme. -->
+
+      <section class="level-section" data-level="6" aria-labelledby="p6-heading">
+        <h2 id="p6-heading">Primary 6</h2>
+
+        <h3 class="theme-heading">Interactions: Forces</h3>
         <div class="tool-grid">
           <a class="card tool-card" href="tools/friction/index.html">
             <span class="tool-icon" aria-hidden="true">🚗</span>
-            <h3>Friction Ramp</h3>
+            <h4>Friction Ramp</h4>
             <p>Roll a toy car onto glass, wood, carpet or sandpaper. Which surface stops it soonest?</p>
-            <div class="tags"><span class="tag">Frictional force</span><span class="tag">Standard &amp; Foundation</span></div>
+            <div class="tags"><span class="tag tag-level">P6</span><span class="tag">Frictional force</span><span class="tag">Standard &amp; Foundation</span></div>
           </a>
           <a class="card tool-card" href="tools/spring/index.html">
             <span class="tool-icon" aria-hidden="true">🌀</span>
-            <h3>Spring Stretch</h3>
+            <h4>Spring Stretch</h4>
             <p>Hang masses on a soft spring and a stiff spring. How much does each one stretch?</p>
-            <div class="tags"><span class="tag">Spring force</span><span class="tag">Standard</span></div>
+            <div class="tags"><span class="tag tag-level">P6</span><span class="tag">Spring force</span><span class="tag">Standard</span></div>
           </a>
           <a class="card tool-card" href="tools/gravity/index.html">
             <span class="tool-icon" aria-hidden="true">🪶</span>
-            <h3>Drop Race</h3>
+            <h4>Drop Race</h4>
             <p>Drop a feather, paper and a metal ball together. Then take the air away. Which lands first?</p>
-            <div class="tags"><span class="tag">Gravitational force</span><span class="tag">Air resistance</span><span class="tag">Standard &amp; Foundation</span></div>
+            <div class="tags"><span class="tag tag-level">P6</span><span class="tag">Gravitational force</span><span class="tag">Air resistance</span><span class="tag">Standard &amp; Foundation</span></div>
           </a>
         </div>
-      </section>
 
-      <section class="topic-section" aria-labelledby="energy-heading">
-        <h2 id="energy-heading">Energy</h2>
+        <h3 class="theme-heading">Energy</h3>
         <div class="tool-grid">
           <a class="card tool-card" href="tools/energy/index.html">
             <span class="tool-icon" aria-hidden="true">⚡</span>
-            <h3>Energy Conversion</h3>
+            <h4>Energy Conversion</h4>
             <p>See how energy changes from one form to another in a torch, a falling ball, a wind turbine and more.</p>
-            <div class="tags"><span class="tag">Energy conversion</span><span class="tag">Standard</span></div>
+            <div class="tags"><span class="tag tag-level">P6</span><span class="tag">Energy conversion</span><span class="tag">Standard</span></div>
           </a>
           <a class="card tool-card" href="tools/pendulum/index.html">
             <span class="tool-icon" aria-hidden="true">🎯</span>
-            <h3>Swinging Pendulum</h3>
+            <h4>Swinging Pendulum</h4>
             <p>Release a pendulum and watch its energy change between gravitational potential energy and kinetic energy.</p>
-            <div class="tags"><span class="tag">Energy conversion</span><span class="tag">Standard</span></div>
+            <div class="tags"><span class="tag tag-level">P6</span><span class="tag">Energy conversion</span><span class="tag">Standard</span></div>
           </a>
           <a class="card tool-card" href="tools/photosynthesis/index.html">
             <span class="tool-icon" aria-hidden="true">🌱</span>
-            <h3>Photosynthesis Lab</h3>
+            <h4>Photosynthesis Lab</h4>
             <p>Change the light and carbon dioxide a water plant gets. Count the bubbles of oxygen it gives off.</p>
-            <div class="tags"><span class="tag">Photosynthesis</span><span class="tag">Standard &amp; Foundation</span></div>
+            <div class="tags"><span class="tag tag-level">P6</span><span class="tag">Photosynthesis</span><span class="tag">Standard &amp; Foundation</span></div>
           </a>
         </div>
-      </section>
 
-      <section class="topic-section" aria-labelledby="living-heading">
-        <h2 id="living-heading">Interactions: Living things and the environment</h2>
+        <h3 class="theme-heading">Interactions: Living things and the environment</h3>
         <div class="tool-grid">
           <a class="card tool-card" href="tools/foodweb/index.html">
             <span class="tool-icon" aria-hidden="true">🕸️</span>
-            <h3>Food Chain and Food Web</h3>
+            <h4>Food Chain and Food Web</h4>
             <p>Who eats whom? Build food chains, explore a food web, and remove an organism to see what changes.</p>
-            <div class="tags"><span class="tag">Food chains and food webs</span><span class="tag">Standard &amp; Foundation</span></div>
+            <div class="tags"><span class="tag tag-level">P6</span><span class="tag">Food chains and food webs</span><span class="tag">Standard &amp; Foundation</span></div>
           </a>
           <a class="card tool-card" href="tools/adaptations/index.html">
             <span class="tool-icon" aria-hidden="true">🐫</span>
-            <h3>Adaptations Explorer</h3>
+            <h4>Adaptations Explorer</h4>
             <p>Why does a camel have a hump and a duck have webbed feet? Discover how features help living things survive.</p>
-            <div class="tags"><span class="tag">Adaptations</span><span class="tag">Standard &amp; Foundation</span></div>
+            <div class="tags"><span class="tag tag-level">P6</span><span class="tag">Adaptations</span><span class="tag">Standard &amp; Foundation</span></div>
           </a>
         </div>
       </section>
@@ -93,7 +106,7 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container">Made for Primary 6 pupils preparing for PSLE Science.</div>
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
   </footer>
 </body>
 </html>

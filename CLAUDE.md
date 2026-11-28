@@ -8,20 +8,22 @@
 
 ## About the Project
 
-"P6 Science Lab": a web portal of small interactive tools for Singapore Primary 6 pupils, based on the PSLE Science syllabus (2023 MOE Primary Science syllabus).
+"Primary Science Lab": a web portal of small interactive tools for Singapore Primary 3 to 6 pupils, based on the 2023 MOE Primary Science syllabus.
 
 - Content and wording must follow the MOE Primary Science syllabus. Use the terms pupils learn in class (e.g. "chemical potential energy", "frictional force").
-- Mark whether a topic is in the Standard track, the Foundation track or both.
-- Keep language simple and friendly for 11–12 year olds.
+- Every tool shows its level (Primary 3, 4, 5 or 6) on its home-page card and on its own page.
+- For Primary 5 and 6 tools, also mark whether the topic is in the Standard track, the Foundation track or both. (These tracks start in Primary 5.)
+- Keep language simple and friendly for the tool's level: 9 year olds for Primary 3, up to 12 year olds for Primary 6.
 
 ## Project Structure
 
 ```
 /
 ├── CLAUDE.md                  # This file: guidance for Claude
-├── index.html                 # Portal home page: tool cards grouped by syllabus theme
+├── index.html                 # Portal home page: tool cards grouped by level, then syllabus theme
 ├── css/style.css              # Shared styles; all colours are CSS variables for both themes
 ├── js/theme.js                # Light/dark toggle, shared by every page
+├── js/portal.js               # Home page level filter (All, P3, P4, P5, P6)
 ├── js/friction.js             # Friction Ramp tool logic
 ├── js/energy.js               # Energy Conversion tool logic and example data
 ├── js/spring.js               # Spring Stretch tool logic
@@ -41,11 +43,11 @@
     └── energy/index.html      # Energy Conversion tool page
 ```
 
-To add a tool: create `tools/<name>/index.html` and `js/<name>.js`, copy the header and the inline theme script from an existing tool page, and add a card to `index.html`.
+To add a tool: create `tools/<name>/index.html` and `js/<name>.js`, copy the header and the inline theme script from an existing tool page, and add a card to the right level section of `index.html`, with a level tag.
 
 Update this section when files or folders are added.
 
-**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=13`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages.
+**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=14`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages.
 
 ## Key Requirements
 

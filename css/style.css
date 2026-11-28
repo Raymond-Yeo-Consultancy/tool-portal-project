@@ -1,5 +1,5 @@
 /* ==========================================================
-   P6 Science Lab – shared styles
+   Primary Science Lab – shared styles
    Colours live in CSS variables so the light and dark themes
    can swap them in one place. Light is the default.
    ========================================================== */
@@ -309,7 +309,8 @@ main { padding: 28px 0 48px; }
 }
 
 .tool-card .tool-icon { font-size: 2.6rem; line-height: 1; }
-.tool-card h3 { margin: 0; color: var(--primary); }
+.tool-card h3,
+.tool-card h4 { margin: 0; color: var(--primary); font-size: 1.15rem; }
 .tool-card p { margin: 0; color: var(--text-muted); }
 .tool-card .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
 
@@ -898,6 +899,28 @@ tbody th { font-size: 1rem; color: var(--text); }
 .chain-empty { color: var(--text-muted); font-style: italic; }
 .fx-up { color: var(--success); }
 .fx-down { color: var(--error); }
+
+/* ---------- levels (home page filter and level tags) ---------- */
+.level-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 18px 0 6px;
+  font-weight: 700;
+}
+
+.level-section { margin-top: 30px; }
+.level-section > h2 { border-bottom: 2px solid var(--border); padding-bottom: 6px; }
+.theme-heading { margin: 22px 0 0; color: var(--text-muted); }
+
+p.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.tag-level {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
 
 /* ---------- adaptations tool ---------- */
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
