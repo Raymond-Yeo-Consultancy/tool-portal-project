@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Swinging Pendulum</title>
+  <meta name="description" content="Release a pendulum and watch its energy change between gravitational potential energy and kinetic energy.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=10">
+  <script src="../../js/theme.js?v=10" defer></script>
+  <script src="../../js/pendulum.js?v=10" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> P6 Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Swinging Pendulum</h1>
+      <p class="lead">Release a pendulum and watch its energy change from one form to another as it swings.</p>
+      <p><span class="tag">Standard Science</span></p>
+
+      <div class="tool-layout friction-layout">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Experiment</h2>
+          <div class="drop-scene" id="scene"></div>
+          <p class="step-caption" id="caption"></p>
+
+          <div class="energy-bars" aria-hidden="true">
+            <div class="ebar">
+              <span class="ebar-label">Gravitational potential energy</span>
+              <div class="ebar-track"><div class="ebar-fill" id="bar-gpe" style="background:var(--e-gpe)"></div></div>
+            </div>
+            <div class="ebar">
+              <span class="ebar-label">Kinetic energy</span>
+              <div class="ebar-track"><div class="ebar-fill" id="bar-ke" style="background:var(--e-kinetic)"></div></div>
+            </div>
+            <div class="ebar" id="heat-row" hidden>
+              <span class="ebar-label">Heat energy (from air resistance)</span>
+              <div class="ebar-track"><div class="ebar-fill" id="bar-heat" style="background:var(--e-heat)"></div></div>
+            </div>
+            <div class="ebar">
+              <span class="ebar-label">Total energy</span>
+              <div class="ebar-track">
+                <div class="ebar-fill" id="total-gpe" style="background:var(--e-gpe)"></div>
+                <div class="ebar-fill" id="total-ke" style="background:var(--e-kinetic)"></div>
+                <div class="ebar-fill" id="total-heat" style="background:var(--e-heat)"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">Set up your experiment</h2>
+
+          <fieldset class="choice-group">
+            <legend>1. Release height</legend>
+            <div class="choices three" id="height-choices">
+              <button type="button" class="choice" data-height="5" aria-pressed="false">Low<br><span class="tag">5 cm</span></button>
+              <button type="button" class="choice" data-height="10" aria-pressed="true">Medium<br><span class="tag">10 cm</span></button>
+              <button type="button" class="choice" data-height="15" aria-pressed="false">High<br><span class="tag">15 cm</span></button>
+            </div>
+          </fieldset>
+
+          <fieldset class="choice-group">
+            <legend>2. Length of the string</legend>
+            <div class="choices" id="string-choices">
+              <button type="button" class="choice" data-string="short" aria-pressed="false">Short<br><span class="tag">50 cm</span></button>
+              <button type="button" class="choice" data-string="long" aria-pressed="true">Long<br><span class="tag">100 cm</span></button>
+            </div>
+          </fieldset>
+
+          <label class="check-row">
+            <input type="checkbox" id="air-toggle">
+            With air resistance
+          </label>
+
+          <div class="actions" style="margin-top:10px">
+            <button type="button" class="btn btn-big" id="release-btn">Release!</button>
+            <button type="button" class="btn btn-secondary" id="pause-btn" disabled>⏸ Pause</button>
+          </div>
+          <div class="actions" style="margin-top:10px">
+            <button type="button" class="btn btn-secondary" id="high-btn" disabled>Stop at highest point</button>
+            <button type="button" class="btn btn-secondary" id="low-btn" disabled>Stop at lowest point</button>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="table-heading">
+          <div class="actions" style="justify-content:space-between">
+            <h2 id="table-heading" style="margin:0">Results table</h2>
+            <button type="button" class="btn btn-secondary" id="clear-btn">Clear results</button>
+          </div>
+          <p style="color:var(--text-muted);margin:6px 0 0">Time for one complete swing (there and back).</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">String length</th><th scope="col">Release height</th><th scope="col">Time for one swing</th></tr>
+              </thead>
+              <tbody id="results-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0; padding-left:1.2em">
+            <li>At the <strong>highest points</strong>, the bob has the most <strong>gravitational potential energy</strong> and no kinetic energy.</li>
+            <li>At the <strong>lowest point</strong>, the bob moves fastest. It has the most <strong>kinetic energy</strong>.</li>
+            <li>As the bob swings, energy is converted from gravitational potential energy to kinetic energy and back again.</li>
+            <li>Energy is not created or destroyed. With air resistance, some energy is converted into <strong>heat energy</strong>, so each swing is a little lower.</li>
+          </ul>
+        </section>
+
+        <section class="card span-all" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>Where does the bob have the most kinetic energy? How can you tell?</summary>
+            <p>At the <strong>lowest point</strong>. The bob is moving fastest there. Press <em>Stop at lowest point</em> and look at the bars.</p>
+          </details>
+          <details>
+            <summary>Without air resistance, what do you notice about the Total energy bar?</summary>
+            <p>It stays the <strong>same length</strong> all the time. Energy is only converted from one form to another. The bob swings back up to its release height every time.</p>
+          </details>
+          <details>
+            <summary>With air resistance, why do the swings get smaller?</summary>
+            <p>Air resistance is a frictional force that opposes the bob's motion. Some of the bob's energy is converted into <strong>heat energy</strong>, so there is less energy left to carry the bob up. In the end the pendulum stops.</p>
+          </details>
+          <details>
+            <summary>What changes the time for one swing: the release height or the string length?</summary>
+            <p>The <strong>string length</strong>. A longer string gives a longer time for one swing. Changing the release height hardly changes the time at all. Check your results table!</p>
+          </details>
+          <details>
+            <summary>A higher release gives more energy. Why?</summary>
+            <p>The higher an object is above the ground, the more gravitational potential energy it has. Release the bob from 15 cm and its bars are longer than from 5 cm.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 6 pupils preparing for PSLE Science.</div>
+  </footer>
+</body>
+</html>

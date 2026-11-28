@@ -790,3 +790,31 @@ tbody th { font-size: 1rem; color: var(--text); }
 }
 
 .spring-control legend { display: flex; align-items: center; gap: 8px; }
+
+/* ---------- energy bars (pendulum tool) ---------- */
+.energy-bars {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.ebar-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 3px;
+}
+
+.ebar-track {
+  display: flex;
+  height: 22px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.ebar-fill { height: 100%; width: 0; }
+
+/* three short choices fit side by side even on a phone */
+.choices.three { grid-template-columns: repeat(3, 1fr); }

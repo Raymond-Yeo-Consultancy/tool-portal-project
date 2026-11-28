@@ -26,10 +26,12 @@
 ├── js/energy.js               # Energy Conversion tool logic and example data
 ├── js/spring.js               # Spring Stretch tool logic
 ├── js/gravity.js              # Drop Race (gravity and air resistance) tool logic
+├── js/pendulum.js             # Swinging Pendulum tool logic
 └── tools/
     ├── friction/index.html    # Friction Ramp tool page
     ├── spring/index.html      # Spring Stretch tool page
     ├── gravity/index.html     # Drop Race tool page
+    ├── pendulum/index.html    # Swinging Pendulum tool page
     └── energy/index.html      # Energy Conversion tool page
 ```
 
@@ -37,7 +39,7 @@ To add a tool: create `tools/<name>/index.html` and `js/<name>.js`, copy the hea
 
 Update this section when files or folders are added.
 
-**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=9`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages.
+**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=10`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages.
 
 ## Key Requirements
 
