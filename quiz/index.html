@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Revision Quiz</title>
+  <meta name="description" content="Test yourself on Primary 3 to 6 Science with easy, medium and hard questions on every topic.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../css/style.css?v=30">
+  <script src="../js/theme.js?v=30" defer></script>
+  <script src="../js/questions/index.js?v=30" defer></script>
+  <script src="../js/quiz.js?v=30" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container quiz-container">
+      <a class="back-link" href="../index.html">← All tools</a>
+      <h1>Revision Quiz</h1>
+
+      <!-- 1. choose a topic -->
+      <div id="setup">
+        <p class="lead">Pick a topic and a difficulty. You will get 10 questions, with the answer explained after each one.</p>
+
+        <section class="card" aria-labelledby="topic-heading" style="margin-top:18px">
+          <h2 id="topic-heading">1. Choose a topic</h2>
+          <div class="level-filter" style="margin-top:0">
+            <span id="level-label">Show topics for:</span>
+            <div class="mode-switch" role="group" aria-labelledby="level-label" id="level-filter">
+              <button type="button" data-level="all" aria-pressed="true">All</button>
+              <button type="button" data-level="3" aria-pressed="false">P3</button>
+              <button type="button" data-level="4" aria-pressed="false">P4</button>
+              <button type="button" data-level="5" aria-pressed="false">P5</button>
+              <button type="button" data-level="6" aria-pressed="false">P6</button>
+            </div>
+          </div>
+          <p class="hint" id="no-topics" hidden>Quiz questions for this level are coming soon.</p>
+          <div class="topic-grid" id="topic-choices"></div>
+        </section>
+
+        <section class="card" aria-labelledby="difficulty-heading" style="margin-top:18px">
+          <h2 id="difficulty-heading">2. Choose a difficulty</h2>
+          <div class="choices four" id="difficulty-choices">
+            <button type="button" class="choice" data-difficulty="easy" aria-pressed="false">Easy<br><span class="tag">know the facts</span></button>
+            <button type="button" class="choice" data-difficulty="medium" aria-pressed="false">Medium<br><span class="tag">explain and apply</span></button>
+            <button type="button" class="choice" data-difficulty="hard" aria-pressed="false">Hard<br><span class="tag">think like a scientist</span></button>
+            <button type="button" class="choice" data-difficulty="mixed" aria-pressed="true">Mixed<br><span class="tag">some of each</span></button>
+          </div>
+          <p id="setup-message" aria-live="polite" style="margin:14px 0 10px; font-weight:600"></p>
+          <div class="actions">
+            <button type="button" class="btn btn-big" id="start-btn" disabled>Start the quiz</button>
+            <button type="button" class="btn btn-secondary" id="clear-scores">Clear my scores</button>
+          </div>
+          <p class="slowmo-note">Your best scores are saved on this device only.</p>
+        </section>
+      </div>
+
+      <!-- 2. answer questions -->
+      <div id="play" hidden>
+        <section class="card" aria-labelledby="question" style="margin-top:18px">
+          <div class="actions" style="justify-content:space-between">
+            <p id="play-topic" style="margin:0; font-weight:700"></p>
+            <button type="button" class="btn btn-secondary" id="quit-btn">Stop the quiz</button>
+          </div>
+          <div class="quiz-progress" aria-hidden="true"><div id="progress-bar"></div></div>
+          <p class="tags" style="margin:10px 0 6px"><span class="tag" id="progress"></span><span class="tag" id="difficulty-tag"></span></p>
+          <h2 id="question" tabindex="-1" class="quiz-question"></h2>
+          <div class="quiz-options" id="options"></div>
+          <p class="feedback" id="feedback" aria-live="polite" style="margin-top:12px"></p>
+          <div class="hint" id="why" hidden><strong>Why?</strong> <span id="why-text"></span></div>
+          <div class="actions" style="margin-top:14px">
+            <button type="button" class="btn btn-big" id="next-btn" hidden>Next question →</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- 3. results -->
+      <div id="results" hidden>
+        <section class="card" aria-labelledby="results-heading" style="margin-top:18px">
+          <h2 id="results-heading">Your score</h2>
+          <p class="quiz-score" id="score" tabindex="-1"></p>
+          <p id="score-message" style="font-size:1.15rem"></p>
+          <div class="actions">
+            <button type="button" class="btn btn-big" id="again-btn">Try again</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">Choose another topic</button>
+            <a class="btn btn-secondary" id="tool-link" href="../index.html">Open the tool</a>
+          </div>
+        </section>
+        <section class="card" aria-labelledby="review-heading" style="margin-top:18px">
+          <h2 id="review-heading">Questions to look at again</h2>
+          <div id="review"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science. <a href="answers.html">Teacher's answer sheet</a></div>
+  </footer>
+</body>
+</html>

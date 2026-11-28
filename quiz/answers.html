@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teacher's Answer Sheet</title>
+  <meta name="description" content="Every question in the Revision Quiz with its correct answer and explanation, for teachers to check.">
+  <meta name="robots" content="noindex">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../css/style.css?v=30">
+  <script src="../js/theme.js?v=30" defer></script>
+  <script src="../js/questions/index.js?v=30" defer></script>
+  <script src="../js/answers.js?v=30" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> Primary Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container quiz-container">
+      <a class="back-link no-print" href="index.html">← Revision Quiz</a>
+      <h1>Teacher's Answer Sheet</h1>
+      <p class="lead">Every question in the Revision Quiz, with the correct answer ticked and the explanation pupils see. In the quiz itself, the four options appear in a random order.</p>
+      <p id="summary" style="font-weight:700"></p>
+      <div id="checks" class="hint">Checking the questions…</div>
+      <div class="actions no-print" style="margin-top:14px">
+        <button type="button" class="btn" id="print-btn">Print or save as PDF</button>
+      </div>
+      <p class="slowmo-note">These questions were written from the content of the tools and have not been checked against the official MOE syllabus. Please tell us about any question that is wrong or unclear, quoting its code (for example friction-e01).</p>
+      <div id="sheet"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="container">Made for Primary 3 to 6 pupils learning Science.</div>
+  </footer>
+</body>
+</html>

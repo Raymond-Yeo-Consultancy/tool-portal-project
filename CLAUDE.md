@@ -26,7 +26,13 @@
 ├── js/portal.js               # Home page level filter (All, P3, P4, P5, P6)
 ├── js/activities.js           # Shared sort / order / match activities used by several tools
 ├── js/<tool>.js               # One script per tool: its logic and data
-└── tools/<tool>/index.html    # One page per tool
+├── tools/<tool>/index.html    # One page per tool
+├── quiz/index.html            # Revision Quiz page
+├── quiz/answers.html          # Teacher's answer sheet: every question, answer and explanation; printable
+├── js/quiz.js                 # Quiz engine
+├── js/answers.js              # Builds the teacher's answer sheet and runs the question checks
+├── js/questions/index.js      # List of quiz topics (one per tool) and the question checks
+└── js/questions/<tool>.js     # One question file per topic
 ```
 
 Tools (`<tool>` is the folder and script name):
@@ -61,7 +67,22 @@ To add a tool: create `tools/<name>/index.html` and `js/<name>.js`, copy the hea
 
 Update this section when files or folders are added.
 
-**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=29`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages.
+## Quiz Questions
+
+Each topic (one per tool) has at least 30 questions: 10 easy (recall a fact), 10 medium (explain or apply) and 10 hard (PSLE-style thinking, such as reading results or spotting a fair test). A topic is offered in the quiz only when `ready: true` is set for it in `js/questions/index.js`.
+
+Rules for writing questions:
+
+1. Four options, exactly one correct. The others must be clearly wrong at that level. No "all of the above" or "none of the above", no trick wording.
+2. The question must be answerable from that topic's tool page, in the wording pupils see there.
+3. Any number in a question comes from the tool's own model, not from working it out by hand.
+4. Avoid facts that depend on details the question does not give.
+5. Every question has a `why`: one or two sentences that teach the idea.
+6. Text only: the question must make sense without a picture.
+
+Before a topic is marked ready: open `quiz/answers.html` and confirm the automatic checks pass, and have every question answered by an independent reviewer who cannot see the answer key. Fix or replace any question the reviewer gets "wrong" or flags as unclear.
+
+**Version numbers on file links:** every page loads its CSS and JS with `?v=N` on the end (e.g. `js/gravity.js?v=30`). This forces browsers to fetch the new file instead of reusing an old saved copy. When you change any CSS or JS file, raise `N` in all the HTML pages (including `quiz/index.html` and `quiz/answers.html`).
 
 ## Key Requirements
 
