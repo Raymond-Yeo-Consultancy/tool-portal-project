@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photosynthesis Lab</title>
+  <meta name="description" content="Change the light and carbon dioxide a water plant gets and count the bubbles of oxygen it gives off.">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../css/style.css?v=11">
+  <script src="../../js/theme.js?v=11" defer></script>
+  <script src="../../js/photosynthesis.js?v=11" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../../index.html"><span class="brand-icon" aria-hidden="true">🔬</span> P6 Science Lab</a>
+      <button type="button" id="theme-toggle" class="btn theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span><span class="label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <a class="back-link" href="../../index.html">← All tools</a>
+      <h1>Photosynthesis Lab</h1>
+      <p class="lead">A water plant gives off bubbles of oxygen when it makes food. Change the light and the carbon dioxide, then count the bubbles.</p>
+      <p><span class="tag">Standard &amp; Foundation Science</span></p>
+
+      <div class="tool-layout friction-layout">
+        <section class="card" aria-labelledby="sim-heading">
+          <h2 id="sim-heading" class="visually-hidden">Experiment</h2>
+          <div class="drop-scene" id="scene"></div>
+          <div class="stat-row">
+            <div class="stat"><span class="stat-label">Time</span><span class="stat-value" id="timer">0 s</span></div>
+            <div class="stat"><span class="stat-label">Bubbles counted</span><span class="stat-value" id="counter">0</span></div>
+          </div>
+          <p class="slowmo-note">The minute is speeded up. The count is for one real minute.</p>
+          <p class="result-line" id="result" aria-live="polite">Press <strong style="font-size:inherit">Count bubbles</strong> to measure this set-up.</p>
+        </section>
+
+        <section class="card" aria-labelledby="controls-heading">
+          <h2 id="controls-heading">Set up your experiment</h2>
+
+          <fieldset class="choice-group">
+            <legend>1. Light from the lamp</legend>
+            <div class="choices three" id="light-choices">
+              <button type="button" class="choice" data-light="dark" aria-pressed="false"><span class="emoji" aria-hidden="true">🌑</span>Dark</button>
+              <button type="button" class="choice" data-light="dim" aria-pressed="false"><span class="emoji" aria-hidden="true">🔅</span>Dim</button>
+              <button type="button" class="choice" data-light="bright" aria-pressed="true"><span class="emoji" aria-hidden="true">🔆</span>Bright</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="choice-group">
+            <legend>2. Carbon dioxide in the water</legend>
+            <div class="choices three" id="co2-choices">
+              <button type="button" class="choice" data-co2="none" aria-pressed="false">None</button>
+              <button type="button" class="choice" data-co2="some" aria-pressed="false">Some</button>
+              <button type="button" class="choice" data-co2="plenty" aria-pressed="true">Plenty</button>
+            </div>
+          </fieldset>
+
+          <div class="actions">
+            <button type="button" class="btn btn-big" id="count-btn">Count bubbles</button>
+          </div>
+          <div class="hint" id="fair-test-hint" hidden style="margin-top:14px">
+            <strong>Fair test tip:</strong> you changed <em>both</em> the light and the carbon dioxide. Change only <em>one</em> thing at a time, so you know which change made the difference.
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="table-heading">
+          <div class="actions" style="justify-content:space-between">
+            <h2 id="table-heading" style="margin:0">Results table</h2>
+            <button type="button" class="btn btn-secondary" id="clear-btn">Clear results</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th scope="col">Run</th><th scope="col">Light</th><th scope="col">Carbon dioxide</th><th scope="col">Bubbles in 1 minute</th></tr>
+              </thead>
+              <tbody id="results-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card key-idea" aria-labelledby="key-heading">
+          <h2 id="key-heading">Key ideas</h2>
+          <ul style="margin:0 0 12px; padding-left:1.2em">
+            <li>Plants make their own food by <strong>photosynthesis</strong>.</li>
+            <li>For photosynthesis, a plant needs <strong>light</strong>, <strong>carbon dioxide</strong> and <strong>water</strong>. <strong>Chlorophyll</strong>, the green substance in the leaves, traps light energy.</li>
+            <li>The plant makes <strong>food (sugar)</strong> and gives off <strong>oxygen</strong>. The bubbles are oxygen.</li>
+            <li>More bubbles in a minute means the plant is making food faster.</li>
+          </ul>
+          <div class="word-equation" role="img" aria-label="Carbon dioxide plus water, with light and chlorophyll, gives food (sugar) plus oxygen.">
+            <span>carbon dioxide + water</span>
+            <span class="eq-arrow"><small>light</small>→<small>chlorophyll</small></span>
+            <span>food (sugar) + oxygen</span>
+          </div>
+        </section>
+
+        <section class="card span-all" aria-labelledby="think-heading">
+          <h2 id="think-heading">Think like a scientist</h2>
+          <details>
+            <summary>Why are there no bubbles in the dark?</summary>
+            <p>Plants need <strong>light</strong> for photosynthesis. Without light the plant cannot make food, so it gives off no oxygen.</p>
+          </details>
+          <details>
+            <summary>The lamp is bright but there is no carbon dioxide. What happens? Why?</summary>
+            <p>There are <strong>no bubbles</strong>. Light alone is not enough. The plant also needs carbon dioxide to make food.</p>
+          </details>
+          <details>
+            <summary>You want to find out how light affects photosynthesis. What must you keep the same?</summary>
+            <p>Keep the <strong>carbon dioxide</strong> the same, and use the <strong>same plant</strong> in the same amount of water. Change only the <strong>light</strong>. This makes it a fair test.</p>
+          </details>
+          <details>
+            <summary>What pattern do you see in your results?</summary>
+            <p>The <strong>brighter</strong> the light, the more bubbles in one minute. The <strong>more carbon dioxide</strong> in the water, the more bubbles in one minute. So the plant makes food faster.</p>
+          </details>
+          <details>
+            <summary>Where does the energy in the plant's food come from?</summary>
+            <p>From <strong>light</strong>. During photosynthesis, light energy is converted into chemical potential energy, which is stored in the food. Animals get this energy when they eat plants.</p>
+          </details>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Made for Primary 6 pupils preparing for PSLE Science.</div>
+  </footer>
+</body>
+</html>
